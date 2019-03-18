@@ -1,0 +1,16 @@
+# Lines that start with '#' are comments.
+ 
+bin/
+gen/
+target/
+local.properties
+ 
+.DS_Store
+Thumbs.db
+ 
+*.bak
+*.tem
+*.temp
+#.swp
+*.*~
+~*.*
