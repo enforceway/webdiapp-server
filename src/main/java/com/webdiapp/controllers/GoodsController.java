@@ -18,10 +18,7 @@ public class GoodsController {
     
     @Resource
     GoodsService goodsService;
-    
-    /*
-     * 产品列表与分页Action
-     */
+
     @RequestMapping("/list")
     public String list(Model model,@RequestParam(required=false,defaultValue="1") int pageNO){
         int size=5;

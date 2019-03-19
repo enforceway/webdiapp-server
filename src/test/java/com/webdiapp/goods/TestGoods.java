@@ -54,7 +54,7 @@ public class TestGoods{
         SqlSession session=MyBatisUtil.getSession();
         try {
             Goods entity=new Goods();
-            entity.setName("正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装江浙沪皖顺丰包邮");
+            entity.setName("m淇哄璇磋鍚嶅瓧蹇呴』鐨勯暱");
             entity.setPrice(108);
             entity.setPicture("nopic.jpg");
             GoodsDAO bookdao=session.getMapper(GoodsDAO.class);
@@ -81,7 +81,7 @@ public class TestGoods{
         try {
             GoodsDAO bookdao=session.getMapper(GoodsDAO.class);
             Goods entity=bookdao.getGoodsById(3);
-            entity.setName("正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装");
+            entity.setName("鍚嶅瓧涓�瀹氳瓒呯骇鐨勯暱");
             entity.setPrice(107);
             entity.setPicture("nopicture.jpg");
 

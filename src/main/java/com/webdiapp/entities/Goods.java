@@ -5,32 +5,19 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-/**
- * 商品实体
- *
- */
 public class Goods implements Serializable {
-    /**
-     * 
-     */
-    /*
-     * 编号
-     */
+
+	private static final long serialVersionUID = -4281854134539742511L;
+
     private int id;
-    /*
-     * 名称
-     */
+
     @Pattern(regexp="^[^><&#]{1,50}$",message="{pattern}")
     @NotNull(message="{notNull}")
     private String name;
-    /*
-     * 价格
-     */
+
     @Min(value=1,message="必须大于或等于1")
     private double price;
-    /*
-     * 图片
-     */
+
     private String picture;
     
     public Goods() {
