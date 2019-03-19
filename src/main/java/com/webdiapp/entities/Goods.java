@@ -6,31 +6,30 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * ÉÌÆ·ÊµÌå
+ * å•†å“å®žä½“
  *
  */
 public class Goods implements Serializable {
     /**
      * 
      */
-    private static final long serialVersionUID = 1L;
     /*
-     * ±àºÅ
+     * ç¼–å·
      */
     private int id;
     /*
-     * Ãû³Æ
+     * åç§°
      */
     @Pattern(regexp="^[^><&#]{1,50}$",message="{pattern}")
     @NotNull(message="{notNull}")
     private String name;
     /*
-     * ¼Û¸ñ
+     * ä»·æ ¼
      */
-    @Min(value=1,message="±ØÐë´óÓÚ»òµÈÓÚ1")
+    @Min(value=1,message="å¿…é¡»å¤§äºŽæˆ–ç­‰äºŽ1")
     private double price;
     /*
-     * Í¼Æ¬
+     * å›¾ç‰‡
      */
     private String picture;
     
@@ -64,6 +63,6 @@ public class Goods implements Serializable {
     
     @Override
     public String toString() {
-        return "id£º"+getId()+"£¬name£º"+getName()+"£¬price£º"+getPrice()+"£¬picture£º"+getPicture();
+        return "idï¼š"+getId()+"ï¼Œnameï¼š"+getName()+"ï¼Œpriceï¼š"+getPrice()+"ï¼Œpictureï¼š"+getPicture();
     }
 }
