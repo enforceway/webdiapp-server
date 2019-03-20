@@ -16,34 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `questionnaire_t`
+-- Table structure for table `question_type_r`
 --
 
-DROP TABLE IF EXISTS `questionnaire_t`;
+DROP TABLE IF EXISTS `question_type_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `questionnaire_t` (
+CREATE TABLE `question_type_r` (
   `id` int(11) NOT NULL,
-  `status` varchar(30) DEFAULT 'created',
-  `working_field` varchar(45) DEFAULT 'sociology',
+  `option` varchar(255) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `creation_user_name` varchar(45) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
   `lastupdate_user_name` varchar(45) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT NULL,
+  `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `questionnaire_t`
+-- Dumping data for table `question_type_r`
 --
 
-LOCK TABLES `questionnaire_t` WRITE;
-/*!40000 ALTER TABLE `questionnaire_t` DISABLE KEYS */;
-/*!40000 ALTER TABLE `questionnaire_t` ENABLE KEYS */;
+LOCK TABLES `question_type_r` WRITE;
+/*!40000 ALTER TABLE `question_type_r` DISABLE KEYS */;
+/*!40000 ALTER TABLE `question_type_r` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
