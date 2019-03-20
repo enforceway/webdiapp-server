@@ -16,34 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `questionaire_question_r`
+-- Table structure for table `questionaire_question_options_r`
 --
 
-DROP TABLE IF EXISTS `questionaire_question_r`;
+DROP TABLE IF EXISTS `questionaire_question_options_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `questionaire_question_r` (
+CREATE TABLE `questionaire_question_options_r` (
   `id` int(11) NOT NULL,
+  `option_content` varchar(55) DEFAULT NULL,
+  `selected` varchar(5) DEFAULT 'n',
   `question_id` int(11) DEFAULT NULL,
   `questionaire_id` int(11) DEFAULT NULL,
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `creation_user_name` varchar(45) DEFAULT NULL,
-  `lastupdate_timestamp` datetime DEFAULT NULL,
-  `lastupdate_user` int(11) DEFAULT NULL,
-  `lastupdate_user_name` varchar(45) DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `questionaire_question_r`
+-- Dumping data for table `questionaire_question_options_r`
 --
 
-LOCK TABLES `questionaire_question_r` WRITE;
-/*!40000 ALTER TABLE `questionaire_question_r` DISABLE KEYS */;
-/*!40000 ALTER TABLE `questionaire_question_r` ENABLE KEYS */;
+LOCK TABLES `questionaire_question_options_r` WRITE;
+/*!40000 ALTER TABLE `questionaire_question_options_r` DISABLE KEYS */;
+/*!40000 ALTER TABLE `questionaire_question_options_r` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-20 13:07:28
+-- Dump completed on 2019-03-20 20:44:58
