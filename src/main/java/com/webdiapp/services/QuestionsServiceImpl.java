@@ -19,9 +19,8 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 
 	@Override
-	public Question getQuestionById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Question getById(int id) {
+		return this.questionDao.getById(id);
 	}
 
 	@Override
@@ -32,8 +31,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
 	@Override
 	public int insert(Question question) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.questionDao.insert(question);
 	}
 
 	@Override

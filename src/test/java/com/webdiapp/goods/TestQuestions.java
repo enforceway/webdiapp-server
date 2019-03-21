@@ -4,23 +4,23 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import com.webdiapp.entities.Goods;
-import com.webdiapp.mapper.GoodsDAO;
+import com.webdiapp.entities.Question;
+import com.webdiapp.mapper.QuestionDAO;
 import com.webdiapp.util.MyBatisUtil;
 
 import junit.framework.Assert;
 
-public class TestGoods{
+public class TestQuestions{
 
     @Test
-    public void getGoodsPagerTest() {
-        int skip=4;
-        int size=2;
-        SqlSession session=MyBatisUtil.getSession();
+    public void getQuestionPagerTest() {
+        int skip = 1;
+        int size = 5;
+        SqlSession session = MyBatisUtil.getSession();
         try {
-            GoodsDAO bookdao=session.getMapper(GoodsDAO.class);
-            List<Goods> goods=bookdao.getGoodsPager(skip, size);
-            Assert.assertEquals(2, goods.size());
+        	QuestionDAO dao = session.getMapper(QuestionDAO.class);
+            List<Question> list = dao.getList(skip, size);
+            Assert.assertEquals(2, list.size());
         } finally {
             session.close();
         }

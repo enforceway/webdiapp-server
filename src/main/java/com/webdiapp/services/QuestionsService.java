@@ -7,7 +7,7 @@ public interface QuestionsService {
 
     List<Question> getList(int pageNO, int size);
 
-    Question getQuestionById(int id);
+    Question getById(int id);
     
     int getCount();
 

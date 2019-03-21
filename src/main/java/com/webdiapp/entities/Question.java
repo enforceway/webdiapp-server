@@ -8,7 +8,7 @@ public class Question extends BaseEntity {
 
 	private static final long serialVersionUID = -8552283633126138930L;
 
-	private int id;
+	private Integer id;
 
     private String questionContent;
     
@@ -17,11 +17,11 @@ public class Question extends BaseEntity {
     public Question() {
     }
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
