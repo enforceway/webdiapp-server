@@ -19,7 +19,7 @@
     <!--新增加商品 -->
     <insert id="insert" parameterType="Goods">
         insert into
-        goods(name,price,picture) values(#{name},#{price},#{picture});
+        goods(name,price,picture,sur_name) values(#{name},#{price},#{picture},#{surName});
     </insert>
     <!-- 删除商品 -->
     <delete id="delete">
