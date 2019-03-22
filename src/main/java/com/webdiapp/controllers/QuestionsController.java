@@ -1,8 +1,10 @@
 package com.webdiapp.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webdiapp.entities.Goods;
 import com.webdiapp.entities.Question;
+import com.webdiapp.vo.QuestionVO;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionsService;
 
@@ -41,12 +43,15 @@ public class QuestionsController {
     	log.info("search count is:" + count);
         return "goden/listing:" + count;
     }
-    
+
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
     public int insert(@RequestBody Question question) {
-    	System.out.println(question.getQuestionContent() + ", " + question.getQuestionType());
+    	System.out.println("insert for questions:" + question.getQuestionContent() + ", " + question.getQuestionType() + "," + question.getCreationTimestamp());
+    	Date curr = new Date();
+    	question.setCreationTimestamp(curr);
+    	question.setLastupdateTimestamp(curr);
     	int count = this.questionService.insert(question);
-        return count;
+    	return count;
     }
 
     @SuppressWarnings("finally")
@@ -69,6 +74,14 @@ public class QuestionsController {
     public int delete(@RequestBody Question question) {
     	int count = this.questionService.delete(question.getId());
         return count;
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
+    public int update(@RequestBody Question question) {
+    	Date curr = new Date();
+    	question.setLastupdateTimestamp(curr);
+    	int count = this.questionService.update(question);
+    	return count;
     }
     
 }

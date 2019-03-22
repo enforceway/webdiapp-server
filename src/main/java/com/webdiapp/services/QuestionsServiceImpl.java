@@ -3,8 +3,10 @@ package com.webdiapp.services;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+
 import com.webdiapp.entities.Question;
 import com.webdiapp.mapper.QuestionDAO;
+import com.webdiapp.vo.QuestionVO;
 
 @Service
 public class QuestionsServiceImpl implements QuestionsService {
@@ -36,8 +38,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.questionDao.delete(id);
 	}
 
 	@Override
@@ -47,9 +48,8 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 
 	@Override
-	public int update(Question Question) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Question question) {
+		return this.questionDao.update(question);
 	}
     
 }

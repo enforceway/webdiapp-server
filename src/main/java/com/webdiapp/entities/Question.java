@@ -1,5 +1,7 @@
 package com.webdiapp.entities;
 
+import com.webdiapp.vo.QuestionVO;
+
 //import javax.validation.constraints.Min;
 //import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Pattern;
@@ -15,6 +17,11 @@ public class Question extends BaseEntity {
     private String questionType;
     
     public Question() {
+    }
+    public Question(QuestionVO que) {
+    	this.setQuestionContent(que.getQuestionContent());
+    	this.setQuestionType(que.getQuestionType());
+//    	this.setCreationTimestamp(creationTimestamp);
     }
 
 	public Integer getId() {

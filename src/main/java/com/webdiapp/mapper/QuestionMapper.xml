@@ -50,10 +50,10 @@
         values(
         #{questionContent},
         #{questionType},
-        #{creationTimestamp, javaType=java.sql.Date, jdbcType=DATE},
+        #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
         #{creationUsername, javaType=string, jdbcType=VARCHAR},
-        #{lastupdateTimestamp, javaType=java.sql.Date, jdbcType=DATE},
+        #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
         #{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
         )
@@ -65,6 +65,11 @@
     <!-- 修改商品 -->
     <update id="update" parameterType="Question">
         update question_t set
-        name=#{name},price=#{price},picture=#{picture} where id=#{id}
+        question_content=#{questionContent},
+        question_type=#{questionType},
+        lastupdate_timestamp=#{lastupdateTimestamp},
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
+        lastupdate_username=#{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+        where id=#{id}
     </update>
 </mapper>

@@ -3,6 +3,8 @@ package com.webdiapp.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,16 @@ public class BaseEntity implements Serializable {
     private String lastupdateUsername;
     
     private String userYn;
+    
+    public BaseEntity() {
+//    	new 
+//    	this.setCreationTimestamp(curr);
+//    	this.setLastupdateTimestamp(curr);
+	}
+    
+    public void setUser(HttpServletRequest request) {
+    	
+    }
 
 	public Date getCreationTimestamp() {
 		return creationTimestamp;
