@@ -1,14 +1,13 @@
 package com.webdiapp.services;
 
 import java.util.List;
-import com.webdiapp.entities.Question;
 import com.webdiapp.entities.User;
 
 public interface UserService {
 
-    List<Question> getList(int pageNO, int size);
+    List<User> getList(int pageNO, int size);
 
-    Question getById(int id);
+    User getById(int id);
     
     int getCount();
 

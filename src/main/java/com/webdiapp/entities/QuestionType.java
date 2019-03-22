@@ -1,10 +1,10 @@
 package com.webdiapp.entities;
 
-public class Status extends BaseEntity {
+public class QuestionType extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String status;
+	private String type;
 
 	public Integer getId() {
 		return id;
@@ -14,12 +14,12 @@ public class Status extends BaseEntity {
 		this.id = id;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getType() {
+		return type;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

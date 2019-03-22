@@ -1,8 +1,8 @@
 package com.webdiapp.services;
 
 import java.util.List;
+
 import com.webdiapp.entities.Question;
-import com.webdiapp.vo.QuestionVO;
 
 public interface QuestionsService {
 

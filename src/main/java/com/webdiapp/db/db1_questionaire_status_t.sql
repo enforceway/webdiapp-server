@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `goods`
+-- Table structure for table `questionaire_status_t`
 --
 
-DROP TABLE IF EXISTS `goods`;
+DROP TABLE IF EXISTS `questionaire_status_t`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `goods` (
+CREATE TABLE `questionaire_status_t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `picture` varchar(100) DEFAULT 'default.jpg',
-  `sur_name` varchar(45) DEFAULT NULL,
-  `date` timestamp NULL DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `goods`
+-- Dumping data for table `questionaire_status_t`
 --
 
-LOCK TABLES `goods` WRITE;
-/*!40000 ALTER TABLE `goods` DISABLE KEYS */;
-/*!40000 ALTER TABLE `goods` ENABLE KEYS */;
+LOCK TABLES `questionaire_status_t` WRITE;
+/*!40000 ALTER TABLE `questionaire_status_t` DISABLE KEYS */;
+INSERT INTO `questionaire_status_t` VALUES (1,'created'),(2,'draft'),(3,'published'),(4,'overdued');
+/*!40000 ALTER TABLE `questionaire_status_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-22 20:09:33
+-- Dump completed on 2019-03-22 20:09:34

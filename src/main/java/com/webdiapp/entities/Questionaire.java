@@ -1,5 +1,7 @@
 package com.webdiapp.entities;
 
+import java.util.Date;
+
 //import javax.validation.constraints.Min;
 //import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Pattern;
@@ -15,6 +17,10 @@ public class Questionaire extends BaseEntity {
 	private String status;
 
 	private String workingField;
+
+	private Date activeDateStart;
+
+	private Date activeDateEnd;
 
 	public Integer getId() {
 		return id;
@@ -46,6 +52,22 @@ public class Questionaire extends BaseEntity {
 
 	public void setWorkingField(String workingField) {
 		this.workingField = workingField;
+	}
+
+	public Date getActiveDateStart() {
+		return activeDateStart;
+	}
+
+	public void setActiveDateStart(Date activeDateStart) {
+		this.activeDateStart = activeDateStart;
+	}
+
+	public Date getActiveDateEnd() {
+		return activeDateEnd;
+	}
+
+	public void setActiveDateEnd(Date activeDateEnd) {
+		this.activeDateEnd = activeDateEnd;
 	}
 
 }

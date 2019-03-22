@@ -38,13 +38,13 @@ public class QuestionsController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
-    public int insert(@RequestBody Question question) {
-    	System.out.println("insert for questions:" + question.getQuestionContent() + ", " + question.getQuestionType() + "," + question.getCreationTimestamp());
+    public int insert(@RequestBody Question que) {
+    	System.out.println("insert for questions:" + que.getQuestionContent() + ", " + que.getQuestionType() + "," + que.getCreationTimestamp());
     	Date curr = new Date();
-    	question.setCreationTimestamp(curr);
-    	question.setLastupdateTimestamp(curr);
-    	question.setUserYn("y");
-    	int count = this.questionService.insert(question);
+    	que.setCreationTimestamp(curr);
+    	que.setLastupdateTimestamp(curr);
+//    	que.setUserYn("y");
+    	int count = this.questionService.insert(que);
     	return count;
     }
 

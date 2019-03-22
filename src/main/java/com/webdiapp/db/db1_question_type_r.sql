@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `question_type_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question_type_r` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `option` varchar(255) NOT NULL,
   `question_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-22 11:28:24
+-- Dump completed on 2019-03-22 20:09:35

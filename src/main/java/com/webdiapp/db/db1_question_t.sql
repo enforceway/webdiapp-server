@@ -35,7 +35,7 @@ CREATE TABLE `question_t` (
   `lastupdate_username` varchar(45) DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `question_t` (
 
 LOCK TABLES `question_t` WRITE;
 /*!40000 ALTER TABLE `question_t` DISABLE KEYS */;
-INSERT INTO `question_t` VALUES (1,'你热爱此前的工作dddd吗?',NULL,'social',NULL,NULL,NULL,'2019-03-22 08:27:08',0,NULL,NULL);
+INSERT INTO `question_t` VALUES (1,'你热爱此前的工作吗?',1,'Sociology','2019-03-22 19:44:08',NULL,NULL,'2019-03-22 19:46:11',0,NULL,NULL),(19,'个人工作经验，也就是自己的背景介绍',1,'Sociology','2019-03-22 19:44:08',NULL,NULL,'2019-03-22 19:46:11',NULL,NULL,NULL),(20,'公司为什么要选择你，证明过往经历适合该岗位',1,'Sociology','2019-03-22 19:44:08',NULL,NULL,'2019-03-22 19:46:11',NULL,NULL,NULL),(21,'为什么要选择这家公司',1,'Sociology','2019-03-22 19:44:08',NULL,NULL,'2019-03-22 19:46:11',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `question_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-22 11:28:23
+-- Dump completed on 2019-03-22 20:09:33

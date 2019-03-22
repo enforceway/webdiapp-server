@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.webdiapp.entities.Question;
 import com.webdiapp.entities.User;
 import com.webdiapp.mapper.UserDAO;
 
@@ -17,13 +16,13 @@ public class UserServiceImpl implements UserService {
     UserDAO userDao;
 
 	@Override
-	public List<Question> getList(int pageNO, int size) {
+	public List<User> getList(int pageNO, int size) {
 //		int skip=(pageNO-1)*size;
         return this.userDao.getList(pageNO, size);
 	}
 
 	@Override
-	public Question getById(int id) {
+	public User getById(int id) {
 		return this.userDao.getById(id);
 	}
 

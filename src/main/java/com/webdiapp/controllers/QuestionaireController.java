@@ -40,7 +40,7 @@ public class QuestionaireController {
     	Date curr = new Date();
     	que.setCreationTimestamp(curr);
     	que.setLastupdateTimestamp(curr);
-    	que.setUserYn("y");
+//    	que.setUserYn("y");
     	System.out.println("vo from questionaire controller is:" + que.getStatus() + "," + que.getStatusId() + "," + que.getWorkingField());
     	int count = this.queService.insert(que);
     	return count;
