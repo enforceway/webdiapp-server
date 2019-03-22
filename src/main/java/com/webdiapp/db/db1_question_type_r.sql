@@ -29,10 +29,10 @@ CREATE TABLE `question_type_r` (
   `type_id` int(11) NOT NULL,
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
-  `creation_user_name` varchar(45) DEFAULT NULL,
+  `creation_username` varchar(45) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `lastupdate_user_name` varchar(45) DEFAULT NULL,
+  `lastupdate_username` varchar(45) DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-20 20:44:58
+-- Dump completed on 2019-03-22 11:28:24

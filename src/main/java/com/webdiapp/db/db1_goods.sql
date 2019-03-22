@@ -27,6 +27,7 @@ CREATE TABLE `goods` (
   `name` varchar(100) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   `picture` varchar(100) DEFAULT 'default.jpg',
+  `sur_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +38,7 @@ CREATE TABLE `goods` (
 
 LOCK TABLES `goods` WRITE;
 /*!40000 ALTER TABLE `goods` DISABLE KEYS */;
-INSERT INTO `goods` VALUES (1,'G7 中原G7三合一浓醇咖啡固体饮料1200',66.50,'1.jpg'),(2,'百草味东北松子200gx2袋 坚果炒货零',42.90,'2.jpg'),(3,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装',107.00,'nopicture.jpg'),(4,'益达尊享护齿装草本40粒+冰柠40粒+西',25.90,'4.jpg'),(5,'猴坑茶业2016新茶原产地手工太平猴魁特',168.00,'5.jpg'),(6,'嘻鱿记 休闲零食 麻辣香辣奶香炭烧 5种',39.80,'6.jpg'),(7,'荣业鸿福五分瘦腊肠 香港土特产香肠腊味',126.80,'7.jpg'),(8,'蓓琳娜（BELLINA）3L PDO特级初榨橄榄油',178.00,'8.jpg'),(10,'荣业鸿福五分瘦腊肠 香港土特产香肠腊味',30.60,'b454b44f-868e-4efe-ae17-91e9e6a58390.jpg'),(13,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装江浙沪皖顺丰包邮',108.00,'nopic.jpg'),(14,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装江浙沪皖顺丰包邮',108.00,'nopic.jpg'),(15,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装江浙沪皖顺丰包邮',108.00,'nopic.jpg');
+INSERT INTO `goods` VALUES (1,'G7 中原G7三合一浓醇咖啡固体饮料1200',66.50,'1.jpg','test'),(2,'百草味东北松子200gx2袋 坚果炒货零',42.90,'2.jpg','test'),(3,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装',107.00,'nopicture.jpg',NULL),(4,'益达尊享护齿装草本40粒+冰柠40粒+西',25.90,'4.jpg',NULL),(5,'猴坑茶业2016新茶原产地手工太平猴魁特',168.00,'5.jpg',NULL),(6,'嘻鱿记 休闲零食 麻辣香辣奶香炭烧 5种',39.80,'6.jpg',NULL),(7,'荣业鸿福五分瘦腊肠 香港土特产香肠腊味',126.80,'7.jpg',NULL),(8,'蓓琳娜（BELLINA）3L PDO特级初榨橄榄油',178.00,'8.jpg',NULL),(10,'荣业鸿福五分瘦腊肠 香港土特产香肠腊味',30.60,'b454b44f-868e-4efe-ae17-91e9e6a58390.jpg',NULL),(13,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装江浙沪皖顺丰包邮',108.00,'nopic.jpg',NULL),(14,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装江浙沪皖顺丰包邮',108.00,'nopic.jpg',NULL),(15,'正宗无锡阳山水蜜桃新鲜水果水密桃12个6斤装江浙沪皖顺丰包邮',108.00,'nopic.jpg',NULL);
 /*!40000 ALTER TABLE `goods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-20 20:44:57
+-- Dump completed on 2019-03-22 11:28:23

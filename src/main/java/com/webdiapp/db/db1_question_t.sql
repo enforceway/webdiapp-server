@@ -23,18 +23,19 @@ DROP TABLE IF EXISTS `question_t`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question_t` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `question_content` varchar(255) NOT NULL,
-  `question_type` int(11) DEFAULT NULL,
+  `question_type_id` int(11) DEFAULT NULL,
+  `question_type` varchar(55) DEFAULT 'sociology',
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
-  `creation_user_name` varchar(45) DEFAULT NULL,
+  `creation_username` varchar(45) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `lastupdate_user_name` varchar(45) DEFAULT NULL,
+  `lastupdate_username` varchar(45) DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +44,7 @@ CREATE TABLE `question_t` (
 
 LOCK TABLES `question_t` WRITE;
 /*!40000 ALTER TABLE `question_t` DISABLE KEYS */;
+INSERT INTO `question_t` VALUES (1,'你热爱此前的工作dddd吗?',NULL,'social',NULL,NULL,NULL,'2019-03-22 08:27:08',0,NULL,NULL);
 /*!40000 ALTER TABLE `question_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-20 20:44:58
+-- Dump completed on 2019-03-22 11:28:23

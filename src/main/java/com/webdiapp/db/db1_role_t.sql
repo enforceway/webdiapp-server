@@ -16,33 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `question_type_t`
+-- Table structure for table `role_t`
 --
 
-DROP TABLE IF EXISTS `question_type_t`;
+DROP TABLE IF EXISTS `role_t`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `question_type_t` (
-  `id` int(11) NOT NULL,
-  `type` varchar(45) NOT NULL,
+CREATE TABLE `role_t` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(55) DEFAULT NULL,
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
-  `creation_username` varchar(45) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `lastupdate_username` varchar(45) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT 'y',
+  `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `question_type_t`
+-- Dumping data for table `role_t`
 --
 
-LOCK TABLES `question_type_t` WRITE;
-/*!40000 ALTER TABLE `question_type_t` DISABLE KEYS */;
-/*!40000 ALTER TABLE `question_type_t` ENABLE KEYS */;
+LOCK TABLES `role_t` WRITE;
+/*!40000 ALTER TABLE `role_t` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

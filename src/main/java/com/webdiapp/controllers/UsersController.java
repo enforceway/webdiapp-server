@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webdiapp.entities.Question;
-import com.webdiapp.vo.QuestionVO;
+import com.webdiapp.entities.User;
 import com.webdiapp.models.GeneralResponser;
-import com.webdiapp.services.QuestionsService;
+import com.webdiapp.services.UserService;
 
 @RestController
-@RequestMapping("/questions")
-public class QuestionsController {
+@RequestMapping("/users")
+public class UsersController {
 
 	private static final Logger log = Logger.getLogger(GoodsController.class);
     
     @Resource
-    QuestionsService questionService;
+    UserService userService;
 
     @RequestMapping(value = "/list/", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         System.out.println(pageNo + "," + pageSize);
-        List<Question> list = this.questionService.getList(pageNo, pageSize);
+        List<Question> list = this.userService.getList(pageNo, pageSize);
         GeneralResponser gr = new GeneralResponser();
         gr.setData(list);
         return gr;
@@ -39,19 +38,19 @@ public class QuestionsController {
     
     @RequestMapping("/listing")
     public String hello() {
-    	int count = this.questionService.getCount();
+    	int count = this.userService.getCount();
     	log.info("search count is:" + count);
         return "goden/listing:" + count;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
-    public int insert(@RequestBody Question question) {
-    	System.out.println("insert for questions:" + question.getQuestionContent() + ", " + question.getQuestionType() + "," + question.getCreationTimestamp());
+    public int insert(@RequestBody User user) {
+    	System.out.println("insert for questions:" + user.getUsername());// + ", " + user.getQuestionType() + "," + user.getCreationTimestamp());
     	Date curr = new Date();
-    	question.setCreationTimestamp(curr);
-    	question.setLastupdateTimestamp(curr);
-    	question.setUserYn("y");
-    	int count = this.questionService.insert(question);
+    	user.setCreationTimestamp(curr);
+    	user.setLastupdateTimestamp(curr);
+    	user.setUserYn("y");
+    	int count = this.userService.insert(user);
     	return count;
     }
 
@@ -62,7 +61,7 @@ public class QuestionsController {
     	Question que = null;
     	try {
     		int questionId = Integer.parseInt(strQuestionId);
-    		que = this.questionService.getById(questionId);
+    		que = this.userService.getById(questionId);
 		} catch (NumberFormatException e) {
 			// TODO: handle exception
 		} finally {
@@ -71,17 +70,17 @@ public class QuestionsController {
 		}
     }
     
-    @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
-    public int delete(@RequestBody Question question) {
-    	int count = this.questionService.delete(question.getId());
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes="application/json")
+    public int delete(@RequestBody User user) {
+    	int count = this.userService.delete(user.getId());
         return count;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
-    public int update(@RequestBody Question question) {
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes="application/json")
+    public int update(@RequestBody User user) {
     	Date curr = new Date();
-    	question.setLastupdateTimestamp(curr);
-    	int count = this.questionService.update(question);
+    	user.setLastupdateTimestamp(curr);
+    	int count = this.userService.update(user);
     	return count;
     }
     

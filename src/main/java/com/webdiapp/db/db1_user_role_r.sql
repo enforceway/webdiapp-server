@@ -16,33 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `question_type_t`
+-- Table structure for table `user_role_r`
 --
 
-DROP TABLE IF EXISTS `question_type_t`;
+DROP TABLE IF EXISTS `user_role_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `question_type_t` (
-  `id` int(11) NOT NULL,
-  `type` varchar(45) NOT NULL,
+CREATE TABLE `user_role_r` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
-  `creation_username` varchar(45) DEFAULT NULL,
+  `creation_user_name` varchar(45) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `lastupdate_username` varchar(45) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT 'y',
+  `lastupdate_user_name` varchar(45) DEFAULT NULL,
+  `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `question_type_t`
+-- Dumping data for table `user_role_r`
 --
 
-LOCK TABLES `question_type_t` WRITE;
-/*!40000 ALTER TABLE `question_type_t` DISABLE KEYS */;
-/*!40000 ALTER TABLE `question_type_t` ENABLE KEYS */;
+LOCK TABLES `user_role_r` WRITE;
+/*!40000 ALTER TABLE `user_role_r` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_role_r` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-22 11:28:25
+-- Dump completed on 2019-03-22 11:28:22

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webdiapp.mapper.UserDAO">
+	<sql id="baseColumnsQry">
+		creation_timestamp as creationTimestamp,
+        creation_user as creationUser,
+        creation_username as creationUsername,
+        lastupdate_timestamp as lastupdateTimestamp,
+        lastupdate_user as lastupdateUser,
+        lastupdate_username as lastupdateUsername 
+	</sql>
+	<sql id="baseColumnsInsertFields">
+		creation_timestamp,creation_user,creation_username,lastupdate_timestamp,lastupdate_user,lastupdate_username 
+	</sql>
+	<sql id="baseColumnsInsert"> 
+        #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
+        #{creationUsername, javaType=string, jdbcType=VARCHAR},
+        #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
+        #{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+	</sql>
+    <select id="getList" resultType="User">
+        select
+        id,
+        question_content as questionContent,
+        question_type as questionType,
+        <include refid="baseColumnsQry" />
+        from user_t limit #{skip},#{size}
+    </select>
+    <select id="getById" parameterType="INTEGER" resultType="User">
+        select
+        id,
+        question_content as questionContent,
+        question_type as questionType,
+        <include refid="baseColumnsQry" />
+        from user_t where id=#{id}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(id) from user_t
+    </select>
+    <insert id="insert" parameterType="User">
+        insert into
+        user_t(user_name,<include refid="baseColumnsInsertFields" />) 
+        values(
+        #{username},
+       	<include refid="baseColumnsInsert" />
+        )
+    </insert>
+    <delete id="delete">
+        delete from user_t where id=#{id}
+    </delete>
+    <update id="update" parameterType="User">
+        update user_t set
+        user_name=#{username},
+        lastupdate_timestamp=#{lastupdateTimestamp},
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
+        lastupdate_username=#{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+        where id=#{id}
+    </update>
+</mapper>
