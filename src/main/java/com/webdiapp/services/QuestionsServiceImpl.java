@@ -27,8 +27,7 @@ public class QuestionsServiceImpl implements QuestionsService {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.questionDao.getCount();
 	}
 
 	@Override

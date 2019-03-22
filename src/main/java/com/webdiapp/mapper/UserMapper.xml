@@ -23,16 +23,14 @@
     <select id="getList" resultType="User">
         select
         id,
-        question_content as questionContent,
-        question_type as questionType,
+        user_name as username,
         <include refid="baseColumnsQry" />
         from user_t limit #{skip},#{size}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="User">
         select
         id,
-        question_content as questionContent,
-        question_type as questionType,
+        user_name as username,
         <include refid="baseColumnsQry" />
         from user_t where id=#{id}
     </select>

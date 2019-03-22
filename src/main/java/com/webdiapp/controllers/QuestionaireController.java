@@ -13,44 +13,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webdiapp.entities.Question;
-import com.webdiapp.entities.User;
+import com.webdiapp.entities.Questionaire;
 import com.webdiapp.models.GeneralResponser;
-import com.webdiapp.services.UserService;
+import com.webdiapp.services.QuestionaireService;
 
 @RestController
-@RequestMapping("/users")
-public class UsersController {
+@RequestMapping("/questionaire")
+public class QuestionaireController {
 
-	private static final Logger log = Logger.getLogger(UsersController.class);
+	private static final Logger log = Logger.getLogger(QuestionaireController.class);
     
     @Resource
-    UserService userService;
+    QuestionaireService queService;
 
-    @RequestMapping(value = "/list/", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         System.out.println(pageNo + "," + pageSize);
-        List<Question> list = this.userService.getList(pageNo, pageSize);
+        List<Questionaire> list = this.queService.getList(pageNo, pageSize);
         GeneralResponser gr = new GeneralResponser();
         gr.setData(list);
         return gr;
     }
-    
-    @RequestMapping("/listing")
-    public String hello() {
-    	int count = this.userService.getCount();
-    	log.info("search count is:" + count);
-        return "goden/listing:" + count;
-    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
-    public int insert(@RequestBody User user) {
-    	System.out.println("insert for questions:" + user.getUsername());// + ", " + user.getQuestionType() + "," + user.getCreationTimestamp());
+    public int insert(@RequestBody Questionaire que) {
     	Date curr = new Date();
-    	user.setCreationTimestamp(curr);
-    	user.setLastupdateTimestamp(curr);
-    	user.setUserYn("y");
-    	int count = this.userService.insert(user);
+    	que.setCreationTimestamp(curr);
+    	que.setLastupdateTimestamp(curr);
+    	que.setUserYn("y");
+    	System.out.println("vo from questionaire controller is:" + que.getStatus() + "," + que.getStatusId() + "," + que.getWorkingField());
+    	int count = this.queService.insert(que);
     	return count;
     }
 
@@ -58,10 +50,10 @@ public class UsersController {
 	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.GET)
     public GeneralResponser listById(@PathVariable("questionId") String strQuestionId) {
     	GeneralResponser gr = new GeneralResponser();
-    	Question que = null;
+    	Questionaire que = null;
     	try {
     		int questionId = Integer.parseInt(strQuestionId);
-    		que = this.userService.getById(questionId);
+    		que = this.queService.getById(questionId);
 		} catch (NumberFormatException e) {
 			// TODO: handle exception
 		} finally {
@@ -70,18 +62,18 @@ public class UsersController {
 		}
     }
     
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes="application/json")
-    public int delete(@RequestBody User user) {
-    	int count = this.userService.delete(user.getId());
+    @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
+    public int delete(@RequestBody Questionaire que) {
+    	int count = this.queService.delete(que.getId());
         return count;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes="application/json")
-    public int update(@RequestBody User user) {
+    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
+    public int update(@RequestBody Questionaire que) {
     	Date curr = new Date();
-    	user.setLastupdateTimestamp(curr);
-    	int count = this.userService.update(user);
+    	que.setLastupdateTimestamp(curr);
+    	int count = this.queService.update(que);
     	return count;
     }
-    
+
 }
