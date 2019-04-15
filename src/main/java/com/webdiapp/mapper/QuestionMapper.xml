@@ -25,6 +25,7 @@
     <select id="getList" resultType="Question">
         select
         id,
+        question_type_id as questionTypeId,
         question_content as questionContent,
         question_type as questionType,
         <include refid="baseColumnsQry" />
@@ -46,10 +47,11 @@
     <!--新增加商品 -->
     <insert id="insert" parameterType="Question">
         insert into
-        question_t(question_content,question_type, <include refid="baseColumnsInsertFields" />) 
+        question_t(question_content,question_type, question_type_id, <include refid="baseColumnsInsertFields" />) 
         values(
         #{questionContent},
         #{questionType},
+        #{questionTypeId, javaType=INTEGER, jdbcTYpe=INTEGER},
         #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
         #{creationUsername, javaType=string, jdbcType=VARCHAR},
