@@ -39,7 +39,9 @@ public class QuestionsController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
     public int insert(@RequestBody Question que) {
-    	System.out.println("insert for questions:" + que.getQuestionContent() + ", " + que.getQuestionType() + "," + que.getCreationTimestamp());
+    	log.info("添加题目接口入参: id:" + que.getQuestionTypeId() + 
+				";typeid:" + que.getQuestionTypeId() + 
+				";type:" + que.getQuestionType());
     	Date curr = new Date();
     	que.setCreationTimestamp(curr);
     	que.setLastupdateTimestamp(curr);
@@ -66,6 +68,9 @@ public class QuestionsController {
     
     @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
     public int delete(@RequestBody Question question) {
+    	log.info("删除题目接口入参: id:" + question.getQuestionTypeId() + 
+				";typeid:" + question.getQuestionTypeId() + 
+				";type:" + question.getQuestionType());
     	int count = this.questionService.delete(question.getId());
         return count;
     }
@@ -73,6 +78,9 @@ public class QuestionsController {
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
     public int update(@RequestBody Question question) {
     	Date curr = new Date();
+    	log.info("更新题目接口入参: id:" + question.getQuestionTypeId() + 
+    							";typeid:" + question.getQuestionTypeId() + 
+    							";type:" + question.getQuestionType());
     	question.setLastupdateTimestamp(curr);
     	int count = this.questionService.update(question);
     	return count;
