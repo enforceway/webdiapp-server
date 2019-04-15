@@ -51,7 +51,7 @@
         values(
         #{questionContent},
         #{questionType},
-        #{questionTypeId, javaType=INTEGER, jdbcTYpe=INTEGER},
+        #{questionTypeId, javaType=INTEGER, jdbcType=INTEGER},
         #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
         #{creationUsername, javaType=string, jdbcType=VARCHAR},
