@@ -78,7 +78,8 @@ public class QuestionsController {
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
     public int update(@RequestBody Question question) {
     	Date curr = new Date();
-    	log.info("更新题目接口入参: id:" + question.getQuestionTypeId() + 
+    	log.info("更新题目接口入参: id:" + question.getQuestionTypeId() +
+    							";questionContent:" + question.getQuestionContent() +
     							";typeid:" + question.getQuestionTypeId() + 
     							";type:" + question.getQuestionType());
     	question.setLastupdateTimestamp(curr);
