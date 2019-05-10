@@ -27,11 +27,11 @@ CREATE TABLE `questionaire_question_r` (
   `question_type` int(11) NOT NULL COMMENT '题目类型: 1代表单选，2代表多选，3代表文本输入，4代表长文本输入',
   `question_id` int(11) NOT NULL COMMENT '题目的id',
   `questionaire_id` int(11) NOT NULL COMMENT '调查问卷的id',
+  `enabled` int(11) DEFAULT NULL COMMENT '定义了该问题在问卷中是否启用：0代表未启动，1代表启用',
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `enabled` int(11) DEFAULT NULL COMMENT '定义了该问题在问卷中是否启用：0代表未启动，1代表启用',
   `use_yn` varchar(5) DEFAULT NULL COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义问卷中有哪些题目';
