@@ -16,31 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role_t`
+-- Table structure for table `questionaire_question_r`
 --
 
-DROP TABLE IF EXISTS `role_t`;
+DROP TABLE IF EXISTS `questionaire_question_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role_t` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(55) DEFAULT NULL,
+CREATE TABLE `questionaire_question_r` (
+  `id` int(11) NOT NULL COMMENT '主键',
+  `question_type` int(11) NOT NULL COMMENT '题目类型: 1代表单选，2代表多选，3代表文本输入，4代表长文本输入',
+  `question_id` int(11) NOT NULL COMMENT '题目的id',
+  `questionaire_id` int(11) NOT NULL COMMENT '调查问卷的id',
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT NULL,
+  `enabled` int(11) DEFAULT NULL COMMENT '定义了该问题在问卷中是否启用：0代表未启动，1代表启用',
+  `use_yn` varchar(5) DEFAULT NULL COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义问卷中有哪些题目';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role_t`
+-- Dumping data for table `questionaire_question_r`
 --
 
-LOCK TABLES `role_t` WRITE;
-/*!40000 ALTER TABLE `role_t` DISABLE KEYS */;
-/*!40000 ALTER TABLE `role_t` ENABLE KEYS */;
+LOCK TABLES `questionaire_question_r` WRITE;
+/*!40000 ALTER TABLE `questionaire_question_r` DISABLE KEYS */;
+/*!40000 ALTER TABLE `questionaire_question_r` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

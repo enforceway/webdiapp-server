@@ -16,31 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role_t`
+-- Table structure for table `group_t`
 --
 
-DROP TABLE IF EXISTS `role_t`;
+DROP TABLE IF EXISTS `group_t`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role_t` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(55) DEFAULT NULL,
+CREATE TABLE `group_t` (
+  `id` int(11) NOT NULL,
+  `group_name` varchar(45) DEFAULT NULL COMMENT '定义了组名',
   `creation_timestamp` datetime DEFAULT NULL,
-  `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
+  `creation_user` int(11) DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色组对应的表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role_t`
+-- Dumping data for table `group_t`
 --
 
-LOCK TABLES `role_t` WRITE;
-/*!40000 ALTER TABLE `role_t` DISABLE KEYS */;
-/*!40000 ALTER TABLE `role_t` ENABLE KEYS */;
+LOCK TABLES `group_t` WRITE;
+/*!40000 ALTER TABLE `group_t` DISABLE KEYS */;
+/*!40000 ALTER TABLE `group_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-11  0:57:17
+-- Dump completed on 2019-05-11  0:57:15
