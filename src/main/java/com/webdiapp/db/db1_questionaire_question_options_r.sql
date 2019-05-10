@@ -31,7 +31,8 @@ CREATE TABLE `questionaire_question_options_r` (
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `creation_username` varchar(45) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT 'y',
+  `disabled` varchar(5) DEFAULT 'y' COMMENT '标识问卷中该题目是否禁用，不在真是问卷中使用。',
+  `use_yn` varchar(5) DEFAULT 'y' COMMENT '逻辑删除标识',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,7 +43,7 @@ CREATE TABLE `questionaire_question_options_r` (
 
 LOCK TABLES `questionaire_question_options_r` WRITE;
 /*!40000 ALTER TABLE `questionaire_question_options_r` DISABLE KEYS */;
-INSERT INTO `questionaire_question_options_r` VALUES (1,'非常喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(2,'比较喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(3,'一般','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(4,'不太喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(5,'非常不喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(6,'看你便宜','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(7,'你技术能力出众','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(8,'你沟通能力强','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(9,'你是老板儿子','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(10,'薪资到位','n',21,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(11,'工作环境好','n',21,1,'2019-03-22 16:35:12',NULL,NULL,'y'),(12,'同事和蔼','n',21,1,'2019-03-22 16:35:12',NULL,NULL,'y');
+INSERT INTO `questionaire_question_options_r` VALUES (1,'非常喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(2,'比较喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(3,'一般','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(4,'不太喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(5,'非常不喜欢','n',1,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(6,'看你便宜','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(7,'你技术能力出众','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(8,'你沟通能力强','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(9,'你是老板儿子','n',19,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(10,'薪资到位','n',21,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(11,'工作环境好','n',21,1,'2019-03-22 16:35:12',NULL,NULL,'y','y'),(12,'同事和蔼','n',21,1,'2019-03-22 16:35:12',NULL,NULL,'y','y');
 /*!40000 ALTER TABLE `questionaire_question_options_r` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
