@@ -25,14 +25,12 @@ DROP TABLE IF EXISTS `questionaire_t`;
 CREATE TABLE `questionaire_t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status_id` int(11) DEFAULT NULL COMMENT '定义了状态',
-  `status` varchar(30) DEFAULT 'created' COMMENT '定义了状态显示文字',
-  `working_field` varchar(45) DEFAULT 'sociology' COMMENT '定义了问卷所属领域',
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `active_date_start` datetime DEFAULT NULL,
-  `active_date_end` datetime DEFAULT NULL,
+  `active_date_start` datetime DEFAULT NULL COMMENT '开始有效日期',
+  `active_date_end` datetime DEFAULT NULL COMMENT '结束有效日期',
   `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='问卷对应的数据表';
@@ -44,7 +42,7 @@ CREATE TABLE `questionaire_t` (
 
 LOCK TABLES `questionaire_t` WRITE;
 /*!40000 ALTER TABLE `questionaire_t` DISABLE KEYS */;
-INSERT INTO `questionaire_t` VALUES (1,2,'draft','','2019-03-22 16:35:12',0,'2019-03-22 16:35:12',0,'2019-03-22 16:35:12','2019-04-22 16:35:12','y');
+INSERT INTO `questionaire_t` VALUES (1,2,'2019-03-22 16:35:12',0,'2019-03-22 16:35:12',0,'2019-03-22 16:35:12','2019-04-22 16:35:12','y');
 /*!40000 ALTER TABLE `questionaire_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-11  0:57:16
+-- Dump completed on 2019-05-11  1:17:05

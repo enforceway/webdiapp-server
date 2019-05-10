@@ -28,13 +28,11 @@ CREATE TABLE `user_role_r` (
   `role_id` int(11) NOT NULL,
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
-  `creation_user_name` varchar(45) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `lastupdate_user_name` varchar(45) DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户有组的概念，不会强行赋予用户权限.要废弃了';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-22 20:09:33
+-- Dump completed on 2019-05-11  1:17:04
