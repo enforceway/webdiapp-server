@@ -5,27 +5,22 @@
 	<sql id="baseColumnsQry">
 		creation_timestamp as creationTimestamp,
         creation_user as creationUser,
-        creation_username as creationUsername,
         lastupdate_timestamp as lastupdateTimestamp,
-        lastupdate_user as lastupdateUser,
-        lastupdate_username as lastupdateUsername 
+        lastupdate_user as lastupdateUser
 	</sql>
 	<sql id="baseColumnsInsertFields">
-		creation_timestamp,creation_user,creation_username,lastupdate_timestamp,lastupdate_user,lastupdate_username 
+		creation_timestamp,creation_user,lastupdate_timestamp,lastupdate_user 
 	</sql>
 	<sql id="baseColumnsInsert">
 		#{creation_timestamp, javaType=java.sql.Date, jdbcType=DATE},
         #{creation_user, javaType=INTEGER, jdbcType=INTEGER},
-        #{creation_username, javaType=string, jdbcType=string},
         #{lastupdate_timestamp, javaType=java.sql.Date, jdbcType=DATE},
-        #{lastupdate_user, javaType=INTEGER, jdbcType=INTEGER},
-        #{lastupdate_username, javaType=string, jdbcType=string} 
+        #{lastupdate_user, javaType=INTEGER, jdbcType=INTEGER}
 	</sql>
     <select id="getList" resultType="Questionaire">
         select
         id,
         status_id as statusId,
-        status,
         working_field as workingField,
         <include refid="baseColumnsQry" />
         from questionaire_t limit #{skip},#{size}
@@ -34,7 +29,6 @@
         select
         id,
         status_id as statusId,
-        status,
         working_field as workingField,
         <include refid="baseColumnsQry" />
         from questionaire_t where id=#{id}
@@ -44,10 +38,9 @@
     </select>
     <insert id="insert" parameterType="Questionaire">
         insert into
-        questionaire_t(status_id, status, working_field, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
+        questionaire_t(status_id, working_field, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
         values(
         #{statusId, javaType=INTEGER, jdbcType=INTEGER},
-        #{status, javaType=string, jdbcType=VARCHAR},
         #{workingField, javaType=string, jdbcType=VARCHAR},
         #{activeDateStart, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{activeDateEnd, javaType=java.util.Date, jdbcType=TIMESTAMP},
@@ -65,10 +58,8 @@
     <update id="update" parameterType="Questionaire">
         update questionaire_t set
         status_id=#{statusId},
-        status=#{status},
         lastupdate_timestamp=#{lastupdateTimestamp},
-        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
-        lastupdate_username=#{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         where id=#{id}
     </update>
 </mapper>

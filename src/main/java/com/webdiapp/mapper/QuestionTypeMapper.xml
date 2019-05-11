@@ -5,13 +5,11 @@
 	<sql id="baseColumnsQry">
 		creation_timestamp as creationTimestamp,
         creation_user as creationUser,
-        creation_username as creationUsername,
         lastupdate_timestamp as lastupdateTimestamp,
-        lastupdate_user as lastupdateUser,
-        lastupdate_username as lastupdateUsername 
+        lastupdate_user as lastupdateUser
 	</sql>
 	<sql id="baseColumnsInsertFields">
-		creation_timestamp,creation_user,creation_username,lastupdate_timestamp,lastupdate_user,lastupdate_username 
+		creation_timestamp,creation_user,lastupdate_timestamp,lastupdate_user 
 	</sql>
 	<sql id="baseColumnsInsert">
 		#{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
@@ -60,8 +58,7 @@
         question_content=#{questionContent},
         question_type=#{questionType},
         lastupdate_timestamp=#{lastupdateTimestamp},
-        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
-        lastupdate_username=#{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         where id=#{id}
     </update>
 </mapper>
