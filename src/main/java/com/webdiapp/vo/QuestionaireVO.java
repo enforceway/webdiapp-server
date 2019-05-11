@@ -4,9 +4,9 @@ public class QuestionaireVO {
 
 	private Integer id;
 
-	private Integer statusId;
-
 	private String status;
+
+	private Integer statusId;
 
 	private String workingField;
 

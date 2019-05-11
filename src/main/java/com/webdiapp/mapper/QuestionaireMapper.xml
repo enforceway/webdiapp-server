@@ -21,7 +21,6 @@
         select
         id,
         status_id as statusId,
-        working_field as workingField,
         <include refid="baseColumnsQry" />
         from questionaire_t limit #{skip},#{size}
     </select>
@@ -29,7 +28,6 @@
         select
         id,
         status_id as statusId,
-        working_field as workingField,
         <include refid="baseColumnsQry" />
         from questionaire_t where id=#{id}
     </select>
@@ -38,10 +36,9 @@
     </select>
     <insert id="insert" parameterType="Questionaire">
         insert into
-        questionaire_t(status_id, working_field, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
+        questionaire_t(status_id, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
         values(
         #{statusId, javaType=INTEGER, jdbcType=INTEGER},
-        #{workingField, javaType=string, jdbcType=VARCHAR},
         #{activeDateStart, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{activeDateEnd, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
