@@ -43,10 +43,8 @@
         #{activeDateEnd, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
-        #{creationUsername, javaType=string, jdbcType=VARCHAR},
         #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
-        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
-        #{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         )
     </insert>
     <delete id="delete">

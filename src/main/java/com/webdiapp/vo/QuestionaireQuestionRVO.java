@@ -16,7 +16,7 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 
 	private Integer questionaireId;
 
-	private Integer enabled;
+	private Integer enabled; // 1或者null代表启用状态，0代表不可用状态
 	
 	private List<QuestionOptionRVO> options;
 

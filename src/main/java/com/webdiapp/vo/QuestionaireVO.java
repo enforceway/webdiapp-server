@@ -22,8 +22,9 @@ public class QuestionaireVO extends BaseVO {
 	public QuestionaireVO() {}
 	
 	public QuestionaireVO(Questionaire que) {
-		this.setCreationTimestamp(que.getCreationTimestamp());
-		this.setCreationUser(que.getCreationUser());
+//		this.setCreationTimestamp(que.getCreationTimestamp());
+//		System.out.println("que:" + que.getCreationUser());
+//		this.setCreationUser(que.getCreationUser());
 		
 		this.setId(que.getId());
 		this.setStatusId(que.getStatusId());
