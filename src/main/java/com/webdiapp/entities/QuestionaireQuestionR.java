@@ -1,17 +1,21 @@
-package com.webdiapp.vo;
+package com.webdiapp.entities;
 
 import com.webdiapp.entities.BaseEntity;
 
-public class QuestionaireQuestionVO extends BaseEntity {
+public class QuestionaireQuestionR extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private Integer questionType; // 1代表单选，2代表多选，3代表文本输入，4代表长文本输入'
-	private Integer questionId;
-	private Integer questionaireId;
-	private Integer enabled;
 
+	private Integer questionType; // 1代表单选，2代表多选，3代表文本输入，4代表长文本输入'
+
+	private Integer questionId;
+
+	private Integer questionaireId;
+
+	private Integer enabled;
+	
 	public Integer getId() {
 		return id;
 	}

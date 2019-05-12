@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webdiapp.entities.Questionaire;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionaireService;
+import com.webdiapp.vo.QuestionaireVO;
 
 @RestController
 @RequestMapping("/questionaire")
@@ -27,23 +28,28 @@ public class QuestionaireController {
     QuestionaireService queService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
-        System.out.println(pageNo + "," + pageSize);
-        List<Questionaire> list = this.queService.getList(pageNo, pageSize);
+    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+        List<QuestionaireVO> list = this.queService.getList(pageNo, pageSize);
         GeneralResponser gr = new GeneralResponser();
         gr.setData(list);
         return gr;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
-    public int insert(@RequestBody Questionaire que) {
+    public GeneralResponser insert(@RequestBody QuestionaireVO que) {
+    	GeneralResponser gr = new GeneralResponser();
     	Date curr = new Date();
     	que.setCreationTimestamp(curr);
     	que.setLastupdateTimestamp(curr);
-//    	que.setUserYn("y");
-    	System.out.println("vo from questionaire controller is:" + que.getStatus() + "," + que.getStatusId() + "," + que.getWorkingField());
-    	int count = this.queService.insert(que);
-    	return count;
+    	Integer ifSucc = 0;
+    	try {
+    		ifSucc = this.queService.insert(que);
+		} catch (NumberFormatException e) {
+//			ifSucc = 0;
+		} finally {
+			gr.setData(ifSucc);
+			return gr;
+		}
     }
 
     @SuppressWarnings("finally")
@@ -55,13 +61,13 @@ public class QuestionaireController {
     		int questionId = Integer.parseInt(strQuestionId);
     		que = this.queService.getById(questionId);
 		} catch (NumberFormatException e) {
-			// TODO: handle exception
+			
 		} finally {
 			gr.setData(que);
 			return gr;
 		}
     }
-    
+
     @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
     public int delete(@RequestBody Questionaire que) {
     	int count = this.queService.delete(que.getId());

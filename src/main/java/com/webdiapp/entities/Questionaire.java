@@ -14,10 +14,6 @@ public class Questionaire extends BaseEntity {
 
 	private Integer statusId;
 
-	private String status;
-
-	private String workingField;
-
 	private Date activeDateStart;
 
 	private Date activeDateEnd;
@@ -36,22 +32,6 @@ public class Questionaire extends BaseEntity {
 
 	public void setStatusId(Integer statusId) {
 		this.statusId = statusId;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getWorkingField() {
-		return workingField;
-	}
-
-	public void setWorkingField(String workingField) {
-		this.workingField = workingField;
 	}
 
 	public Date getActiveDateStart() {

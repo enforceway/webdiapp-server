@@ -11,15 +11,15 @@ public class BaseEntity implements Serializable {
 
 	private Date creationTimestamp;
     
-    private int creationUser;
+    private Integer creationUser;
     
     private String creationUsername;
     
     private Date lastupdateTimestamp;
     
-    private int lastupdateUser;
+    private Integer lastupdateUser;
     
-    private String lastupdateUsername;
+//    private String lastupdateUsername;
     
     private String userYn;
     
@@ -41,11 +41,11 @@ public class BaseEntity implements Serializable {
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public int getCreationUser() {
+	public Integer getCreationUser() {
 		return creationUser;
 	}
 
-	public void setCreationUser(int creationUser) {
+	public void setCreationUser(Integer creationUser) {
 		this.creationUser = creationUser;
 	}
 
@@ -65,21 +65,21 @@ public class BaseEntity implements Serializable {
 		this.lastupdateTimestamp = lastupdateTimestamp;
 	}
 
-	public int getLastupdateUser() {
+	public Integer getLastupdateUser() {
 		return lastupdateUser;
 	}
 
-	public void setLastupdateUser(int lastupdateUser) {
+	public void setLastupdateUser(Integer lastupdateUser) {
 		this.lastupdateUser = lastupdateUser;
 	}
 
-	public String getLastupdateUsername() {
-		return lastupdateUsername;
-	}
-
-	public void setLastupdateUsername(String lastupdateUsername) {
-		this.lastupdateUsername = lastupdateUsername;
-	}
+//	public String getLastupdateUsername() {
+//		return lastupdateUsername;
+//	}
+//
+//	public void setLastupdateUsername(String lastupdateUsername) {
+//		this.lastupdateUsername = lastupdateUsername;
+//	}
 
 	public String getUserYn() {
 		return userYn;
