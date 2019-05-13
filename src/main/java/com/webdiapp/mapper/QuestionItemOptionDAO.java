@@ -2,12 +2,11 @@ package com.webdiapp.mapper;
 
 import java.util.List;
 
-import com.webdiapp.entities.Question;
 import com.webdiapp.entities.QuestionItemOption;
 
 public interface QuestionItemOptionDAO {
 
-    public List<Question> getList(int questionItemId);
+    public List<QuestionItemOption> getList(int questionaireQuestionId);
     
 //    public Question getById(int id);
     

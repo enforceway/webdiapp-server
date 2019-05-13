@@ -9,7 +9,7 @@ public interface QuestionaireService {
 
     List<QuestionaireVO> getList(int pageNO, int size);
 
-    Questionaire getById(int id);
+    QuestionaireVO getById(Integer id);
     
     int getCount();
 
@@ -19,6 +19,6 @@ public interface QuestionaireService {
 
     int deletes(int[] ids);
 
-    int update(Questionaire que);
+    int update(QuestionaireVO que);
 
 }

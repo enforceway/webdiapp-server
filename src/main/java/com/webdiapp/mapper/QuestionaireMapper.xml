@@ -26,10 +26,16 @@
     </select>
     <select id="getById" parameterType="INTEGER" resultType="Questionaire">
         select
-        id,
-        status_id as statusId,
-        <include refid="baseColumnsQry" />
-        from questionaire_t where id=#{id}
+        naire.id as id,
+        naire.status_id as statusId,
+        naire.active_date_start as activeDateStart,
+        naire.active_date_end as activeDateEnd,
+        naire.creation_timestamp as creationTimestamp,
+        naire.creation_user as creationUser,
+        naire.lastupdate_timestamp as lastupdateTimestamp,
+        naire.lastupdate_user as lastupdateUser
+        from questionaire_t naire 
+        where naire.id=#{id}
     </select>
     <select id="getCount" resultType="int">
         select count(id) from questionaire_t

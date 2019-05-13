@@ -54,12 +54,12 @@ public class QuestionaireController {
 
     @SuppressWarnings("finally")
 	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.GET)
-    public GeneralResponser listById(@PathVariable("questionId") String strQuestionId) {
+    public GeneralResponser listById(@PathVariable("questionId") Integer strQuestionId) {
     	GeneralResponser gr = new GeneralResponser();
-    	Questionaire que = null;
+    	QuestionaireVO que = null;
     	try {
-    		int questionId = Integer.parseInt(strQuestionId);
-    		que = this.queService.getById(questionId);
+//    		int questionaireId = Integer.parseInt(strQuestionId);
+    		que = this.queService.getById(strQuestionId);
 		} catch (NumberFormatException e) {
 			
 		} finally {
@@ -75,7 +75,7 @@ public class QuestionaireController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
-    public int update(@RequestBody Questionaire que) {
+    public int update(@RequestBody QuestionaireVO que) {
     	Date curr = new Date();
     	que.setLastupdateTimestamp(curr);
     	int count = this.queService.update(que);

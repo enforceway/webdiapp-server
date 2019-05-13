@@ -4,12 +4,12 @@
 <mapper namespace="com.webdiapp.mapper.QuestionItemOptionDAO">
     <select id="getList" parameterType="INTEGER" resultType="QuestionItemOption">
         select
-        questionaire_question_id,
-        option_content,
+        questionaire_question_id as questionItemId,
+        option_content as optionContent,
         selected,
-        creation_timestamp,
-        creation_user
-        from questionaire_question_options_r where questionaire_id=#{questionaireId}
+        creation_timestamp as creationTimestamp,
+        creation_user as creationUser
+        from questionaire_question_options_r where questionaire_question_id=#{questionaireQuestionId}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="QuestionItemOption">
         select

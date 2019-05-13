@@ -3,6 +3,7 @@ package com.webdiapp.vo;
 import java.util.List;
 
 import com.webdiapp.entities.BaseEntity;
+import com.webdiapp.entities.QuestionaireQuestionR;
 
 public class QuestionaireQuestionRVO extends BaseEntity {
 
@@ -19,6 +20,21 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 	private Integer enabled; // 1或者null代表启用状态，0代表不可用状态
 	
 	private List<QuestionOptionRVO> options;
+	
+	public QuestionaireQuestionRVO() {}
+	
+	public QuestionaireQuestionRVO(QuestionaireQuestionR questionR) {
+		this.setId(questionR.getId());
+		this.setQuestionType(questionR.getQuestionType());
+		this.setQuestionId(questionR.getQuestionId());
+		this.setQuestionaireId(questionR.getQuestionaireId());
+		this.setEnabled(questionR.getEnabled());
+		
+		this.setCreationTimestamp(questionR.getCreationTimestamp());
+		this.setCreationUser(questionR.getCreationUser());
+		this.setLastupdateTimestamp(questionR.getLastupdateTimestamp());
+		this.setLastupdateUser(questionR.getLastupdateUser());
+	}
 
 	public Integer getId() {
 		return id;

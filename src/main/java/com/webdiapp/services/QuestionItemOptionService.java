@@ -5,16 +5,17 @@ import java.util.List;
 import com.webdiapp.entities.Question;
 import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.entities.QuestionaireQuestionR;
+import com.webdiapp.vo.QuestionOptionRVO;
 
 public interface QuestionItemOptionService {
 
-    public List<Question> getList(int questionItemId);
+    public List<QuestionOptionRVO> getList(int questionItemId);
 
 //    public Question getById(int id);
 
     public int getCount();
 
-    public int insert(QuestionItemOption entity);
+    public int insert(QuestionOptionRVO entity);
 
     public int delete(int[] ids);
 

@@ -7,9 +7,9 @@ import com.webdiapp.entities.QuestionaireQuestionR;
 
 public interface QuestionaireQuestionService {
 
-    public List<Question> getList(int questionaireId);
+    public List<QuestionaireQuestionR> getList(int questionaireId);
 
-    public Question getById(int id);
+    public QuestionaireQuestionR getById(int id);
 
     public int getCount();
 

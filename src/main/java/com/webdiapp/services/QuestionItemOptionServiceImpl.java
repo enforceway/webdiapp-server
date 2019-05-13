@@ -1,14 +1,15 @@
 package com.webdiapp.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.webdiapp.entities.Question;
 import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.mapper.QuestionItemOptionDAO;
+import com.webdiapp.vo.QuestionOptionRVO;
 
 @Service
 public class QuestionItemOptionServiceImpl implements QuestionItemOptionService {
@@ -17,9 +18,13 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 	private QuestionItemOptionDAO questionItemDao;
 	
 	@Override
-	public List<Question> getList(int questionaireId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QuestionOptionRVO> getList(int questionItemId) {
+		List<QuestionItemOption> rvs = this.questionItemDao.getList(questionItemId);
+		List<QuestionOptionRVO> res = new ArrayList<>(rvs.size());
+		for(QuestionItemOption rvo : rvs) {
+			res.add(new QuestionOptionRVO(rvo));
+		}
+		return res;
 	}
 
 	@Override
@@ -29,9 +34,17 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 	}
 
 	@Override
-	public int insert(QuestionItemOption entity) {
+	public int insert(QuestionOptionRVO entity) {
 		System.out.println("entity:" + entity.getOptionContent());
-		return this.questionItemDao.insert(entity);
+		QuestionItemOption optionItem = new QuestionItemOption();
+		optionItem.setOptionContent(entity.getOptionContent());
+		optionItem.setQuestionItemId(entity.getQuestionaireQuestionId());
+		
+		optionItem.setCreationTimestamp(entity.getCreationTimestamp());
+		optionItem.setLastupdateTimestamp(entity.getLastupdateTimestamp());
+		optionItem.setCreationUser(entity.getCreationUser());
+		optionItem.setLastupdateUser(entity.getLastupdateUser());
+		return this.questionItemDao.insert(optionItem);
 	}
 
 	@Override

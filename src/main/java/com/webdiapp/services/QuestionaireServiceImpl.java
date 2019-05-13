@@ -39,8 +39,27 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	}
 
 	@Override
-	public Questionaire getById(int id) {
-		return this.queDao.getById(id);
+	public QuestionaireVO getById(Integer id) {
+		// 获取问卷详情
+		Questionaire questionaire = this.queDao.getById(id);
+		QuestionaireVO naireVO = new QuestionaireVO(questionaire);
+		// 获取问卷对应题目
+		List<QuestionaireQuestionR> questions = this.queQuestionService.getList(id);
+		
+		List<QuestionaireQuestionRVO> questionList = new ArrayList<QuestionaireQuestionRVO>(questions.size());
+		naireVO.setQuestionsList(questionList);
+
+		QuestionaireQuestionRVO rvo = null;
+		List<QuestionOptionRVO> questionItemOptions = null;
+		for(QuestionaireQuestionR que : questions) {
+			rvo = new QuestionaireQuestionRVO(que);
+			questionList.add(rvo);
+			
+			// 获取题目对应带候选项
+			questionItemOptions = this.questionItemOptionService.getList(rvo.getQuestionId());
+			rvo.setOptions(questionItemOptions);
+		}
+		return naireVO;
 	}
 
 	@Override
@@ -48,42 +67,39 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		return this.queDao.getCount();
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public int insert(QuestionaireVO question) {
 		Questionaire newQue = new Questionaire();
 		Date date = new Date();
 		newQue.setStatusId(question.getStatusId());
-		newQue.setActiveDateStart(null);
-		newQue.setActiveDateEnd(null);
+		newQue.setActiveDateStart(question.getActiveDateStart());
+		newQue.setActiveDateEnd(question.getActiveDateEnd());
 		newQue.setCreationTimestamp(date);
-		newQue.setCreationUser(null);
+//		newQue.setCreationUser(null);
 		newQue.setLastupdateTimestamp(date);
-		newQue.setLastupdateUser(null);
+//		newQue.setLastupdateUser(null);
 		
 		this.queDao.insert(newQue);
 		List<QuestionaireQuestionRVO> ques = question.getQuestionsList();
 		QuestionaireQuestionR queR = null;
 		QuestionItemOption questionItem = null;
-		for(QuestionaireQuestionRVO questionR : ques) {
+		for(QuestionaireQuestionRVO que : ques) {
 			queR = new QuestionaireQuestionR();
-			queR.setQuestionType(questionR.getQuestionType());
-			queR.setQuestionId(questionR.getQuestionId());
+			queR.setQuestionType(que.getQuestionType());
+			queR.setQuestionId(que.getQuestionId());
 			queR.setQuestionaireId(newQue.getId());
-			queR.setEnabled(questionR.getEnabled());
+			queR.setEnabled(que.getEnabled());
 			queR.setCreationTimestamp(date);
 			queR.setLastupdateTimestamp(date);
 //			queR.setCreationUser(0);
 //			queR.setLastupdateUser(0);
 			this.queQuestionService.insert(queR);
-			System.out.println("start1 entity:" + questionR.getOptions().size());
-			for(QuestionOptionRVO optionItem : questionR.getOptions()) {
-				System.out.println("start entity:" + optionItem.getOptionContent());
+			for(QuestionOptionRVO optionItem : que.getOptions()) {
 				questionItem = new QuestionItemOption();
 				questionItem.setCreationTimestamp(date);
 //				questionItem.setCreationUser(0);
 				questionItem.setOptionContent(optionItem.getOptionContent());
-				this.questionItemOptionService.insert(questionItem);
+				this.questionItemOptionService.insert(optionItem);
 			}
 		}
 
@@ -101,8 +117,9 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	}
 
 	@Override
-	public int update(Questionaire question) {
-		return this.queDao.update(question);
+	public int update(QuestionaireVO question) {
+		Questionaire que = null;
+		return this.queDao.update(que);
 	}
     
 }

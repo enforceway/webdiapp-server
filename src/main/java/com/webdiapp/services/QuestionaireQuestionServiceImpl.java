@@ -17,18 +17,6 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	private QuestionaireQuestionRDAO queQuestionRDao;
 
 	@Override
-	public List<Question> getList(int questionaireId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Question getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -43,6 +31,18 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	public int delete(int[] ids) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<QuestionaireQuestionR> getList(int questionaireId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public QuestionaireQuestionR getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
