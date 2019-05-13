@@ -1,26 +1,27 @@
-package com.webdiapp.goods;
+package com.webdiapp.questionaire;
 
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import com.webdiapp.entities.Question;
-import com.webdiapp.mapper.QuestionDAO;
+import com.webdiapp.entities.Questionaire;
+import com.webdiapp.mapper.QuestionaireDAO;
 import com.webdiapp.util.MyBatisUtil;
 
 import junit.framework.Assert;
 
-public class TestQuestions {
+public class TestQuestionaire {
 
     @Test
-    public void getQuestionPagerTest() {
+    public void getQuestionaireListOnPaging() {
         int skip = 1;
         int size = 5;
         SqlSession session = MyBatisUtil.getSession();
         try {
-        	QuestionDAO dao = session.getMapper(QuestionDAO.class);
-            List<Question> list = dao.getList(skip, size);
-            Assert.assertEquals(2, list.size());
+        	QuestionaireDAO dao = session.getMapper(QuestionaireDAO.class);
+        	System.out.println("dao:" + dao.hashCode());
+            List<Questionaire> list = dao.getList(skip, size);
+            Assert.assertTrue(list.size() >= 0);
         } finally {
             session.close();
         }

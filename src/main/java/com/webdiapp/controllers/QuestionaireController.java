@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ import com.webdiapp.vo.QuestionaireVO;
 @RequestMapping("/questionaire")
 public class QuestionaireController {
 
-	private static final Logger log = Logger.getLogger(QuestionaireController.class);
+//	private static final Logger log = Logger.getLogger(QuestionaireController.class);
     
     @Resource
     QuestionaireService queService;
@@ -41,15 +41,9 @@ public class QuestionaireController {
     	Date curr = new Date();
     	que.setCreationTimestamp(curr);
     	que.setLastupdateTimestamp(curr);
-    	Integer ifSucc = 0;
-    	try {
-    		ifSucc = this.queService.insert(que);
-		} catch (NumberFormatException e) {
-//			ifSucc = 0;
-		} finally {
-			gr.setData(ifSucc);
-			return gr;
-		}
+    	Integer ifSucc = this.queService.insert(que);
+    	gr.setData(ifSucc);
+    	return gr;
     }
 
     @SuppressWarnings("finally")
@@ -58,7 +52,6 @@ public class QuestionaireController {
     	GeneralResponser gr = new GeneralResponser();
     	QuestionaireVO que = null;
     	try {
-//    		int questionaireId = Integer.parseInt(strQuestionId);
     		que = this.queService.getById(strQuestionId);
 		} catch (NumberFormatException e) {
 			

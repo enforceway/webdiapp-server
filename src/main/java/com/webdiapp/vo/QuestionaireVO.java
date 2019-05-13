@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.webdiapp.entities.Questionaire;
 
+//import javax.validation.constraints.Min;
+//import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.Pattern;
+
+
 public class QuestionaireVO extends BaseVO {
 
 	private static final long serialVersionUID = 1L;

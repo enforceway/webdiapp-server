@@ -8,7 +8,7 @@ public class QuestionOptionRVO extends BaseVO {
 
 	private Integer id;
 	
-	private Integer questionaireQuestionId;
+	private Integer questionItemId;
 
 	private String optionContent;
 
@@ -20,7 +20,7 @@ public class QuestionOptionRVO extends BaseVO {
 	
 	public QuestionOptionRVO(QuestionItemOption itemOption) {
 		this.setId(itemOption.getId());
-		this.setQuestionaireQuestionId(itemOption.getQuestionItemId());
+		this.setQuestionItemId(itemOption.getQuestionItemId());
 		this.setOptionContent(itemOption.getOptionContent());
 		this.setSelected(itemOption.getSelected());
 		this.setCreationTimestamp(itemOption.getCreationTimestamp());
@@ -37,12 +37,12 @@ public class QuestionOptionRVO extends BaseVO {
 		this.id = id;
 	}
 
-	public Integer getQuestionaireQuestionId() {
-		return questionaireQuestionId;
+	public Integer getQuestionItemId() {
+		return questionItemId;
 	}
 
-	public void setQuestionaireQuestionId(Integer questionaireQuestionId) {
-		this.questionaireQuestionId = questionaireQuestionId;
+	public void setQuestionItemId(Integer questionItemId) {
+		this.questionItemId = questionItemId;
 	}
 
 	public String getOptionContent() {

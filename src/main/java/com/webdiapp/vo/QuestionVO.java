@@ -7,10 +7,14 @@ public class QuestionVO extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	private Integer questionTypeId;
 
 	private String questionContent;
 
 	private String questionType;
+	
+	public QuestionVO() {}
 
 	public Integer getId() {
 		return id;
@@ -18,6 +22,14 @@ public class QuestionVO extends BaseEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getQuestionTypeId() {
+		return questionTypeId;
+	}
+
+	public void setQuestionTypeId(Integer questionTypeId) {
+		this.questionTypeId = questionTypeId;
 	}
 
 	public String getQuestionContent() {

@@ -17,7 +17,7 @@
         #{lastupdate_timestamp, javaType=java.sql.Date, jdbcType=DATE},
         #{lastupdate_user, javaType=INTEGER, jdbcType=INTEGER}
 	</sql>
-    <select id="getList" parameterType="INTEGER" resultType="QuestionaireQuestionR">
+    <select id="getList" parameterType="INTEGER" resultType="QuestionaireQuestion">
         select
         id,
         question_type as questionType,
@@ -27,7 +27,7 @@
         <include refid="baseColumnsQry" />
         from questionaire_question_r where questionaire_id=#{questionaireId}
     </select>
-    <select id="getById" parameterType="INTEGER" resultType="QuestionaireQuestionR">
+    <select id="getById" parameterType="INTEGER" resultType="QuestionaireQuestion">
         select
         id,
         question_type as questionType,
@@ -40,7 +40,7 @@
     <select id="getCount" resultType="int">
         select count(id) from questionaire_question_r
     </select>
-    <insert id="insert" parameterType="QuestionaireQuestionR"
+    <insert id="insert" parameterType="QuestionaireQuestion"
     	useGeneratedKeys="true" keyProperty="id">
         insert into
         questionaire_question_r(question_type, question_id, questionaire_id, enabled, <include refid="baseColumnsInsertFields" />) 
@@ -60,7 +60,7 @@
     	use_yn='n' where id in [1,2,3,4]
     </delete>
     <!-- 不设置更新直接删除
-    <update id="update" parameterType="QuestionaireQuestionR">
+    <update id="update" parameterType="QuestionaireQuestion">
         update questionaire_question_r set
         question_type=#{questionType},
         question_id=#{questionId},

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.entities.Questionaire;
-import com.webdiapp.entities.QuestionaireQuestionR;
+import com.webdiapp.entities.QuestionaireQuestion;
 import com.webdiapp.mapper.QuestionaireDAO;
 import com.webdiapp.vo.QuestionOptionRVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
@@ -44,20 +44,19 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		Questionaire questionaire = this.queDao.getById(id);
 		QuestionaireVO naireVO = new QuestionaireVO(questionaire);
 		// 获取问卷对应题目
-		List<QuestionaireQuestionR> questions = this.queQuestionService.getList(id);
-		
+		System.out.println("questionaire id:" + questionaire.getId());
+		List<QuestionaireQuestionRVO> questions = this.queQuestionService.getList(id);
+
 		List<QuestionaireQuestionRVO> questionList = new ArrayList<QuestionaireQuestionRVO>(questions.size());
 		naireVO.setQuestionsList(questionList);
 
-		QuestionaireQuestionRVO rvo = null;
 		List<QuestionOptionRVO> questionItemOptions = null;
-		for(QuestionaireQuestionR que : questions) {
-			rvo = new QuestionaireQuestionRVO(que);
-			questionList.add(rvo);
+		for(QuestionaireQuestionRVO que : questions) {
+			questionList.add(que);
 			
 			// 获取题目对应带候选项
-			questionItemOptions = this.questionItemOptionService.getList(rvo.getQuestionId());
-			rvo.setOptions(questionItemOptions);
+			questionItemOptions = this.questionItemOptionService.getList(que.getQuestionId());
+			que.setOptions(questionItemOptions);
 		}
 		return naireVO;
 	}
@@ -81,10 +80,10 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		
 		this.queDao.insert(newQue);
 		List<QuestionaireQuestionRVO> ques = question.getQuestionsList();
-		QuestionaireQuestionR queR = null;
+		QuestionaireQuestion queR = null;
 		QuestionItemOption questionItem = null;
 		for(QuestionaireQuestionRVO que : ques) {
-			queR = new QuestionaireQuestionR();
+			queR = new QuestionaireQuestion();
 			queR.setQuestionType(que.getQuestionType());
 			queR.setQuestionId(que.getQuestionId());
 			queR.setQuestionaireId(newQue.getId());

@@ -1,14 +1,15 @@
 package com.webdiapp.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.webdiapp.entities.Question;
-import com.webdiapp.entities.QuestionaireQuestionR;
+import com.webdiapp.entities.QuestionaireQuestion;
 import com.webdiapp.mapper.QuestionaireQuestionRDAO;
+import com.webdiapp.vo.QuestionaireQuestionRVO;
 
 @Service
 public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionService {
@@ -23,7 +24,7 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	}
 
 	@Override
-	public int insert(QuestionaireQuestionR entity) {
+	public int insert(QuestionaireQuestion entity) {
 		return this.queQuestionRDao.insert(entity);
 	}
 
@@ -34,13 +35,17 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	}
 
 	@Override
-	public List<QuestionaireQuestionR> getList(int questionaireId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QuestionaireQuestionRVO> getList(int questionaireId) {
+		List<QuestionaireQuestion> questions = this.queQuestionRDao.getList(questionaireId);
+		List<QuestionaireQuestionRVO> questionItems = new ArrayList<>(questions.size());
+		for (QuestionaireQuestion question : questions) {
+			questionItems.add(new QuestionaireQuestionRVO(question));
+		}
+		return questionItems;
 	}
 
 	@Override
-	public QuestionaireQuestionR getById(int id) {
+	public QuestionaireQuestion getById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

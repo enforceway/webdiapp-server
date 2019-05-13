@@ -2,7 +2,7 @@ package com.webdiapp.entities;
 
 import com.webdiapp.entities.BaseEntity;
 
-public class QuestionaireQuestionR extends BaseEntity {
+public class QuestionaireQuestion extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -14,8 +14,10 @@ public class QuestionaireQuestionR extends BaseEntity {
 
 	private Integer questionaireId;
 
-	private Integer enabled;
+	private Integer enabled; // 1或者null代表启用状态，0代表不可用状态
 	
+	public QuestionaireQuestion() {}
+
 	public Integer getId() {
 		return id;
 	}

@@ -3,7 +3,7 @@ package com.webdiapp.vo;
 import java.util.List;
 
 import com.webdiapp.entities.BaseEntity;
-import com.webdiapp.entities.QuestionaireQuestionR;
+import com.webdiapp.entities.QuestionaireQuestion;
 
 public class QuestionaireQuestionRVO extends BaseEntity {
 
@@ -19,11 +19,11 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 
 	private Integer enabled; // 1或者null代表启用状态，0代表不可用状态
 	
-	private List<QuestionOptionRVO> options;
+	private List<QuestionOptionRVO> options; // 题目对应的选项
 	
 	public QuestionaireQuestionRVO() {}
 	
-	public QuestionaireQuestionRVO(QuestionaireQuestionR questionR) {
+	public QuestionaireQuestionRVO(QuestionaireQuestion questionR) {
 		this.setId(questionR.getId());
 		this.setQuestionType(questionR.getQuestionType());
 		this.setQuestionId(questionR.getQuestionId());

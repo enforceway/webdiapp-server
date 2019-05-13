@@ -4,6 +4,7 @@
 <mapper namespace="com.webdiapp.mapper.QuestionItemOptionDAO">
     <select id="getList" parameterType="INTEGER" resultType="QuestionItemOption">
         select
+        id,
         questionaire_question_id as questionItemId,
         option_content as optionContent,
         selected,
@@ -13,6 +14,7 @@
     </select>
     <select id="getById" parameterType="INTEGER" resultType="QuestionItemOption">
         select
+        id,
         questionaire_question_id,
         option_content,
         selected,
@@ -42,7 +44,7 @@
     	use_yn='n' where id in [1,2,3,4]
     </delete>
     <!-- 不设置更新直接逻辑删除
-    <update id="update" parameterType="QuestionaireQuestionR">
+    <update id="update" parameterType="QuestionaireQuestion">
         update questionaire_question_r set
         question_type=#{questionType},
         question_id=#{questionId},

@@ -2,7 +2,6 @@ package com.webdiapp.services;
 
 import java.util.List;
 
-import com.webdiapp.entities.Questionaire;
 import com.webdiapp.vo.QuestionaireVO;
 
 public interface QuestionaireService {

@@ -2,18 +2,18 @@ package com.webdiapp.services;
 
 import java.util.List;
 
-import com.webdiapp.entities.Question;
-import com.webdiapp.entities.QuestionaireQuestionR;
+import com.webdiapp.entities.QuestionaireQuestion;
+import com.webdiapp.vo.QuestionaireQuestionRVO;
 
 public interface QuestionaireQuestionService {
 
-    public List<QuestionaireQuestionR> getList(int questionaireId);
+    public List<QuestionaireQuestionRVO> getList(int questionaireId);
 
-    public QuestionaireQuestionR getById(int id);
+    public QuestionaireQuestion getById(int id);
 
     public int getCount();
 
-    public int insert(QuestionaireQuestionR entity);
+    public int insert(QuestionaireQuestion entity);
 
     public int delete(int[] ids);
 

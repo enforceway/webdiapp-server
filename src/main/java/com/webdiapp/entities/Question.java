@@ -18,8 +18,8 @@ public class Question extends BaseEntity {
     
     private String questionType;
     
-    public Question() {
-    }
+    public Question() {}
+
     public Question(QuestionVO que) {
     	this.setQuestionContent(que.getQuestionContent());
     	this.setQuestionType(que.getQuestionType());

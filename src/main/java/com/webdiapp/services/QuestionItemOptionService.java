@@ -2,9 +2,6 @@ package com.webdiapp.services;
 
 import java.util.List;
 
-import com.webdiapp.entities.Question;
-import com.webdiapp.entities.QuestionItemOption;
-import com.webdiapp.entities.QuestionaireQuestionR;
 import com.webdiapp.vo.QuestionOptionRVO;
 
 public interface QuestionItemOptionService {

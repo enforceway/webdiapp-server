@@ -17,6 +17,8 @@ public class Questionaire extends BaseEntity {
 	private Date activeDateStart;
 
 	private Date activeDateEnd;
+	
+	public Questionaire() {}
 
 	public Integer getId() {
 		return id;

@@ -38,7 +38,7 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 		System.out.println("entity:" + entity.getOptionContent());
 		QuestionItemOption optionItem = new QuestionItemOption();
 		optionItem.setOptionContent(entity.getOptionContent());
-		optionItem.setQuestionItemId(entity.getQuestionaireQuestionId());
+		optionItem.setQuestionItemId(entity.getQuestionItemId());
 		
 		optionItem.setCreationTimestamp(entity.getCreationTimestamp());
 		optionItem.setLastupdateTimestamp(entity.getLastupdateTimestamp());
