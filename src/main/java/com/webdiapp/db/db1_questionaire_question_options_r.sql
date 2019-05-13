@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `questionaire_question_options_r`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `questionaire_question_options_r` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `questionire_question_id` int(11) DEFAULT NULL COMMENT '定义了问卷中问题的id',
+  `questionaire_question_id` int(11) DEFAULT NULL COMMENT '定义了问卷中问题的id',
   `option_content` varchar(255) DEFAULT NULL COMMENT '定义了每个选项对应带文字内容',
   `selected` int(11) DEFAULT '0' COMMENT '定义了题目对应带多个选项中，哪个被选中:0代表未选中，1代表选中。',
   `creation_timestamp` datetime DEFAULT NULL,

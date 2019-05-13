@@ -34,7 +34,8 @@
     <select id="getCount" resultType="int">
         select count(id) from questionaire_t
     </select>
-    <insert id="insert" parameterType="Questionaire">
+    <insert id="insert" parameterType="Questionaire"
+    	useGeneratedKeys="true" keyProperty="id">
         insert into
         questionaire_t(status_id, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
         values(

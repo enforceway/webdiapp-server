@@ -8,15 +8,20 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.entities.Questionaire;
 import com.webdiapp.entities.QuestionaireQuestionR;
 import com.webdiapp.mapper.QuestionaireDAO;
+import com.webdiapp.vo.QuestionOptionRVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
 import com.webdiapp.vo.QuestionaireVO;
 
 @Service
 public class QuestionaireServiceImpl implements QuestionaireService {
 
+	@Resource
+	QuestionItemOptionService questionItemOptionService;
+	
 	@Resource
     QuestionaireDAO queDao;
 	
@@ -43,6 +48,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		return this.queDao.getCount();
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public int insert(QuestionaireVO question) {
 		Questionaire newQue = new Questionaire();
@@ -56,17 +62,29 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		newQue.setLastupdateUser(null);
 		
 		this.queDao.insert(newQue);
-		
 		List<QuestionaireQuestionRVO> ques = question.getQuestionsList();
 		QuestionaireQuestionR queR = null;
+		QuestionItemOption questionItem = null;
 		for(QuestionaireQuestionRVO questionR : ques) {
 			queR = new QuestionaireQuestionR();
 			queR.setQuestionType(questionR.getQuestionType());
 			queR.setQuestionId(questionR.getQuestionId());
-			queR.setQuestionaireId(questionR.getQuestionaireId());
+			queR.setQuestionaireId(newQue.getId());
 			queR.setEnabled(questionR.getEnabled());
+			queR.setCreationTimestamp(date);
+			queR.setLastupdateTimestamp(date);
+//			queR.setCreationUser(0);
+//			queR.setLastupdateUser(0);
 			this.queQuestionService.insert(queR);
-//			questionR.getOptions();
+			System.out.println("start1 entity:" + questionR.getOptions().size());
+			for(QuestionOptionRVO optionItem : questionR.getOptions()) {
+				System.out.println("start entity:" + optionItem.getOptionContent());
+				questionItem = new QuestionItemOption();
+				questionItem.setCreationTimestamp(date);
+//				questionItem.setCreationUser(0);
+				questionItem.setOptionContent(optionItem.getOptionContent());
+				this.questionItemOptionService.insert(questionItem);
+			}
 		}
 
 		return 1;

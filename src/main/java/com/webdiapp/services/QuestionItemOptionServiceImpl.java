@@ -7,23 +7,17 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.Question;
-import com.webdiapp.entities.QuestionaireQuestionR;
-import com.webdiapp.mapper.QuestionaireQuestionRDAO;
+import com.webdiapp.entities.QuestionItemOption;
+import com.webdiapp.mapper.QuestionItemOptionDAO;
 
 @Service
-public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionService {
-	
-	@Resource
-	private QuestionaireQuestionRDAO queQuestionRDao;
+public class QuestionItemOptionServiceImpl implements QuestionItemOptionService {
 
+	@Resource
+	private QuestionItemOptionDAO questionItemDao;
+	
 	@Override
 	public List<Question> getList(int questionaireId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Question getById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,8 +29,9 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	}
 
 	@Override
-	public int insert(QuestionaireQuestionR entity) {
-		return this.queQuestionRDao.insert(entity);
+	public int insert(QuestionItemOption entity) {
+		System.out.println("entity:" + entity.getOptionContent());
+		return this.questionItemDao.insert(entity);
 	}
 
 	@Override
@@ -44,5 +39,5 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 }

@@ -40,13 +40,14 @@
     <select id="getCount" resultType="int">
         select count(id) from questionaire_question_r
     </select>
-    <insert id="insert" parameterType="QuestionaireQuestionR">
+    <insert id="insert" parameterType="QuestionaireQuestionR"
+    	useGeneratedKeys="true" keyProperty="id">
         insert into
         questionaire_question_r(question_type, question_id, questionaire_id, enabled, <include refid="baseColumnsInsertFields" />) 
         values(
-        #{question_type, javaType=INTEGER, jdbcType=INTEGER},
-        #{question_id, javaType=INTEGER, jdbcType=INTEGER},
-        #{questionaire_id, javaType=INTEGER, jdbcType=INTEGER},
+        #{questionType, javaType=INTEGER, jdbcType=INTEGER},
+        #{questionId, javaType=INTEGER, jdbcType=INTEGER},
+        #{questionaireId, javaType=INTEGER, jdbcType=INTEGER},
         #{enabled, javaType=INTEGER, jdbcType=INTEGER},
         #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
