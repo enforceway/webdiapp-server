@@ -9,11 +9,11 @@ public class BaseVO implements Serializable {
 
 	private Date creationTimestamp;
     
-    private int creationUser;
+    private Integer creationUser;
     
     private Date lastupdateTimestamp;
     
-    private int lastupdateUser;
+    private Integer lastupdateUser;
     
     public BaseVO() {
 	}
@@ -26,11 +26,11 @@ public class BaseVO implements Serializable {
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public int getCreationUser() {
+	public Integdr getCreationUser() {
 		return creationUser;
 	}
 
-	public void setCreationUser(int creationUser) {
+	public void setCreationUser(Integer creationUser) {
 		this.creationUser = creationUser;
 	}
 
@@ -42,7 +42,7 @@ public class BaseVO implements Serializable {
 		this.lastupdateTimestamp = lastupdateTimestamp;
 	}
 
-	public int getLastupdateUser() {
+	public Integer getLastupdateUser() {
 		return lastupdateUser;
 	}
 
