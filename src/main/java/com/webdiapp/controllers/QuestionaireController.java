@@ -54,7 +54,7 @@ public class QuestionaireController {
     	try {
     		que = this.queService.getById(strQuestionId);
 		} catch (NumberFormatException e) {
-			
+			gr.setData(e.getMessage());
 		} finally {
 			gr.setData(que);
 			return gr;

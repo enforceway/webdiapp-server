@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class GeneralResponser implements Serializable {
 
 	private static final long serialVersionUID = 8182818811554664967L;
-	private String message;
-	private String code;
+	private String message = "ok";
+	private String code = "0";
 	private Object data;
 	public String getMessage() {
 		return message;
