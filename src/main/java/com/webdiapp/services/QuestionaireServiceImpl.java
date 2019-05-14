@@ -51,10 +51,12 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		naireVO.setQuestionsList(questionList);
 
 		List<QuestionOptionRVO> questionItemOptions = null;
+		System.out.println("questionaire:" + questions.size());
 		for(QuestionaireQuestionRVO que : questions) {
 			questionList.add(que);
 			
 			// 获取题目对应带候选项
+			System.out.println("que.getId():" + que.getId());
 			questionItemOptions = this.questionItemOptionService.getList(que.getId());
 			que.setOptions(questionItemOptions);
 		}
