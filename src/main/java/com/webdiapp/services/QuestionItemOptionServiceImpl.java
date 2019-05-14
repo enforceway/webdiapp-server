@@ -35,16 +35,19 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 
 	@Override
 	public int insert(QuestionOptionRVO entity) {
-		System.out.println("entity:" + entity.getOptionContent());
 		QuestionItemOption optionItem = new QuestionItemOption();
-		optionItem.setOptionContent(entity.getOptionContent());
+		optionItem.setId(entity.getId());
 		optionItem.setQuestionItemId(entity.getQuestionItemId());
+		optionItem.setOptionContent(entity.getOptionContent());
+		optionItem.setSelected(entity.getSelected());
 		
 		optionItem.setCreationTimestamp(entity.getCreationTimestamp());
 		optionItem.setLastupdateTimestamp(entity.getLastupdateTimestamp());
 		optionItem.setCreationUser(entity.getCreationUser());
 		optionItem.setLastupdateUser(entity.getLastupdateUser());
-		return this.questionItemDao.insert(optionItem);
+		int res = this.questionItemDao.insert(optionItem);
+		entity.setId(optionItem.getId());
+		return res;
 	}
 
 	@Override

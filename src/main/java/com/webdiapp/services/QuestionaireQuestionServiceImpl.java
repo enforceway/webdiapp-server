@@ -24,8 +24,22 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	}
 
 	@Override
-	public int insert(QuestionaireQuestion entity) {
-		return this.queQuestionRDao.insert(entity);
+	public int insert(QuestionaireQuestionRVO entity) {
+		QuestionaireQuestion qr = new QuestionaireQuestion();
+//		qr.setId(entity.getId());
+		qr.setQuestionType(entity.getQuestionType());
+		qr.setQuestionaireId(entity.getQuestionaireId());
+		qr.setQuestionId(entity.getQuestionId());
+		qr.setEnabled(entity.getEnabled());
+		
+		qr.setCreationTimestamp(entity.getCreationTimestamp());
+		qr.setCreationUser(entity.getCreationUser());
+		qr.setLastupdateTimestamp(entity.getCreationTimestamp());
+		qr.setLastupdateUser(entity.getLastupdateUser());
+		
+		int res = this.queQuestionRDao.insert(qr);
+		entity.setId(qr.getId());
+		return res;
 	}
 
 	@Override
@@ -45,7 +59,7 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	}
 
 	@Override
-	public QuestionaireQuestion getById(int id) {
+	public QuestionaireQuestionRVO getById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

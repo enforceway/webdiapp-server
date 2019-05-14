@@ -55,7 +55,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 			questionList.add(que);
 			
 			// 获取题目对应带候选项
-			questionItemOptions = this.questionItemOptionService.getList(que.getQuestionId());
+			questionItemOptions = this.questionItemOptionService.getList(que.getId());
 			que.setOptions(questionItemOptions);
 		}
 		return naireVO;
@@ -79,25 +79,17 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 //		newQue.setLastupdateUser(null);
 		
 		this.queDao.insert(newQue);
+		question.setId(newQue.getId());
 		List<QuestionaireQuestionRVO> ques = question.getQuestionsList();
-		QuestionaireQuestion queR = null;
-		QuestionItemOption questionItem = null;
 		for(QuestionaireQuestionRVO que : ques) {
-			queR = new QuestionaireQuestion();
-			queR.setQuestionType(que.getQuestionType());
-			queR.setQuestionId(que.getQuestionId());
-			queR.setQuestionaireId(newQue.getId());
-			queR.setEnabled(que.getEnabled());
-			queR.setCreationTimestamp(date);
-			queR.setLastupdateTimestamp(date);
-//			queR.setCreationUser(0);
-//			queR.setLastupdateUser(0);
-			this.queQuestionService.insert(queR);
+			// 设置创建问卷后生成的id
+			que.setQuestionaireId(newQue.getId());
+
+			this.queQuestionService.insert(que);
 			for(QuestionOptionRVO optionItem : que.getOptions()) {
-				questionItem = new QuestionItemOption();
-				questionItem.setCreationTimestamp(date);
-//				questionItem.setCreationUser(0);
-				questionItem.setOptionContent(optionItem.getOptionContent());
+				// 设置生成的题目的id
+				optionItem.setQuestionItemId(que.getId());
+				
 				this.questionItemOptionService.insert(optionItem);
 			}
 		}
