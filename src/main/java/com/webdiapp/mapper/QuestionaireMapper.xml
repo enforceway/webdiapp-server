@@ -22,7 +22,7 @@
         id,
         status_id as statusId,
         <include refid="baseColumnsQry" />
-        from questionaire_t limit #{skip},#{size}
+        from questionaire_t where use_yn != 'n' limit #{skip},#{size}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="Questionaire">
         select
@@ -35,10 +35,10 @@
         naire.lastupdate_timestamp as lastupdateTimestamp,
         naire.lastupdate_user as lastupdateUser
         from questionaire_t naire 
-        where naire.id=#{id}
+        where naire.id=#{id} and use_yn != 'n'
     </select>
     <select id="getCount" resultType="int">
-        select count(id) from questionaire_t
+        select count(id) from questionaire_t where use_yn != 'n'
     </select>
     <insert id="insert" parameterType="Questionaire"
     	useGeneratedKeys="true" keyProperty="id">

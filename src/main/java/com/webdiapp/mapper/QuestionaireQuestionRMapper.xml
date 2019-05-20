@@ -25,7 +25,7 @@
         questionaire_id as questionaireId,
         enabled,
         <include refid="baseColumnsQry" />
-        from questionaire_question_r where questionaire_id=#{questionaireId}
+        from questionaire_question_r where questionaire_id=#{questionaireId} and use_yn!='n'
     </select>
     <select id="getById" parameterType="INTEGER" resultType="QuestionaireQuestion">
         select
@@ -35,10 +35,10 @@
         questionaire_id as questionaireId,
         enabled,
         <include refid="baseColumnsQry" />
-        from questionaire_question_r where id=#{id}
+        from questionaire_question_r where id=#{id} and use_yn!='n'
     </select>
     <select id="getCount" resultType="int">
-        select count(id) from questionaire_question_r
+        select count(id) from questionaire_question_r where use_yn!='n'
     </select>
     <insert id="insert" parameterType="QuestionaireQuestion"
     	useGeneratedKeys="true" keyProperty="id">

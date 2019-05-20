@@ -10,7 +10,7 @@
         selected,
         creation_timestamp as creationTimestamp,
         creation_user as creationUser
-        from questionaire_question_options_r where questionaire_question_id=#{questionaireQuestionId}
+        from questionaire_question_options_r where questionaire_question_id=#{questionaireQuestionId} and use_yn!='n'
     </select>
     <select id="getById" parameterType="INTEGER" resultType="QuestionItemOption">
         select
@@ -20,12 +20,12 @@
         selected,
         creation_timestamp,
         creation_user
-        from questionaire_question_options_r where id=#{id}
+        from questionaire_question_options_r where id=#{id} and use_yn!='n'
     </select>
     <select id="getCount" resultType="int">
         select 
         count(id) 
-        from questionaire_question_options_r
+        from questionaire_question_options_r where use_yn!='n'
     </select>
     <insert id="insert" parameterType="QuestionItemOption"
     	useGeneratedKeys="true" keyProperty="id">
