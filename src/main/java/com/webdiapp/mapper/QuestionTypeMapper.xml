@@ -25,7 +25,7 @@
         id,
         type,
         <include refid="baseColumnsQry" />
-        from question_type_t limit #{skip},#{size}
+        from question_type_t where use_yn!='n' limit #{skip},#{size}
     </select>
     <!-- 获得单个商品通过编号 -->
     <select id="getById" parameterType="INTEGER" resultType="QuestionType">
@@ -33,11 +33,11 @@
         id,
         type,
         <include refid="baseColumnsQry" />
-        from question_type_t where id=#{id}
+        from question_type_t where id=#{id} and use_yn!='n'
     </select>
     <!--获得商品总数 -->
     <select id="getCount" resultType="int">
-        select count(id) from question_type_t
+        select count(id) from question_type_t where use_yn!='n'
     </select>
     <!--新增加商品 -->
     <insert id="insert" parameterType="QuestionType">

@@ -25,17 +25,17 @@
         id,
         user_name as username,
         <include refid="baseColumnsQry" />
-        from user_t limit #{skip},#{size}
+        from user_t where use_yn!='n' limit #{skip},#{size}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="User">
         select
         id,
         user_name as username,
         <include refid="baseColumnsQry" />
-        from user_t where id=#{id}
+        from user_t where id=#{id} and use_yn!='n'
     </select>
     <select id="getCount" resultType="int">
-        select count(id) from user_t
+        select count(id) from user_t where use_yn!='n'
     </select>
     <insert id="insert" parameterType="User">
         insert into
