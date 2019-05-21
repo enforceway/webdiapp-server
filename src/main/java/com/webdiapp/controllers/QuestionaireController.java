@@ -61,9 +61,9 @@ public class QuestionaireController {
 		}
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
-    public int delete(@RequestBody Questionaire que) {
-    	int count = this.queService.delete(que.getId());
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes="application/json")
+    public int delete(@RequestBody(required=true) int id) {
+    	int count = this.queService.delete(id);
         return count;
     }
 

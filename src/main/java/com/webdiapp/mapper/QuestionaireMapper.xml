@@ -54,8 +54,10 @@
         #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         )
     </insert>
-    <delete id="delete">
-        delete from questionaire_t where id=#{id}
+    <delete id="delete" parameterType="INTEGER">
+        update questionaire_t set
+        use_yn='n' 
+        where id=#{id}
     </delete>
     <update id="update" parameterType="Questionaire">
         update questionaire_t set
