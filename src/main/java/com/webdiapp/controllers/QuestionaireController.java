@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webdiapp.entities.Questionaire;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionaireService;
-import com.webdiapp.vo.BaseVO;
-import com.webdiapp.vo.Baser;
 import com.webdiapp.vo.QuestionaireVO;
 
 @RestController
