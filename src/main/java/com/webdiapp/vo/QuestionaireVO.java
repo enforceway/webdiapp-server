@@ -13,8 +13,10 @@ import com.webdiapp.entities.Questionaire;
 public class QuestionaireVO extends BaseVO {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private Integer id;
+	
+	private String title;
 
 	private Integer statusId;
 
@@ -35,6 +37,7 @@ public class QuestionaireVO extends BaseVO {
 		this.setStatusId(que.getStatusId());
 		this.setActiveDateStart(que.getActiveDateStart());
 		this.setActiveDateEnd(que.getActiveDateEnd());
+		this.setTitle(que.getTitle());
 	}
 
 	public Date getActiveDateStart() {
@@ -59,6 +62,14 @@ public class QuestionaireVO extends BaseVO {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Integer getStatusId() {

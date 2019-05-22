@@ -31,7 +31,7 @@ CREATE TABLE `user_t` (
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
   `lastupdate_username` varchar(45) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT NULL,
+  `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

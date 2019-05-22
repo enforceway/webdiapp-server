@@ -20,12 +20,14 @@
     <select id="getList" resultType="Questionaire">
         select
         id,
+        title,
         status_id as statusId,
         <include refid="baseColumnsQry" />
         from questionaire_t where use_yn != 'n' limit #{skip},#{size}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="Questionaire">
         select
+        naire.title as title,
         naire.id as id,
         naire.status_id as statusId,
         naire.active_date_start as activeDateStart,
@@ -43,8 +45,9 @@
     <insert id="insert" parameterType="Questionaire"
     	useGeneratedKeys="true" keyProperty="id">
         insert into
-        questionaire_t(status_id, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
+        questionaire_t(title, status_id, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
         values(
+        #{title, javaType=string, jdbcType=VARCHAR},
         #{statusId, javaType=INTEGER, jdbcType=INTEGER},
         #{activeDateStart, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{activeDateEnd, javaType=java.util.Date, jdbcType=TIMESTAMP},
@@ -61,6 +64,7 @@
     </delete>
     <update id="update" parameterType="Questionaire">
         update questionaire_t set
+        title=#{title, javaType=string, jdbcType=VARCHAR},
         status_id=#{statusId},
         lastupdate_timestamp=#{lastupdateTimestamp},
         lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}

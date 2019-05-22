@@ -30,7 +30,7 @@ CREATE TABLE `user_role_r` (
   `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT NULL,
+  `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户有组的概念，不会强行赋予用户权限.要废弃了';
 /*!40101 SET character_set_client = @saved_cs_client */;

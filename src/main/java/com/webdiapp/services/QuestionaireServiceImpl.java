@@ -8,9 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.entities.Questionaire;
-import com.webdiapp.entities.QuestionaireQuestion;
 import com.webdiapp.mapper.QuestionaireDAO;
 import com.webdiapp.vo.QuestionOptionRVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
@@ -73,6 +71,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		Questionaire newQue = new Questionaire();
 		Date date = new Date();
 		newQue.setStatusId(question.getStatusId());
+		newQue.setTitle(question.getTitle());
 		newQue.setActiveDateStart(question.getActiveDateStart());
 		newQue.setActiveDateEnd(question.getActiveDateEnd());
 		newQue.setCreationTimestamp(date);

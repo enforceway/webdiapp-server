@@ -32,7 +32,7 @@ CREATE TABLE `questionaire_question_r` (
   `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `use_yn` varchar(5) DEFAULT NULL COMMENT '逻辑删除',
+  `use_yn` varchar(5) DEFAULT 'y' COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义问卷中有哪些题目';
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -11,6 +11,8 @@ public class Questionaire extends BaseEntity {
 	private static final long serialVersionUID = -8552283633126138930L;
 
 	private Integer id;
+	
+	private String title;
 
 	private Integer statusId;
 
@@ -26,6 +28,14 @@ public class Questionaire extends BaseEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Integer getStatusId() {
