@@ -73,13 +73,13 @@ public class BaseEntity implements Serializable {
 		this.lastupdateUser = lastupdateUser;
 	}
 
-//	public String getLastupdateUsername() {
-//		return lastupdateUsername;
-//	}
-//
-//	public void setLastupdateUsername(String lastupdateUsername) {
-//		this.lastupdateUsername = lastupdateUsername;
-//	}
+	public String getLastupdateUsername() {
+		return lastupdateUsername;
+	}
+
+	public void setLastupdateUsername(String lastupdateUsername) {
+		this.lastupdateUsername = lastupdateUsername;
+	}
 
 	public String getUserYn() {
 		return userYn;

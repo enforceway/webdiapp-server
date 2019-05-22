@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webdiapp.entities.Questionaire;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionaireService;
+import com.webdiapp.vo.BaseVO;
+import com.webdiapp.vo.Baser;
 import com.webdiapp.vo.QuestionaireVO;
 
 @RestController
@@ -62,8 +64,8 @@ public class QuestionaireController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes="application/json")
-    public int delete(@RequestBody(required=true) int id) {
-    	int count = this.queService.delete(id);
+    public int delete(@RequestBody QuestionaireVO baser) {
+    	int count = this.queService.delete(baser.getId());
         return count;
     }
 

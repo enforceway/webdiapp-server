@@ -66,7 +66,7 @@ public class QuestionsController {
 		}
     }
     
-    @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes="application/json")
     public int delete(@RequestBody Question question) {
     	log.info("删除题目接口入参: id:" + question.getQuestionTypeId() + 
 				";typeid:" + question.getQuestionTypeId() + 
