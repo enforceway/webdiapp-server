@@ -29,7 +29,7 @@ public class QuestionsController {
     QuestionsService questionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         System.out.println(pageNo + "," + pageSize);
         List<Question> list = this.questionService.getList(pageNo, pageSize);
         GeneralResponser gr = new GeneralResponser();

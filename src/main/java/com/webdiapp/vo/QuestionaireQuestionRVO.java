@@ -16,6 +16,8 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 	private Integer questionId;
 
 	private Integer questionaireId;
+	
+	private String questionContent;
 
 	private Integer enabled; // 1或者null代表启用状态，0代表不可用状态
 	
@@ -23,12 +25,21 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 	
 	public QuestionaireQuestionRVO() {}
 	
+	public String getQuestionContent() {
+		return questionContent;
+	}
+
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
+
 	public QuestionaireQuestionRVO(QuestionaireQuestion questionR) {
 		this.setId(questionR.getId());
 		this.setQuestionType(questionR.getQuestionType());
 		this.setQuestionId(questionR.getQuestionId());
 		this.setQuestionaireId(questionR.getQuestionaireId());
 		this.setEnabled(questionR.getEnabled());
+		this.setQuestionContent(questionR.getQuestionContent());
 		
 		this.setCreationTimestamp(questionR.getCreationTimestamp());
 		this.setCreationUser(questionR.getCreationUser());

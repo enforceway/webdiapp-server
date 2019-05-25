@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webdiapp.models.GeneralResponser;
+import com.webdiapp.services.QuestionaireQuestionService;
 import com.webdiapp.services.QuestionaireService;
+import com.webdiapp.vo.QuestionaireQuestionRVO;
 import com.webdiapp.vo.QuestionaireVO;
 
 @RestController
@@ -25,6 +27,9 @@ public class QuestionaireController {
     
     @Resource
     QuestionaireService queService;
+    
+    @Resource
+    QuestionaireQuestionService queQuestionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
@@ -63,6 +68,13 @@ public class QuestionaireController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes="application/json")
     public int delete(@RequestBody QuestionaireVO baser) {
     	int count = this.queService.delete(baser.getId());
+        return count;
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes="application/json")
+    public int deleteQuestion(@RequestBody QuestionaireQuestionRVO baser) {
+    	int[] ids = {baser.getId()};
+    	int count = this.queQuestionService.delete(ids);
         return count;
     }
 

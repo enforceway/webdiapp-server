@@ -19,13 +19,17 @@
 	</sql>
     <select id="getList" parameterType="INTEGER" resultType="QuestionaireQuestion">
         select
-        id,
-        question_type as questionType,
-        question_id as questionId,
-        questionaire_id as questionaireId,
-        enabled,
-        <include refid="baseColumnsQry" />
-        from questionaire_question_r where questionaire_id=#{questionaireId} and use_yn!='n'
+        que_r.id,
+        que_r.question_type as questionType,
+        que_r.question_id as questionId,
+        que_r.questionaire_id as questionaireId,
+        que_r.enabled,
+        que.question_content as questionContent
+        from questionaire_question_r que_r 
+        left join 
+        question_t que 
+        on que_r.question_id = que.id
+        where que_r.questionaire_id=#{questionaireId} and que_r.use_yn!='n' and que.use_yn!='n'
     </select>
     <select id="getById" parameterType="INTEGER" resultType="QuestionaireQuestion">
         select
@@ -55,9 +59,10 @@
         #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         )
     </insert>
-    <delete id="delete">
+    <delete id="delete" parameterType="int">
     	update questionaire_question_r set
-    	use_yn='n' where id in [1,2,3,4]
+    	use_yn='n' 
+    	where id in <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
     </delete>
     <!-- 不设置更新直接删除
     <update id="update" parameterType="QuestionaireQuestion">

@@ -42,19 +42,19 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		Questionaire questionaire = this.queDao.getById(id);
 		QuestionaireVO naireVO = new QuestionaireVO(questionaire);
 		// 获取问卷对应题目
-		System.out.println("questionaire id:" + questionaire.getId());
+//		System.out.println("questionaire id:" + questionaire.getId());
 		List<QuestionaireQuestionRVO> questions = this.queQuestionService.getList(id);
 
 		List<QuestionaireQuestionRVO> questionList = new ArrayList<QuestionaireQuestionRVO>(questions.size());
 		naireVO.setQuestionsList(questionList);
 
 		List<QuestionOptionRVO> questionItemOptions = null;
-		System.out.println("questionaire:" + questions.size());
+//		System.out.println("questionaire:" + questions.size());
 		for(QuestionaireQuestionRVO que : questions) {
 			questionList.add(que);
 			
 			// 获取题目对应带候选项
-			System.out.println("que.getId():" + que.getId());
+//			System.out.println("que.getId():" + que.getId());
 			questionItemOptions = this.questionItemOptionService.getList(que.getId());
 			que.setOptions(questionItemOptions);
 		}

@@ -13,10 +13,20 @@ public class QuestionaireQuestion extends BaseEntity {
 	private Integer questionId;
 
 	private Integer questionaireId;
+	
+	private String questionContent;
 
 	private Integer enabled; // 1或者null代表启用状态，0代表不可用状态
 	
 	public QuestionaireQuestion() {}
+
+	public String getQuestionContent() {
+		return questionContent;
+	}
+
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
 
 	public Integer getId() {
 		return id;

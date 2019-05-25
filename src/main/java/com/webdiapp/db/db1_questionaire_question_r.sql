@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `questionaire_question_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `questionaire_question_r` (
-  `id` int(11) NOT NULL COMMENT '主键',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `question_type` int(11) NOT NULL COMMENT '题目类型: 1代表单选，2代表多选，3代表文本输入，4代表长文本输入',
   `question_id` int(11) NOT NULL COMMENT '题目的id',
   `questionaire_id` int(11) NOT NULL COMMENT '调查问卷的id',
