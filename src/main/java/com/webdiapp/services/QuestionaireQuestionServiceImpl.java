@@ -44,11 +44,7 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 
 	@Override
 	public int delete(int[] ids) {
-		this.queQuestionRDao.delete(ids);
-		
-		
-		// TODO Auto-generated method stub
-		return 0;
+		return this.queQuestionRDao.delete(ids);
 	}
 
 	@Override
