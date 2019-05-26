@@ -2,6 +2,7 @@ package com.webdiapp.services;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -110,7 +111,46 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
 	@Override
 	public int update(QuestionaireVO question) {
-		Questionaire que = null;
+		Questionaire que = new Questionaire();
+		List<QuestionaireQuestionRVO> questions = question.getQuestionsList();
+
+		que.setActiveDateStart(question.getActiveDateStart());
+		que.setActiveDateEnd(question.getActiveDateEnd());
+		que.setTitle(question.getTitle());
+		que.setId(question.getId());
+		que.setStatusId(question.getStatusId());
+
+		/* 移除用户删除了的题目选项 */
+		List<Integer> idArr = new ArrayList<Integer>();
+		for(QuestionaireQuestionRVO questionRVO : questions) {
+			if(questionRVO.getId() == null) {
+				// 进行添加题目的操作 
+				this.queQuestionService.insert(questionRVO);
+			}
+			for(QuestionOptionRVO optionRVO : questionRVO.getOptions()) {
+				// 移除该题目后选项
+				if(optionRVO.getId() != null && optionRVO.getIfRemoved() == true) {
+					idArr.add(optionRVO.getId());
+				} else if(optionRVO.getId() != null) {
+					// 不用做任何改动
+				} else if(optionRVO.getId() == null && optionRVO.getIfRemoved() == null) {
+					// 进行添加题目后选项的操作
+					optionRVO.setQuestionItemId(questionRVO.getId());
+					this.questionItemOptionService.insert(optionRVO);
+				}
+			}
+		}
+        int[] ids = idArr.stream().mapToInt(Integer::valueOf).toArray();
+		this.questionItemOptionService.delete(ids);
+		/* 移除用户删除了的题目选项 */
+
+		
+		
+		
+		
+		
+		
+		
 		return this.queDao.update(que);
 	}
     

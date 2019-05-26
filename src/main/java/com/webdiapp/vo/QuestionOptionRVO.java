@@ -14,6 +14,8 @@ public class QuestionOptionRVO extends BaseVO {
 
 	private Integer selected;
 	
+	private Boolean ifRemoved;
+	
 	public QuestionOptionRVO() {
 		
 	}
@@ -59,6 +61,14 @@ public class QuestionOptionRVO extends BaseVO {
 
 	public void setSelected(Integer selected) {
 		this.selected = selected;
+	}
+
+	public Boolean getIfRemoved() {
+		return ifRemoved;
+	}
+
+	public void setIfRemoved(Boolean ifRemoved) {
+		this.ifRemoved = ifRemoved;
 	}
 
 }
