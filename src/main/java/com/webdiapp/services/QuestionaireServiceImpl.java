@@ -129,7 +129,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 			}
 			for(QuestionOptionRVO optionRVO : questionRVO.getOptions()) {
 				// 移除该题目后选项
-				if(optionRVO.getId() != null && optionRVO.getIfRemoved() == true) {
+				if(optionRVO.getId() != null && new Boolean(true).equals(optionRVO.getIfRemoved())) {
 					idArr.add(optionRVO.getId());
 				} else if(optionRVO.getId() != null) {
 					// 不用做任何改动
