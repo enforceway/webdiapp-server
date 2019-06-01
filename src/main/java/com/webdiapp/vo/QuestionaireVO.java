@@ -38,6 +38,8 @@ public class QuestionaireVO extends BaseVO {
 		this.setActiveDateStart(que.getActiveDateStart());
 		this.setActiveDateEnd(que.getActiveDateEnd());
 		this.setTitle(que.getTitle());
+		this.setCreationTimestamp(que.getCreationTimestamp());
+		this.setLastupdateTimestamp(que.getLastupdateTimestamp());
 	}
 
 	public Date getActiveDateStart() {

@@ -3,14 +3,18 @@ package com.webdiapp.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class BaseVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss.SSS",timezone = "GMT+8")
 	private Date creationTimestamp;
     
     private Integer creationUser;
     
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss.SSS",timezone = "GMT+8")
     private Date lastupdateTimestamp;
     
     private Integer lastupdateUser;
