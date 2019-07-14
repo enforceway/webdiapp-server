@@ -32,7 +32,7 @@ CREATE TABLE `questionaire_t` (
   `lastupdate_user` int(11) DEFAULT NULL,
   `active_date_start` datetime DEFAULT NULL COMMENT '开始有效日期',
   `active_date_end` datetime DEFAULT NULL COMMENT '结束有效日期',
-  `use_yn` varchar(5) DEFAULT 'y'
+  `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='问卷对应的数据表';
 /*!40101 SET character_set_client = @saved_cs_client */;

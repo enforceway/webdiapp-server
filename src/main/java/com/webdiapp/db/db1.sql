@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS db1;
+use db1;
