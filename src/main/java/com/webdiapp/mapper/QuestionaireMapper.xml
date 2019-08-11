@@ -22,6 +22,8 @@
         id,
         title,
         status_id as statusId,
+        active_date_start as activeDateStart,
+        active_date_end as activeDateEnd,
         <include refid="baseColumnsQry" />
         from questionaire_t where use_yn != 'n' limit #{skip},#{size}
     </select>

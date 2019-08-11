@@ -27,13 +27,13 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     QuestionaireQuestionService queQuestionService;
 
 	@Override
-	public List<QuestionaireVO> getList(int pageNO, int size) {
+	public List<Questionaire> getList(int pageNO, int size) {
 		List<Questionaire> res = this.queDao.getList(pageNO, size); 
 		List<QuestionaireVO> res1 = new ArrayList<>(res.size());
-		for (Questionaire que : res) {
-			res1.add(new QuestionaireVO(que));
-		}
-        return res1;
+//		for (Questionaire que : res) {
+//			res1.add(new QuestionaireVO(que));
+//		}
+        return res;
 	}
 
 	@Override

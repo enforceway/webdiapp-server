@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-//import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webdiapp.entities.Questionaire;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionaireQuestionService;
 import com.webdiapp.services.QuestionaireService;
@@ -23,7 +24,7 @@ import com.webdiapp.vo.QuestionaireVO;
 @RequestMapping("/questionaire")
 public class QuestionaireController {
 
-//	private static final Logger log = Logger.getLogger(QuestionaireController.class);
+	private static final Logger log = Logger.getLogger(QuestionaireController.class);
     
     @Resource
     QuestionaireService queService;
@@ -33,7 +34,10 @@ public class QuestionaireController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
-        List<QuestionaireVO> list = this.queService.getList(pageNo, pageSize);
+    	log.info("~~QuestionaireController类, list方法~~~");
+    	log.info("pageNo=" + pageNo + ", pageSize=" + pageSize);
+    	List<Questionaire> list = this.queService.getList(pageNo, pageSize);
+    	log.info("list方法执行结果:" + list);
         GeneralResponser gr = new GeneralResponser();
         gr.setData(list);
         return gr;
