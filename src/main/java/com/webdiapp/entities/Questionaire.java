@@ -2,6 +2,8 @@ package com.webdiapp.entities;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 //import javax.validation.constraints.Min;
 //import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Pattern;
@@ -16,8 +18,10 @@ public class Questionaire extends BaseEntity {
 
 	private Integer statusId;
 
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date activeDateStart;
-
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date activeDateEnd;
 	
 	public Questionaire() {}

@@ -9,12 +9,12 @@ public class BaseVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss.SSS",timezone = "GMT+8")
+	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
 	private Date creationTimestamp;
     
     private Integer creationUser;
     
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss.SSS",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date lastupdateTimestamp;
     
     private Integer lastupdateUser;
