@@ -23,16 +23,16 @@ DROP TABLE IF EXISTS `user_role_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_role_r` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `role_id` int NOT NULL,
   `creation_timestamp` datetime DEFAULT NULL,
-  `creation_user` int(11) DEFAULT NULL,
+  `creation_user` int DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
-  `lastupdate_user` int(11) DEFAULT NULL,
+  `lastupdate_user` int DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户有组的概念，不会强行赋予用户权限.要废弃了';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户有组的概念，不会强行赋予用户权限.要废弃了';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

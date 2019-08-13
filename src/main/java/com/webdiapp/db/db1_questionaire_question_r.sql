@@ -23,18 +23,18 @@ DROP TABLE IF EXISTS `questionaire_question_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `questionaire_question_r` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `question_type` int(11) NOT NULL COMMENT '题目类型: 1代表单选，2代表多选，3代表文本输入，4代表长文本输入',
-  `question_id` int(11) NOT NULL COMMENT '题目的id',
-  `questionaire_id` int(11) NOT NULL COMMENT '调查问卷的id',
-  `enabled` int(11) DEFAULT NULL COMMENT '定义了该问题在问卷中是否启用：0代表未启动，1代表启用',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `question_type` int NOT NULL COMMENT '题目类型: 1代表单选，2代表多选，3代表文本输入，4代表长文本输入',
+  `question_id` int NOT NULL COMMENT '题目的id',
+  `questionaire_id` int NOT NULL COMMENT '调查问卷的id',
+  `enabled` int DEFAULT NULL COMMENT '定义了该问题在问卷中是否启用：0代表未启动，1代表启用',
   `creation_timestamp` datetime DEFAULT NULL,
-  `creation_user` int(11) DEFAULT NULL,
+  `creation_user` int DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
-  `lastupdate_user` int(11) DEFAULT NULL,
+  `lastupdate_user` int DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT 'y' COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定义问卷中有哪些题目';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='定义问卷中有哪些题目';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

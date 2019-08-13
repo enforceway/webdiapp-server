@@ -28,10 +28,10 @@ CREATE TABLE `questionaire_question_options_r` (
   `option_content` varchar(255) DEFAULT NULL COMMENT '定义了每个选项对应带文字内容',
   `selected` int(11) DEFAULT '0' COMMENT '定义了题目对应带多个选项中，哪个被选中:0代表未选中，1代表选中。',
   `creation_timestamp` datetime DEFAULT NULL,
-  `creation_user` int(11) DEFAULT NULL,
+  `creation_user` int DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT 'y' COMMENT '标识问卷中该题目是否禁用，不在真是问卷中使用。',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='问卷中题目对应带选项';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='问卷中题目对应带选项';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

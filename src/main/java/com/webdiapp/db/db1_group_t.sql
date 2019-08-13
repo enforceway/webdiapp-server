@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `group_t`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `group_t` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `group_name` varchar(45) DEFAULT NULL COMMENT '定义了组名',
   `creation_timestamp` datetime DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
-  `creation_user` int(11) DEFAULT NULL,
-  `lastupdate_user` int(11) DEFAULT NULL,
+  `creation_user` int DEFAULT NULL,
+  `lastupdate_user` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色组对应的表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色组对应的表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

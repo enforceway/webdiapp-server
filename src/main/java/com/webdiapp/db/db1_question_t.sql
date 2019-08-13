@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `question_t`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question_t` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `question_content` varchar(255) NOT NULL COMMENT '定义了题目带内容',
-  `question_type_id` int(11) DEFAULT NULL COMMENT '题目对应的类型id',
+  `question_type_id` int DEFAULT NULL COMMENT '题目对应的类型id',
   `question_type` varchar(55) DEFAULT 'sociology' COMMENT '题目对应带类型显示文字',
   `creation_timestamp` datetime DEFAULT NULL,
-  `creation_user` int(11) DEFAULT NULL,
+  `creation_user` int DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
-  `lastupdate_user` int(11) DEFAULT NULL,
+  `lastupdate_user` int DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT 'y' COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='题目对应的表';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COMMENT='题目对应的表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
