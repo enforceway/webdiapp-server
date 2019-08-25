@@ -11,14 +11,14 @@ public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSSZ", timezone="GMT+8")
 	private Date creationTimestamp;
     
     private Integer creationUser;
     
     private String creationUsername;
     
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS'Z'")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSSZ", timezone="GMT+8")
     private Date lastupdateTimestamp;
     
     private Integer lastupdateUser;

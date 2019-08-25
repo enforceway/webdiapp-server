@@ -18,10 +18,10 @@ public class Questionaire extends BaseEntity {
 
 	private Integer statusId;
 
-	@JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSSZ", timezone="GMT+8")
 	private Date activeDateStart;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSSZ", timezone="GMT+8")
 	private Date activeDateEnd;
 	
 	public Questionaire() {}
