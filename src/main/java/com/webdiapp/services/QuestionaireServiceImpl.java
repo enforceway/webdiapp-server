@@ -40,21 +40,22 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	public QuestionaireVO getById(Integer id) {
 		// 获取问卷详情
 		Questionaire questionaire = this.queDao.getById(id);
+		
+		if(questionaire != null) {
+			return null;
+		}
+
 		QuestionaireVO naireVO = new QuestionaireVO(questionaire);
 		// 获取问卷对应题目
-//		System.out.println("questionaire id:" + questionaire.getId());
 		List<QuestionaireQuestionRVO> questions = this.queQuestionService.getList(id);
 
 		List<QuestionaireQuestionRVO> questionList = new ArrayList<QuestionaireQuestionRVO>(questions.size());
 		naireVO.setQuestionsList(questionList);
 
 		List<QuestionOptionRVO> questionItemOptions = null;
-//		System.out.println("questionaire:" + questions.size());
 		for(QuestionaireQuestionRVO que : questions) {
 			questionList.add(que);
-			
 			// 获取题目对应带候选项
-//			System.out.println("que.getId():" + que.getId());
 			questionItemOptions = this.questionItemOptionService.getList(que.getId());
 			que.setOptions(questionItemOptions);
 		}
@@ -111,13 +112,46 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	@Override
 	public int update(QuestionaireVO question) {
 		Questionaire que = new Questionaire();
-		List<QuestionaireQuestionRVO> questions = question.getQuestionsList();
-
+//		更新有效期
 		que.setActiveDateStart(question.getActiveDateStart());
 		que.setActiveDateEnd(question.getActiveDateEnd());
+//		更新标题
 		que.setTitle(question.getTitle());
 		que.setId(question.getId());
 		que.setStatusId(question.getStatusId());
+		
+		int naireUpdate = this.queDao.update(que);
+		
+		
+		List<QuestionaireQuestionRVO> questions = question.getQuestionsList();
+		if(questions.size() == 0) {
+//			删除所有问题以及候选项
+//			this.queQuestionService.removeAllQuestionaireQuestions();
+//			this.questionItemOptionService.removeAllQuestionaireQuestionItems();
+			return 1;
+		}
+
+//		删除相应的候选问题
+		for(QuestionaireQuestionRVO questionRVO : questions) {
+			
+		}
+		
+//		删除相应的候选问题选项
+//		for(QuestionaireQuestionRVO questionRVO : questions) {
+//			
+//		}
+		
+//		 新增相应的问题
+		for(QuestionaireQuestionRVO questionRVO : questions) {
+			
+		}
+		
+//		 新增相应的问题的后选项
+		for(QuestionaireQuestionRVO questionRVO : questions) {
+			
+		}
+
+		
 
 		/* 移除用户删除了的题目选项 */
 		List<Integer> idArr = new ArrayList<Integer>();
@@ -150,7 +184,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		
 		
 		
-		return this.queDao.update(que);
+		return 1;
 	}
     
 }
