@@ -55,5 +55,16 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int removeQuestionItemsByQuestionaireId(int[] questionIds, int questionaireId) {
+		return this.questionItemDao.removeQuestionItemsByQuestionaireId(questionIds, questionaireId);
+	}
+
+	@Override
+	public int removeQuestionItemsByQuestionId(int[] questionItemIds, int questionId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

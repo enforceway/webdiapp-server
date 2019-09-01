@@ -16,6 +16,6 @@ public interface QuestionaireQuestionRDAO {
     public int insert(QuestionaireQuestion entity);
     
     public int delete(int[] ids);
-    
+
 //    public int update(Question entity);
 }

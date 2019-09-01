@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.webdiapp.controllers.QuestionsController;
 import com.webdiapp.entities.Questionaire;
 import com.webdiapp.mapper.QuestionaireDAO;
 import com.webdiapp.vo.QuestionOptionRVO;
@@ -25,6 +27,8 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	
 	@Resource
     QuestionaireQuestionService queQuestionService;
+	
+	private static final Logger logger = Logger.getLogger(QuestionaireServiceImpl.class);
 
 	@Override
 	public List<Questionaire> getList(int pageNO, int size) {
@@ -110,81 +114,42 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	}
 
 	@Override
-	public int update(QuestionaireVO question) {
+	public int update(QuestionaireVO questionaire) {
 		Questionaire que = new Questionaire();
-//		更新有效期
-		que.setActiveDateStart(question.getActiveDateStart());
-		que.setActiveDateEnd(question.getActiveDateEnd());
-//		更新标题
-		que.setTitle(question.getTitle());
-		que.setId(question.getId());
-		que.setStatusId(question.getStatusId());
-		
-		int naireUpdate = this.queDao.update(que);
-		
-		
-		List<QuestionaireQuestionRVO> questions = question.getQuestionsList();
-		if(questions.size() == 0) {
-//			删除所有问题以及候选项
-//			this.queQuestionService.removeAllQuestionaireQuestions();
-//			this.questionItemOptionService.removeAllQuestionaireQuestionItems();
-			return 1;
-		}
+		que.setActiveDateStart(questionaire.getActiveDateStart());
+		que.setActiveDateEnd(questionaire.getActiveDateEnd());
+		que.setTitle(questionaire.getTitle());
+		que.setId(questionaire.getId());
+		que.setStatusId(questionaire.getStatusId());
 
-//		删除相应的候选问题
-		for(QuestionaireQuestionRVO questionRVO : questions) {
-			
-		}
-		
-//		删除相应的候选问题选项
-//		for(QuestionaireQuestionRVO questionRVO : questions) {
-//			
-//		}
-		
-//		 新增相应的问题
-		for(QuestionaireQuestionRVO questionRVO : questions) {
-			
-		}
-		
-//		 新增相应的问题的后选项
-		for(QuestionaireQuestionRVO questionRVO : questions) {
-			
-		}
+		// 更新问卷
+		int questionnaireUpdate = this.queDao.update(que);
 
-		
-
-		/* 移除用户删除了的题目选项 */
-		List<Integer> idArr = new ArrayList<Integer>();
+		List<QuestionaireQuestionRVO> questions = questionaire.getQuestionsList();
+		// 不需要移除的题目的数组
+		ArrayList<QuestionaireQuestionRVO> questionsToUpdate = new ArrayList<QuestionaireQuestionRVO>(questions.size());
+		// 需要添加的题目
+		ArrayList<QuestionaireQuestionRVO> questionsToAdd = new ArrayList<QuestionaireQuestionRVO>(questions.size());
 		for(QuestionaireQuestionRVO questionRVO : questions) {
 			if(questionRVO.getId() == null) {
-				// 进行添加题目的操作 
-				this.queQuestionService.insert(questionRVO);
-			}
-			for(QuestionOptionRVO optionRVO : questionRVO.getOptions()) {
-				// 移除该题目后选项
-				if(optionRVO.getId() != null && new Boolean(true).equals(optionRVO.getIfRemoved())) {
-					idArr.add(optionRVO.getId());
-				} else if(optionRVO.getId() != null) {
-					// 不用做任何改动
-				} else if(optionRVO.getId() == null && optionRVO.getIfRemoved() == null) {
-					// 进行添加题目后选项的操作
-					optionRVO.setQuestionItemId(questionRVO.getId());
-					this.questionItemOptionService.insert(optionRVO);
-				}
+				// 需要新增的题目
+				questionRVO.setQuestionaireId(questionaire.getId());
+				questionsToAdd.add(questionRVO);
+			} else {
+				// 需要更新的题目
+				questionsToUpdate.add(questionRVO);
 			}
 		}
-        int[] ids = idArr.stream().mapToInt(Integer::valueOf).toArray();
-		this.questionItemOptionService.delete(ids);
-		/* 移除用户删除了的题目选项 */
-
+		/* 新增问卷中的题目极其选项 */
+		// 参数传入的是不需要删除的题目的id
+		logger.info("questionsToUpdate.length:" + questionsToUpdate.size());
 		
-		
-		
-		
-		
-		
-		
-		return 1;
+		int patchManage = this.queQuestionService.patchManageQuestions(questionsToUpdate);		
+		// 批量创建
+//		int patchCreate = this.queQuestionService.patchCreateQuestions(questionsToAdd);
+		// 批量更新
+//		int questionsUpdate = this.queQuestionService.patchUpdateQuestions(questionsToUpdate);
+		return patchManage;
 	}
-    
+
 }

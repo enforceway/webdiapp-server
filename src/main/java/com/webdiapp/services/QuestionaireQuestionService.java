@@ -1,10 +1,13 @@
 package com.webdiapp.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.webdiapp.vo.QuestionaireQuestionRVO;
 
 public interface QuestionaireQuestionService {
+	
+	public int removeQuestionsByIds(int ids[]);
 
     public List<QuestionaireQuestionRVO> getList(int questionaireId);
 
@@ -16,4 +19,9 @@ public interface QuestionaireQuestionService {
 
     public int delete(int[] ids);
 
+    public int patchCreateQuestions(ArrayList<QuestionaireQuestionRVO> questions);
+
+    public int patchUpdateQuestions(ArrayList<QuestionaireQuestionRVO> questions);
+    
+    public int patchManageQuestions(ArrayList<QuestionaireQuestionRVO> questionsInEffect);
 }
