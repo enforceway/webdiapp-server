@@ -7,6 +7,8 @@ import com.webdiapp.vo.QuestionaireQuestionRVO;
 
 public interface QuestionaireQuestionService {
 	
+	public int removeQuestionsByIdsWithout(int ids[]);
+
 	public int removeQuestionsByIds(int ids[]);
 
     public List<QuestionaireQuestionRVO> getList(int questionaireId);

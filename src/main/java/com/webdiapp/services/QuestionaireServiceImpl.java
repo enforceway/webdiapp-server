@@ -33,7 +33,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	@Override
 	public List<Questionaire> getList(int pageNO, int size) {
 		List<Questionaire> res = this.queDao.getList(pageNO, size); 
-		List<QuestionaireVO> res1 = new ArrayList<>(res.size());
+//		List<QuestionaireVO> res1 = new ArrayList<>(res.size());
 //		for (Questionaire que : res) {
 //			res1.add(new QuestionaireVO(que));
 //		}
@@ -42,10 +42,10 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
 	@Override
 	public QuestionaireVO getById(Integer id) {
-		System.out.println("方法getById的入参:" + id);
+		logger.info("方法getById的入参:" + id);
 		// 获取问卷详情
 		Questionaire questionaire = this.queDao.getById(id);
-		System.out.println("方法getById中查询到的问卷信息:" + JsonUtil.beanToJson(questionaire));
+		logger.info("方法getById中查询到的问卷信息:" + JsonUtil.beanToJson(questionaire));
 
 		QuestionaireVO naireVO = new QuestionaireVO(questionaire);
 		// 获取问卷对应题目
@@ -61,7 +61,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 			questionItemOptions = this.questionItemOptionService.getList(que.getId());
 			que.setOptions(questionItemOptions);
 		}
-		System.out.println("方法getById中查询到的问卷题目信息:" + JsonUtil.listToJson(questions));
+		logger.info("方法getById中查询到的问卷题目信息:" + JsonUtil.listToJson(questions));
 		return naireVO;
 	}
 
@@ -123,6 +123,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
 		// 更新问卷
 		int questionnaireUpdate = this.queDao.update(que);
+		logger.info("方法update的入参:" + que + ", 问卷更新结果:" + questionnaireUpdate);
 
 		List<QuestionaireQuestionRVO> questions = questionaire.getQuestionsList();
 		// 不需要移除的题目的数组
@@ -141,14 +142,14 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		}
 		/* 新增问卷中的题目极其选项 */
 		// 参数传入的是不需要删除的题目的id
-		logger.info("questionsToUpdate.length:" + questionsToUpdate.size());
-		
-		int patchManage = this.queQuestionService.patchManageQuestions(questionsToUpdate);		
+		logger.info("方法update的入参，需要更新的题目:" + JsonUtil.listToJson(questionsToUpdate));
+		int patchManage = this.queQuestionService.patchManageQuestions(questionsToUpdate);
+		logger.info("方法update的入参，需要新增的题目:" + JsonUtil.listToJson(questionsToAdd));
 		// 批量创建
 //		int patchCreate = this.queQuestionService.patchCreateQuestions(questionsToAdd);
 		// 批量更新
 //		int questionsUpdate = this.queQuestionService.patchUpdateQuestions(questionsToUpdate);
-		return patchManage;
+		return questionnaireUpdate * patchManage;
 	}
 
 }
