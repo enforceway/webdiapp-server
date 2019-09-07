@@ -9,9 +9,9 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.webdiapp.controllers.QuestionsController;
 import com.webdiapp.entities.Questionaire;
 import com.webdiapp.mapper.QuestionaireDAO;
+import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.QuestionOptionRVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
 import com.webdiapp.vo.QuestionaireVO;
@@ -42,12 +42,10 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
 	@Override
 	public QuestionaireVO getById(Integer id) {
+		System.out.println("方法getById的入参:" + id);
 		// 获取问卷详情
 		Questionaire questionaire = this.queDao.getById(id);
-		
-		if(questionaire != null) {
-			return null;
-		}
+		System.out.println("方法getById中查询到的问卷信息:" + JsonUtil.beanToJson(questionaire));
 
 		QuestionaireVO naireVO = new QuestionaireVO(questionaire);
 		// 获取问卷对应题目
@@ -63,6 +61,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 			questionItemOptions = this.questionItemOptionService.getList(que.getId());
 			que.setOptions(questionItemOptions);
 		}
+		System.out.println("方法getById中查询到的问卷题目信息:" + JsonUtil.listToJson(questions));
 		return naireVO;
 	}
 
