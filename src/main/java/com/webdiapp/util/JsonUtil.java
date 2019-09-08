@@ -25,6 +25,9 @@ public class JsonUtil {
 		naire.setTitle("问卷标题");
 		System.out.println(JsonUtil.beanToJson(naire));
 		System.out.println(JsonUtil.listToJson(list));
+		int ids[] = new int[2];
+		ids[0] = 5;
+		ids[1] = 6;
 	}
 
     // 获取原始的 ObjectMapper 对象
@@ -99,6 +102,14 @@ public class JsonUtil {
         }
 
         return json.toString();
+    }
+    
+    public static String intArrayToJson(int[] ints) {
+    	StringBuffer sb = new StringBuffer();
+    	for (int index = 0; index < ints.length; index++) {
+    		sb.append(ints[index]);
+    	}
+    	return sb.toString();
     }
 
     public static String beanToJson(Object bean) {

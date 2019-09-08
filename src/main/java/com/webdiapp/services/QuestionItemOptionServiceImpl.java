@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.mapper.QuestionItemOptionDAO;
+import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.QuestionOptionRVO;
 
 @Service
@@ -16,6 +18,8 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 
 	@Resource
 	private QuestionItemOptionDAO questionItemDao;
+	
+	private static final Logger logger = Logger.getLogger(QuestionItemOptionServiceImpl.class);
 	
 	@Override
 	public List<QuestionOptionRVO> getList(int questionItemId) {
@@ -56,9 +60,13 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 		return 0;
 	}
 
+	/**
+	 * @description 删除同一个问卷下指定的问题中，所有的候选项
+	 */
 	@Override
-	public int removeQuestionItemsByQuestionaireId(int[] questionIds, int questionaireId) {
-		return this.questionItemDao.removeQuestionItemsByQuestionaireIdWithout(questionIds, questionaireId);
+	public int removeQuestionItemOptionsByQuestionItemIds(int[] questionIds, int questionaireId) {
+		logger.info("方法removeQuestionItemsByQuestionaireId中，非删除题目的候选项:" + JsonUtil.intArrayToJson(questionIds));
+		return this.questionItemDao.removeQuestionItemOptionsByQuestionItemIds(questionIds, questionaireId);
 	}
 
 	@Override

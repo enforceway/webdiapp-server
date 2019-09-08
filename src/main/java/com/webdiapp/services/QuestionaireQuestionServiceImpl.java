@@ -9,9 +9,9 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.webdiapp.entities.Questionaire;
 import com.webdiapp.entities.QuestionaireQuestion;
 import com.webdiapp.mapper.QuestionaireQuestionRDAO;
+import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.QuestionOptionRVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
 
@@ -124,9 +124,9 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	 * @description 移除题目以及题目对应的后选项
 	 */
 	@Override
-	public int patchManageQuestions(ArrayList<QuestionaireQuestionRVO> questionsInEffect) {
+	public int patchManageQuestionItemsAndOptions(ArrayList<QuestionaireQuestionRVO> questionsInEffect) {
 		int questionaireId = 0;
-		int ids[] = new int[]{questionsInEffect.size()};
+		int ids[] = new int[questionsInEffect.size()];
 		Iterator<QuestionaireQuestionRVO> ite = questionsInEffect.iterator();
 		int idx = 0;
 		QuestionaireQuestionRVO questionRVO = null;
@@ -135,17 +135,20 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 			questionaireId = questionRVO.getQuestionaireId();
 			ids[idx++] = questionRVO.getId();
 		}
-		// 不在ids数组中的问卷题目被移除
-		int removeQuestionState = this.removeQuestionsByIdsWithout(ids);
+//		logger.info("方法patchManageQuestions中，非删除问卷题目:" + JsonUtil.intArrayToJson(ids));
+		int ifUpdated = this.removeQuestionItemsAndOptions(ids, questionaireId);
 		// 根据问卷id，题目id，确定需要删除的候选项目
-		int removeQuestionItemState = this.questionItemService.removeQuestionItemsByQuestionaireId(ids, questionaireId);
-		return removeQuestionState * removeQuestionItemState;
+		return ifUpdated;
 	}
 
 	@Override
-	public int removeQuestionsByIdsWithout(int[] ids) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removeQuestionItemsAndOptions(int[] questionIds, int questionaireId) {
+		logger.info("方法removeQuestionsByIdsWithout中，非删除问卷题目:" + JsonUtil.intArrayToJson(questionIds) + ", " + questionaireId);
+		// 根据问卷题目id，关联制定的问卷id，移除所有的问卷题目
+		int ifRemoveQuestion = this.queQuestionRDao.removeQuestionItemsByIdNotIn(questionIds, questionaireId);
+		// 根据问卷题目id，移除所有的问卷题目候选项
+		int ifRemoveQuestionItem = this.questionItemService.removeQuestionItemOptionsByQuestionItemIds(questionIds, questionaireId);
+		return ifRemoveQuestion * ifRemoveQuestionItem;
 	}
 
 }

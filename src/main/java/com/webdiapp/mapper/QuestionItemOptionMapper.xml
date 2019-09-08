@@ -21,18 +21,23 @@
     </update> --> 
     <delete id="removeQuestionItemsByQuestionaireIdWithout" parameterType="hashmap">
     	update questionaire_question_options_r set
-    	use_yn='n' where questionaire_question_id in (
+    	use_yn='n' where questionaire_question_id not in (
     		select 
     			id 
     		from questionaire_question_r where questionaire_id = #{1} 
     			and
-    		id not in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{0}</foreach> 
+    		id not in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{item}</foreach> 
     	)
     </delete>
-    <delete id="removeQuestionItemsByQuestionIdWithout" parameterType="hashmap">
-    	update questionaire_question_options_r 
-    	set use_yn='n' 
-    	where questionaire_question_id = #{1} and id not in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{0}</foreach> 
+    <delete id="removeQuestionItemOptionsByQuestionItemIds">
+    <!-- 无论是需要保留下来的题目候选项，还是不保留下来的题目后选项，都删除 -->
+    	update questionaire_question_options_r set
+    	use_yn='n' where questionaire_question_id in (
+    		select 
+    			id
+    		from questionaire_question_r where use_yn != 'n' 
+    			and
+    			questionaire_id = #{1}
     	)
     </delete>
 </mapper>

@@ -2,16 +2,17 @@ package com.webdiapp.mapper;
 
 import java.util.List;
 
-import com.webdiapp.entities.Question;
 import com.webdiapp.entities.QuestionaireQuestion;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface QuestionaireQuestionRDAO {
 	
-	public int removeQuestionsByIdsWithout(int[] ids);
+	public int removeQuestionItemsByIdNotIn(@Param("questionsIds") int[] questionsIds, @Param("questionaireId") int questionaireId);
 
     public List<QuestionaireQuestion> getList(int questionaireId);
     
-    public Question getById(int id);
+    public QuestionaireQuestion getById(int id);
     
     public int getCount();
     

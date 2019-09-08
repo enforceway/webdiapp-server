@@ -18,7 +18,7 @@ public interface QuestionItemOptionDAO {
     
     // 根据问卷id，确定了题目。根据题目id, 确定了哪些题目对应的候选项需要删除
     public int removeQuestionItemsByQuestionaireIdWithout(int[] questionIds, int questionaireId);
-    
-    public int removeQuestionItemsByQuestionIdWithout(int[] questionaireQuestionds, int questionId);
+    // 根据问卷题目的id删除候选项
+    public int removeQuestionItemOptionsByQuestionItemIds(int[] questionsId, int questionaireId);
     
 }

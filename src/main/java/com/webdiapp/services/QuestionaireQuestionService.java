@@ -7,7 +7,7 @@ import com.webdiapp.vo.QuestionaireQuestionRVO;
 
 public interface QuestionaireQuestionService {
 	
-	public int removeQuestionsByIdsWithout(int ids[]);
+	public int removeQuestionItemsAndOptions(int ids[], int questionaireId);
 
 	public int removeQuestionsByIds(int ids[]);
 
@@ -25,5 +25,5 @@ public interface QuestionaireQuestionService {
 
     public int patchUpdateQuestions(ArrayList<QuestionaireQuestionRVO> questions);
     
-    public int patchManageQuestions(ArrayList<QuestionaireQuestionRVO> questionsInEffect);
+    public int patchManageQuestionItemsAndOptions(ArrayList<QuestionaireQuestionRVO> questionsInEffect);
 }
