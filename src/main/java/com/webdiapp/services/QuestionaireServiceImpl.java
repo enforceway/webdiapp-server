@@ -146,10 +146,10 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 //		logger.info("方法update的入参，需要移除的题目候选项以及需要notin移除的问卷题目:" + JsonUtil.listToJson(questionsToUpdate));
 		int patchManage = this.queQuestionService.patchManageQuestionItemsAndOptions(questionsToUpdate);
 //		logger.info("方法update的入参，需要新增的题目:" + JsonUtil.listToJson(questionsToAdd));
-//		int patchCreate = this.queQuestionService.patchCreateQuestionItemsAndOptions(questions);
+		int patchCreate = this.queQuestionService.patchCreateQuestionItemsAndOptions(questions);
 		// 批量更新
 //		int questionsUpdate = this.queQuestionService.patchUpdateQuestions(questionsToUpdate);
-		return questionnaireUpdate * patchManage;
+		return questionnaireUpdate * patchManage * patchCreate;
 	}
 
 }

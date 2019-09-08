@@ -1,6 +1,7 @@
 package com.webdiapp.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.QuestionaireQuestion;
-import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.mapper.QuestionaireQuestionRDAO;
 import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.QuestionOptionRVO;
@@ -154,26 +154,33 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 
 	@Override
 	public int patchCreateQuestionItemsAndOptions(List<QuestionaireQuestionRVO> questions) {
-		Iterator<QuestionaireQuestionRVO> ite = questions.iterator();
-		Iterator<QuestionOptionRVO> optIte = null;
-		QuestionaireQuestionRVO questionItem = null;
-		QuestionOptionRVO option = null;
-		QuestionItemOption nOption = null;
 		QuestionaireQuestion nQuestionItem = null;
-		while(ite.hasNext()) {
-			questionItem = ite.next();
-			optIte = questionItem.getOptions().iterator();
+		Date curDate = new Date();
+		for(QuestionaireQuestionRVO questionItem : questions) {
 			nQuestionItem = new QuestionaireQuestion();
+			// 设置问卷id
+			nQuestionItem.setQuestionaireId(questionItem.getQuestionaireId());
+			// 设置题目类型
+			nQuestionItem.setQuestionType(questionItem.getQuestionType());
+			// 设置题目id
+			nQuestionItem.setQuestionId(questionItem.getQuestionId());
+			nQuestionItem.setEnabled(questionItem.getEnabled());
+			
+			nQuestionItem.setCreationTimestamp(curDate);
+			nQuestionItem.setLastupdateTimestamp(curDate);
+			
 			// 插入问卷题目
 			this.queQuestionRDao.insert(nQuestionItem);
-			while(optIte.hasNext()) {
-				option = optIte.next();
+			for(QuestionOptionRVO optionItem : questionItem.getOptions()) {
+				// 设置生成的题目的id
+				optionItem.setQuestionItemId(nQuestionItem.getId());
+				optionItem.setCreationTimestamp(curDate);
+				optionItem.setLastupdateTimestamp(curDate);
+				this.questionItemService.insert(optionItem);
 			}
 		}
 		
-		// 
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 }

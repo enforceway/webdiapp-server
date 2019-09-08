@@ -40,7 +40,7 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 	@Override
 	public int insert(QuestionOptionRVO entity) {
 		QuestionItemOption optionItem = new QuestionItemOption();
-		optionItem.setId(entity.getId());
+//		optionItem.setId(entity.getId());
 		optionItem.setQuestionItemId(entity.getQuestionItemId());
 		optionItem.setOptionContent(entity.getOptionContent());
 		optionItem.setSelected(entity.getSelected());
