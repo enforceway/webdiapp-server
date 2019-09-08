@@ -6,6 +6,8 @@ import com.webdiapp.entities.Question;
 import com.webdiapp.entities.QuestionaireQuestion;
 
 public interface QuestionaireQuestionRDAO {
+	
+	public int removeQuestionsByIdsWithout(int[] ids);
 
     public List<QuestionaireQuestion> getList(int questionaireId);
     

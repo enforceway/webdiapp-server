@@ -120,8 +120,9 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	}
 
 	/**
-	 * 移除不在列表内的问卷题目
-	 * */
+	 * @author enforceway
+	 * @description 移除题目以及题目对应的后选项
+	 */
 	@Override
 	public int patchManageQuestions(ArrayList<QuestionaireQuestionRVO> questionsInEffect) {
 		int questionaireId = 0;
@@ -135,10 +136,10 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 			ids[idx++] = questionRVO.getId();
 		}
 		// 不在ids数组中的问卷题目被移除
-		int removedState = this.removeQuestionsByIdsWithout(ids);
-		return removedState;
+		int removeQuestionState = this.removeQuestionsByIdsWithout(ids);
 		// 根据问卷id，题目id，确定需要删除的候选项目
-//		return this.questionItemService.removeQuestionItemsByQuestionaireId(ids, questionaireId);
+		int removeQuestionItemState = this.questionItemService.removeQuestionItemsByQuestionaireId(ids, questionaireId);
+		return removeQuestionState * removeQuestionItemState;
 	}
 
 	@Override

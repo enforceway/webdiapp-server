@@ -114,6 +114,9 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
 	@Override
 	public int update(QuestionaireVO questionaire) {
+		/* 很重要:
+		 * 对问卷中题目数据进行检查 
+		 */
 		Questionaire que = new Questionaire();
 		que.setActiveDateStart(questionaire.getActiveDateStart());
 		que.setActiveDateEnd(questionaire.getActiveDateEnd());

@@ -58,7 +58,7 @@ public class QuestionItemOptionServiceImpl implements QuestionItemOptionService 
 
 	@Override
 	public int removeQuestionItemsByQuestionaireId(int[] questionIds, int questionaireId) {
-		return this.questionItemDao.removeQuestionItemsByQuestionaireId(questionIds, questionaireId);
+		return this.questionItemDao.removeQuestionItemsByQuestionaireIdWithout(questionIds, questionaireId);
 	}
 
 	@Override

@@ -59,6 +59,11 @@
         #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         )
     </insert>
+    <delete id="removeQuestionsByIdsWithout" parameterType="hashmap">
+    	update questionaire_question_r set
+    	use_yn='n' /
+    	where id not in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+    </delete>
     <delete id="delete" parameterType="int[]">
     	update questionaire_question_r set
     	use_yn='n' 

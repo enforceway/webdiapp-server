@@ -19,7 +19,7 @@
         lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         where id=#{id}
     </update> --> 
-    <delete id="removeQuestionItemsByQuestionaireId" parameterType="hashmap">
+    <delete id="removeQuestionItemsByQuestionaireIdWithout" parameterType="hashmap">
     	update questionaire_question_options_r set
     	use_yn='n' where questionaire_question_id in (
     		select 
@@ -29,7 +29,7 @@
     		id not in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{0}</foreach> 
     	)
     </delete>
-    <delete id="removeQuestionItemsByQuestionId" parameterType="hashmap">
+    <delete id="removeQuestionItemsByQuestionIdWithout" parameterType="hashmap">
     	update questionaire_question_options_r 
     	set use_yn='n' 
     	where questionaire_question_id = #{1} and id not in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{0}</foreach> 
