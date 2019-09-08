@@ -143,13 +143,10 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 				questionsToUpdate.add(questionRVO);
 			}
 		}
-		/* 新增问卷中的题目极其选项 */
-		// 参数传入的是不需要删除的题目的id
-		logger.info("方法update的入参，需要更新的题目:" + JsonUtil.listToJson(questionsToUpdate));
+//		logger.info("方法update的入参，需要移除的题目候选项以及需要notin移除的问卷题目:" + JsonUtil.listToJson(questionsToUpdate));
 		int patchManage = this.queQuestionService.patchManageQuestionItemsAndOptions(questionsToUpdate);
-		logger.info("方法update的入参，需要新增的题目:" + JsonUtil.listToJson(questionsToAdd));
-		// 批量创建
-//		int patchCreate = this.queQuestionService.patchCreateQuestions(questionsToAdd);
+//		logger.info("方法update的入参，需要新增的题目:" + JsonUtil.listToJson(questionsToAdd));
+//		int patchCreate = this.queQuestionService.patchCreateQuestionItemsAndOptions(questions);
 		// 批量更新
 //		int questionsUpdate = this.queQuestionService.patchUpdateQuestions(questionsToUpdate);
 		return questionnaireUpdate * patchManage;

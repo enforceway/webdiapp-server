@@ -25,5 +25,7 @@ public interface QuestionaireQuestionService {
 
     public int patchUpdateQuestions(ArrayList<QuestionaireQuestionRVO> questions);
     
+    public int patchCreateQuestionItemsAndOptions(List<QuestionaireQuestionRVO> questions);
+    
     public int patchManageQuestionItemsAndOptions(ArrayList<QuestionaireQuestionRVO> questionsInEffect);
 }

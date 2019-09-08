@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface QuestionaireQuestionRDAO {
 	
-	public int removeQuestionItemsByIdNotIn(@Param("questionsIds") int[] questionsIds, @Param("questionaireId") int questionaireId);
+	public int removeQuestionItemsByQuestionItemIds(@Param("questionsIds") int[] questionsIds, @Param("questionaireId") int questionaireId);
 
     public List<QuestionaireQuestion> getList(int questionaireId);
     

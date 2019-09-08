@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.QuestionaireQuestion;
+import com.webdiapp.entities.QuestionItemOption;
 import com.webdiapp.mapper.QuestionaireQuestionRDAO;
 import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.QuestionOptionRVO;
@@ -145,10 +146,34 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	public int removeQuestionItemsAndOptions(int[] questionIds, int questionaireId) {
 		logger.info("方法removeQuestionsByIdsWithout中，非删除问卷题目:" + JsonUtil.intArrayToJson(questionIds) + ", " + questionaireId);
 		// 根据问卷题目id，关联制定的问卷id，移除所有的问卷题目
-		int ifRemoveQuestion = this.queQuestionRDao.removeQuestionItemsByIdNotIn(questionIds, questionaireId);
+		int ifRemoveQuestion = this.queQuestionRDao.removeQuestionItemsByQuestionItemIds(questionIds, questionaireId);
 		// 根据问卷题目id，移除所有的问卷题目候选项
 		int ifRemoveQuestionItem = this.questionItemService.removeQuestionItemOptionsByQuestionItemIds(questionIds, questionaireId);
 		return ifRemoveQuestion * ifRemoveQuestionItem;
+	}
+
+	@Override
+	public int patchCreateQuestionItemsAndOptions(List<QuestionaireQuestionRVO> questions) {
+		Iterator<QuestionaireQuestionRVO> ite = questions.iterator();
+		Iterator<QuestionOptionRVO> optIte = null;
+		QuestionaireQuestionRVO questionItem = null;
+		QuestionOptionRVO option = null;
+		QuestionItemOption nOption = null;
+		QuestionaireQuestion nQuestionItem = null;
+		while(ite.hasNext()) {
+			questionItem = ite.next();
+			optIte = questionItem.getOptions().iterator();
+			nQuestionItem = new QuestionaireQuestion();
+			// 插入问卷题目
+			this.queQuestionRDao.insert(nQuestionItem);
+			while(optIte.hasNext()) {
+				option = optIte.next();
+			}
+		}
+		
+		// 
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

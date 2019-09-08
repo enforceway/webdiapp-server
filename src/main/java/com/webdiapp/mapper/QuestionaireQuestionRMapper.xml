@@ -59,12 +59,11 @@
         #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
         )
     </insert>
-    <delete id="removeQuestionItemsByIdNotIn">
+    <!-- 删除问卷中所有的题目  -->
+    <delete id="removeQuestionItemsByQuestionItemIds">
     	update questionaire_question_r set
     	use_yn='n'
-    	where use_yn != 'n'
-    		and
-    		questionaire_id = #{questionaireId} and id not in <foreach collection="questionsIds" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+    	where use_yn != 'n' and questionaire_id = #{questionaireId}
     </delete>
     <delete id="delete" parameterType="int[]">
     	update questionaire_question_r set
