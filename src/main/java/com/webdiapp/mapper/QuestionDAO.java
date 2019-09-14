@@ -5,12 +5,12 @@ import org.apache.ibatis.annotations.Param;
 import com.webdiapp.entities.Question;
 
 public interface QuestionDAO {
+	
+	public int getCount(@Param("content") String questionName);
     
-    public List<Question> getList(@Param("skip") int skip,@Param("size") int size);
+	public List<Question> getList(@Param("content") String questionName, @Param("startIndex") int skip, @Param("pageSize") int size);
     
     public Question getById(int id);
-    
-    public int getCount();
     
     public int insert(Question entity);
     

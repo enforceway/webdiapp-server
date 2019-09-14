@@ -1,24 +1,56 @@
 package com.webdiapp.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.webdiapp.controllers.QuestionsController;
 import com.webdiapp.entities.Question;
 import com.webdiapp.mapper.QuestionDAO;
+import com.webdiapp.vo.Pagination;
+import com.webdiapp.vo.PagingVO;
 
 @Service
 public class QuestionsServiceImpl implements QuestionsService {
+	
+	private static final Logger log = Logger.getLogger(QuestionsController.class);
 
 	@Resource
     QuestionDAO questionDao;
 
 	@Override
-	public List<Question> getList(int pageNO, int size) {
-//		int skip=(pageNO-1)*size;
-        return this.questionDao.getList(pageNO, size);
+	public PagingVO getList(String questionName, int pageNO, int pageSize) {
+		if(pageNO == 0) {
+			pageNO = 1;
+		}
+		if(pageSize == 0) {
+			pageSize = 10;
+		}
+		int total = this.getCount(questionName);
+
+		PagingVO questionPaging = new PagingVO();
+		Pagination pagination = new Pagination();
+		pagination.setCurPage(pageNO);
+        pagination.setPageSize(pageSize);
+        List<Question> list = null;
+
+		pagination.setTotal(total);
+		if(0 != total) {
+			list = this.questionDao.getList(questionName, (pageNO - 1) * pageSize, pageSize);
+		}
+        questionPaging.setPagination(pagination);
+
+        if(list == null) {
+        	questionPaging.setData(new ArrayList<String>());
+        } else {
+        	questionPaging.setData(list);
+        }
+		log.info("问卷题目查询的如参: " + questionName + ", " + pageNO + ", " + pageSize);
+		return questionPaging;
 	}
 
 	@Override
@@ -27,8 +59,8 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 
 	@Override
-	public int getCount() {
-		return this.questionDao.getCount();
+	public int getCount(String content) {
+		return this.questionDao.getCount(content);
 	}
 
 	@Override

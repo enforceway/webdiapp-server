@@ -1,10 +1,8 @@
 package com.webdiapp.controllers;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
-//import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webdiapp.entities.Question;
-//import com.webdiapp.vo.QuestionVO;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionsService;
+import com.webdiapp.util.JsonUtil;
+import com.webdiapp.vo.PagingVO;
 
 @RestController
 @RequestMapping("/question")
@@ -29,11 +28,14 @@ public class QuestionsController {
     QuestionsService questionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
-        System.out.println(pageNo + "," + pageSize);
-        List<Question> list = this.questionService.getList(pageNo, pageSize);
+    public GeneralResponser list(@RequestParam(required=false) String title, @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+        if(pageNo == 0) {
+        	pageNo = 1;
+        }
+        PagingVO questionPaging = this.questionService.getList(title, pageNo, pageSize);
+        log.info("问卷查询列表的response是: " + JsonUtil.objectToJson(questionPaging));
         GeneralResponser gr = new GeneralResponser();
-        gr.setData(list);
+        gr.setData(questionPaging);
         return gr;
     }
 

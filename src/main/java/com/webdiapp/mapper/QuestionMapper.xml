@@ -17,6 +17,15 @@
         #{lastupdate_timestamp, javaType=java.sql.Date, jdbcType=DATE},
         #{lastupdate_user, javaType=INTEGER, jdbcType=INTEGER}
 	</sql>
+	<select id="getCount" resultType="int">
+        select
+        	count(id)
+        from question_t 
+        	where use_yn!='n' 
+       	<if test="content != null and content != ''">
+       		and question_content like concat('%', #{content}, '%')
+        </if>
+    </select>
     <!--获得商品信息并分页 -->
     <select id="getList" resultType="Question">
         select
@@ -25,7 +34,11 @@
         question_content as questionContent,
         question_type as questionType,
         <include refid="baseColumnsQry" />
-        from question_t where use_yn!='n' limit #{skip},#{size}
+        from question_t where use_yn!='n' 
+        <if test="content != null and content != ''">
+       		and question_content like concat('%', #{content}, '%')
+        </if>
+       	limit #{startIndex},#{pageSize}
     </select>
     <!-- 获得单个商品通过编号 -->
     <select id="getById" parameterType="INTEGER" resultType="Question">
@@ -35,10 +48,6 @@
         question_type as questionType,
         <include refid="baseColumnsQry" />
         from question_t where id=#{id} where use_yn!='n'
-    </select>
-    <!--获得商品总数 -->
-    <select id="getCount" resultType="int">
-        select count(id) from question_t where use_yn!='n'
     </select>
     <!--新增加商品 -->
     <insert id="insert" parameterType="Question">
