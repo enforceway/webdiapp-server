@@ -19,7 +19,7 @@ public class TestQuestions {
         SqlSession session = MyBatisUtil.getSession();
         try {
         	QuestionDAO dao = session.getMapper(QuestionDAO.class);
-            List<Question> list = dao.getList(skip, size);
+            List<Question> list = dao.getList(null, skip, size);
             Assert.assertEquals(2, list.size());
         } finally {
             session.close();

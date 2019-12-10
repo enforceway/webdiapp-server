@@ -17,6 +17,7 @@ import com.webdiapp.entities.Questionaire;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionaireQuestionService;
 import com.webdiapp.services.QuestionaireService;
+import com.webdiapp.vo.PagingVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
 import com.webdiapp.vo.QuestionaireVO;
 
@@ -36,10 +37,10 @@ public class QuestionaireController {
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
     	log.info("~~QuestionaireController类, list方法~~~");
     	log.info("pageNo=" + pageNo + ", pageSize=" + pageSize);
-    	List<Questionaire> list = this.queService.getList(pageNo, pageSize);
-    	log.info("list方法执行结果:" + list);
+    	PagingVO questionPaging = this.queService.getList(pageNo, pageSize);
+    	log.info("list方法执行结果:" + questionPaging);
         GeneralResponser gr = new GeneralResponser();
-        gr.setData(list);
+        gr.setData(questionPaging);
         return gr;
     }
 
