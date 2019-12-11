@@ -1,11 +1,13 @@
 package com.webdiapp.services;
 
 import com.webdiapp.vo.QuestionaireVO;
+import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.vo.PagingVO;
 
 public interface QuestionaireService {
 
-	PagingVO getList(int pageNO, int size);
+	GeneralResponser<PagingVO> getList(int pageNO, int size);
+	
 
     QuestionaireVO getById(Integer id);
     

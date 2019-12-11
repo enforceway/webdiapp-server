@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.Questionaire;
 import com.webdiapp.mapper.QuestionaireDAO;
+import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.Pagination;
 import com.webdiapp.vo.PagingVO;
@@ -33,7 +34,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	private static final Logger logger = Logger.getLogger(QuestionaireServiceImpl.class);
 
 	@Override
-	public PagingVO getList(int pageNO, int size) {
+	public GeneralResponser<PagingVO> getList(int pageNO, int size) {
 		PagingVO questionPaging = new PagingVO();
 		Pagination pagination = new Pagination();
 		pagination.setCurPage(pageNO);
@@ -42,7 +43,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		List<Questionaire> res = this.queDao.getList((pageNO - 1) * size, size);
 		questionPaging.setData(res);
 		questionPaging.setPagination(pagination);
-        return questionPaging;
+		return new GeneralResponser.GeneralSponserBuilder<PagingVO>().build(1, "", "", questionPaging);
 	}
 
 	@Override

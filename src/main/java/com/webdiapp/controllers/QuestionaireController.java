@@ -34,14 +34,12 @@ public class QuestionaireController {
     QuestionaireQuestionService queQuestionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    public GeneralResponser<PagingVO> list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
     	log.info("~~QuestionaireController类, list方法~~~");
     	log.info("pageNo=" + pageNo + ", pageSize=" + pageSize);
-    	PagingVO questionPaging = this.queService.getList(pageNo, pageSize);
-    	log.info("list方法执行结果:" + questionPaging);
-        GeneralResponser gr = new GeneralResponser();
-        gr.setData(questionPaging);
-        return gr;
+    	GeneralResponser<PagingVO> resp = this.queService.getList(pageNo, pageSize);
+    	log.info("list方法执行结果:" + resp.getData());
+        return resp;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
