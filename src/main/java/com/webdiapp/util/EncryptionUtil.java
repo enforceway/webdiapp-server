@@ -93,7 +93,7 @@ public class EncryptionUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getHash("小奎", "MD5"));
+        System.out.println(getHash("303585amd", "MD5"));
         System.out.println(getHash("小奎", "SHA") + "\n");
 
         System.out.println(getHash2("小奎", "MD5"));

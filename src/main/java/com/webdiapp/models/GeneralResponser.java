@@ -57,6 +57,12 @@ public class GeneralResponser<T> implements Serializable {
 		private String message = "ok"; // 失败时的信息提示
 		private String code = ""; // 失败时的失败类型
 		private T data; // 成功时的数据返回
+		public GeneralSponserBuilder() {
+			this.status = 1;
+			this.message = "ok";
+			this.code = "";
+			this.data = null;
+		}
 
 		public GeneralResponser<T> build() {
 			return new GeneralResponser<T>(this);

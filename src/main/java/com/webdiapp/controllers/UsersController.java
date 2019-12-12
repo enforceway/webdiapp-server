@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.webdiapp.entities.User;
 import com.webdiapp.models.GeneralResponser;
@@ -19,6 +21,7 @@ import com.webdiapp.services.UserService;
 
 @RestController
 @RequestMapping("/users")
+@SessionAttributes("users")
 public class UsersController {
 
 	private static final Logger log = Logger.getLogger(UsersController.class);
@@ -26,6 +29,18 @@ public class UsersController {
     @Resource
     UserService userService;
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public GeneralResponser<User> login(@RequestBody User user, HttpSession session) {
+        System.out.println(user.getUsername() + "," + user.getPwd());
+        session.setAttribute("online_user", user);
+        GeneralResponser.GeneralSponserBuilder<User> userResp = new GeneralResponser.GeneralSponserBuilder<User>();
+        
+        if("test".equals(user.getUsername())) {
+        	userResp.status(0).code("001").message("该用户不可用");
+        }
+        return userResp.build();
+    }
+    
     @RequestMapping(value = "/list/", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         System.out.println(pageNo + "," + pageSize);
@@ -34,7 +49,7 @@ public class UsersController {
         gr.setData(list);
         return gr;
     }
-    
+
     @RequestMapping("/listing")
     public String hello() {
     	int count = this.userService.getCount();

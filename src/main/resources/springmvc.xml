@@ -26,7 +26,12 @@
 
 	<!-- 使用默认的Servlet来响应静态文件 -->
 	<mvc:default-servlet-handler />
-
+	
+	<!-- 拦截器 -->  
+	<mvc:interceptors>
+		<!-- 对所有请求都拦截，公共拦截器可以有多个  -->
+		<bean name="baseInterceptor" class="com.webdiapp.access.login.LoginInterceptor" />
+	</mvc:interceptors>
 
 	<!-- 视图解析器 -->
 	<bean id="viewResolver"

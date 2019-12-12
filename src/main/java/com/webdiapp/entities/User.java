@@ -6,10 +6,11 @@ public class User extends BaseEntity {
 
 	private Integer id;
 
-    private String username;
-    
-    public User() {
-    }
+	private String username;
+
+	private String pwd;
+
+	public User() {}
 
 	public Integer getId() {
 		return id;
@@ -25,6 +26,14 @@ public class User extends BaseEntity {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
 }
