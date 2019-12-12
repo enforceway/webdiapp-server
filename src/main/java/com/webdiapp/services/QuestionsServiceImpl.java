@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.webdiapp.controllers.QuestionsController;
 import com.webdiapp.entities.Question;
 import com.webdiapp.mapper.QuestionDAO;
+import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.vo.Pagination;
 import com.webdiapp.vo.PagingVO;
 
@@ -23,7 +24,7 @@ public class QuestionsServiceImpl implements QuestionsService {
     QuestionDAO questionDao;
 
 	@Override
-	public PagingVO getList(String questionName, int pageNO, int pageSize) {
+	public GeneralResponser<PagingVO> getList(String questionName, int pageNO, int pageSize) {
 		if(pageNO == 0) {
 			pageNO = 1;
 		}
@@ -50,12 +51,13 @@ public class QuestionsServiceImpl implements QuestionsService {
         	questionPaging.setData(list);
         }
 		log.info("问卷题目查询的如参: " + questionName + ", " + pageNO + ", " + pageSize);
-		return questionPaging;
+		return new GeneralResponser.GeneralSponserBuilder<PagingVO>().build(1, "", "", questionPaging);
 	}
 
 	@Override
-	public Question getById(int id) {
-		return this.questionDao.getById(id);
+	public GeneralResponser<Question> getById(String id) {
+		Question qr = this.questionDao.getById(id);
+		return new GeneralResponser.GeneralSponserBuilder<Question>().build(1, "", "", qr);
 	}
 
 	@Override
@@ -64,13 +66,15 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 
 	@Override
-	public int insert(Question question) {
-		return this.questionDao.insert(question);
+	public GeneralResponser<Integer> insert(Question question) {
+		int i = this.questionDao.insert(question);
+		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", i);
 	}
 
 	@Override
-	public int delete(int id) {
-		return this.questionDao.delete(id);
+	public GeneralResponser<Integer> delete(int id) {
+		int i = this.questionDao.delete(id);
+		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", i);
 	}
 
 	@Override
@@ -80,8 +84,9 @@ public class QuestionsServiceImpl implements QuestionsService {
 	}
 
 	@Override
-	public int update(Question question) {
-		return this.questionDao.update(question);
+	public GeneralResponser<Integer> update(Question question) {
+		int i = this.questionDao.update(question);
+		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", i);
 	}
     
 }

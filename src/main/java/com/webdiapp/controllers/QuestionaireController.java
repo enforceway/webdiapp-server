@@ -1,7 +1,6 @@
 package com.webdiapp.controllers;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webdiapp.entities.Questionaire;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionaireQuestionService;
 import com.webdiapp.services.QuestionaireService;
@@ -34,59 +32,45 @@ public class QuestionaireController {
     QuestionaireQuestionService queQuestionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser<PagingVO> list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    public GeneralResponser<PagingVO> list(@RequestParam(required=false) String subject, @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
     	log.info("~~QuestionaireController类, list方法~~~");
     	log.info("pageNo=" + pageNo + ", pageSize=" + pageSize);
-    	GeneralResponser<PagingVO> resp = this.queService.getList(pageNo, pageSize);
+    	GeneralResponser<PagingVO> resp = this.queService.getList(subject, pageNo, pageSize);
     	log.info("list方法执行结果:" + resp.getData());
         return resp;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
-    public GeneralResponser insert(@RequestBody QuestionaireVO que) {
-    	GeneralResponser gr = new GeneralResponser();
+    public GeneralResponser<Integer> insert(@RequestBody QuestionaireVO que) {
     	Date curr = new Date();
     	que.setCreationTimestamp(curr);
     	que.setLastupdateTimestamp(curr);
-    	Integer ifSucc = this.queService.insert(que);
-    	gr.setData(ifSucc);
-    	return gr;
+    	GeneralResponser<Integer> resp = this.queService.insert(que);
+    	return resp;
     }
 
-    @SuppressWarnings("finally")
 	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.GET)
-    public GeneralResponser listById(@PathVariable("questionId") Integer strQuestionId) {
-    	GeneralResponser gr = new GeneralResponser();
-    	QuestionaireVO que = null;
-    	try {
-    		que = this.queService.getById(strQuestionId);
-		} catch (NumberFormatException e) {
-			gr.setData(e.getMessage());
-		} finally {
-			gr.setData(que);
-			return gr;
-		}
+    public GeneralResponser<QuestionaireVO> listById(@PathVariable("questionId") Integer strQuestionId) {
+    	GeneralResponser<QuestionaireVO> gr = this.queService.getById(strQuestionId);
+		return gr;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes="application/json")
-    public int delete(@RequestBody QuestionaireVO baser) {
-    	int count = this.queService.delete(baser.getId());
-        return count;
+    public GeneralResponser<Integer> delete(@RequestBody QuestionaireVO baser) {
+    	return this.queService.delete(baser.getId());
     }
     
     @RequestMapping(value = "/deleteItem", method = RequestMethod.PUT, consumes="application/json")
-    public int deleteQuestion(@RequestBody QuestionaireQuestionRVO rvo) {
+    public GeneralResponser<Integer> deleteQuestion(@RequestBody QuestionaireQuestionRVO rvo) {
     	int[] ids = {rvo.getId()};
-    	int count = this.queQuestionService.delete(ids);
-        return count;
+    	return this.queQuestionService.delete(ids);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
-    public int update(@RequestBody QuestionaireVO que) {
+    public GeneralResponser<Integer> update(@RequestBody QuestionaireVO que) {
     	Date curr = new Date();
     	que.setLastupdateTimestamp(curr);
-    	int count = this.queService.update(que);
-    	return count;
+    	return this.queService.update(que);
     }
 
 }

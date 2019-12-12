@@ -20,7 +20,7 @@ public class TestQuestionaire {
         try {
         	QuestionaireDAO dao = session.getMapper(QuestionaireDAO.class);
         	System.out.println("dao:" + dao.hashCode());
-            List<Questionaire> list = dao.getList(skip, size);
+            List<Questionaire> list = dao.getList("", skip, size);
             Assert.assertTrue(list.size() >= 0);
         } finally {
             session.close();

@@ -3,6 +3,7 @@ package com.webdiapp.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
 
 public interface QuestionaireQuestionService {
@@ -19,7 +20,7 @@ public interface QuestionaireQuestionService {
 
     public int insert(QuestionaireQuestionRVO entity);
 
-    public int delete(int[] ids);
+    public GeneralResponser<Integer> delete(int[] ids);
 
     public int patchCreateQuestions(ArrayList<QuestionaireQuestionRVO> questions);
 

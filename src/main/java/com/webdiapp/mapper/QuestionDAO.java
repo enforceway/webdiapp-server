@@ -10,7 +10,7 @@ public interface QuestionDAO {
     
 	public List<Question> getList(@Param("content") String questionName, @Param("startIndex") int skip, @Param("pageSize") int size);
     
-    public Question getById(int id);
+    public Question getById(String id);
     
     public int insert(Question entity);
     

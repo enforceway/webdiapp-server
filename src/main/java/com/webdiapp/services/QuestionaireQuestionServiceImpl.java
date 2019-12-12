@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.QuestionaireQuestion;
 import com.webdiapp.mapper.QuestionaireQuestionRDAO;
+import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.QuestionOptionRVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
@@ -53,8 +54,9 @@ public class QuestionaireQuestionServiceImpl implements QuestionaireQuestionServ
 	}
 
 	@Override
-	public int delete(int[] ids) {
-		return this.queQuestionRDao.delete(ids);
+	public GeneralResponser<Integer> delete(int[] ids) {
+		int i = this.queQuestionRDao.delete(ids);
+		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", i);
 	}
 
 	@Override

@@ -28,19 +28,17 @@ public class QuestionsController {
     QuestionsService questionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser list(@RequestParam(required=false) String title, @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    public GeneralResponser<PagingVO> list(@RequestParam(required=false) String title, @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         if(pageNo == 0) {
         	pageNo = 1;
         }
-        PagingVO questionPaging = this.questionService.getList(title, pageNo, pageSize);
-        log.info("问卷查询列表的response是: " + JsonUtil.objectToJson(questionPaging));
-        GeneralResponser gr = new GeneralResponser();
-        gr.setData(questionPaging);
+        GeneralResponser<PagingVO> gr = this.questionService.getList(title, pageNo, pageSize);
+        log.info("问卷查询列表的response是: " + JsonUtil.objectToJson(gr.getData()));
         return gr;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
-    public int insert(@RequestBody Question que) {
+    public GeneralResponser<Integer> insert(@RequestBody Question que) {
     	log.info("添加题目接口入参: id:" + que.getQuestionTypeId() + 
 				";typeid:" + que.getQuestionTypeId() + 
 				";type:" + que.getQuestionType());
@@ -48,45 +46,33 @@ public class QuestionsController {
     	que.setCreationTimestamp(curr);
     	que.setLastupdateTimestamp(curr);
 //    	que.setUserYn("y");
-    	int count = this.questionService.insert(que);
-    	return count;
+    	return this.questionService.insert(que);
     }
 
-    @SuppressWarnings("finally")
 	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.GET)
-    public GeneralResponser listById(@PathVariable("questionId") String strQuestionId) {
-    	GeneralResponser gr = new GeneralResponser();
-    	Question que = null;
-    	try {
-    		int questionId = Integer.parseInt(strQuestionId);
-    		que = this.questionService.getById(questionId);
-		} catch (NumberFormatException e) {
-			// TODO: handle exception
-		} finally {
-			gr.setData(que);
-			return gr;
-		}
+    public GeneralResponser<Question> listById(@PathVariable("questionId") String strQuestionId) {
+    	GeneralResponser<Question> qre = null;
+		qre = this.questionService.getById(strQuestionId);
+    	return qre;
     }
     
     @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes="application/json")
-    public int delete(@RequestBody Question question) {
+    public GeneralResponser<Integer> delete(@RequestBody Question question) {
     	log.info("删除题目接口入参: id:" + question.getQuestionTypeId() + 
 				";typeid:" + question.getQuestionTypeId() + 
 				";type:" + question.getQuestionType());
-    	int count = this.questionService.delete(question.getId());
-        return count;
+    	return this.questionService.delete(question.getId());
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
-    public int update(@RequestBody Question question) {
+    public GeneralResponser<Integer> update(@RequestBody Question question) {
     	Date curr = new Date();
     	log.info("更新题目接口入参: id:" + question.getQuestionTypeId() +
     							";questionContent:" + question.getQuestionContent() +
     							";typeid:" + question.getQuestionTypeId() + 
     							";type:" + question.getQuestionType());
     	question.setLastupdateTimestamp(curr);
-    	int count = this.questionService.update(question);
-    	return count;
+    	return this.questionService.update(question);
     }
     
 }

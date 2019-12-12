@@ -6,19 +6,18 @@ import com.webdiapp.vo.PagingVO;
 
 public interface QuestionaireService {
 
-	GeneralResponser<PagingVO> getList(int pageNO, int size);
-	
+	GeneralResponser<PagingVO> getList(String subject, int pageNO, int size);
 
-    QuestionaireVO getById(Integer id);
+	GeneralResponser<QuestionaireVO> getById(Integer id);
     
     int getCount();
 
-    int insert(QuestionaireVO que);
+    GeneralResponser<Integer> insert(QuestionaireVO que);
 
-    int delete(int id);
+    GeneralResponser<Integer> delete(int id);
 
     int deletes(int[] ids);
 
-    int update(QuestionaireVO que);
+    GeneralResponser<Integer> update(QuestionaireVO que);
 
 }

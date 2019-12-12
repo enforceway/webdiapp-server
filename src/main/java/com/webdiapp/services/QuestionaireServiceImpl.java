@@ -34,20 +34,20 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	private static final Logger logger = Logger.getLogger(QuestionaireServiceImpl.class);
 
 	@Override
-	public GeneralResponser<PagingVO> getList(int pageNO, int size) {
+	public GeneralResponser<PagingVO> getList(String subject, int pageNO, int size) {
 		PagingVO questionPaging = new PagingVO();
 		Pagination pagination = new Pagination();
 		pagination.setCurPage(pageNO);
         pagination.setPageSize(size);
         
-		List<Questionaire> res = this.queDao.getList((pageNO - 1) * size, size);
+		List<Questionaire> res = this.queDao.getList(subject, (pageNO - 1) * size, size);
 		questionPaging.setData(res);
 		questionPaging.setPagination(pagination);
 		return new GeneralResponser.GeneralSponserBuilder<PagingVO>().build(1, "", "", questionPaging);
 	}
 
 	@Override
-	public QuestionaireVO getById(Integer id) {
+	public GeneralResponser<QuestionaireVO> getById(Integer id) {
 		logger.info("方法getById的入参:" + id);
 		// 获取问卷详情
 		Questionaire questionaire = this.queDao.getById(id);
@@ -68,7 +68,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 			que.setOptions(questionItemOptions);
 		}
 		logger.info("方法getById中查询到的问卷题目信息:" + JsonUtil.listToJson(questions));
-		return naireVO;
+		return new GeneralResponser.GeneralSponserBuilder<QuestionaireVO>().build(1, "", "", naireVO);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	}
 
 	@Override
-	public int insert(QuestionaireVO question) {
+	public GeneralResponser<Integer> insert(QuestionaireVO question) {
 		Questionaire newQue = new Questionaire();
 		Date date = new Date();
 		newQue.setStatusId(question.getStatusId());
@@ -104,13 +104,13 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 				this.questionItemOptionService.insert(optionItem);
 			}
 		}
-
-		return 1;
+		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", 1);
 	}
 
 	@Override
-	public int delete(int id) {
-		return this.queDao.delete(id);
+	public GeneralResponser<Integer> delete(int id) {
+		int i = this.queDao.delete(id);
+		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", i);
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	}
 
 	@Override
-	public int update(QuestionaireVO questionaire) {
+	public GeneralResponser<Integer> update(QuestionaireVO questionaire) {
 		/* 很重要:
 		 * 对问卷中题目数据进行检查 
 		 */
@@ -155,7 +155,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		int patchCreate = this.queQuestionService.patchCreateQuestionItemsAndOptions(questions);
 		// 批量更新
 //		int questionsUpdate = this.queQuestionService.patchUpdateQuestions(questionsToUpdate);
-		return questionnaireUpdate * patchManage * patchCreate;
+		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", questionnaireUpdate * patchManage * patchCreate);
 	}
 
 }

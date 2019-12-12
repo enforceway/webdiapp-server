@@ -41,13 +41,13 @@
        	limit #{startIndex},#{pageSize}
     </select>
     <!-- 获得单个商品通过编号 -->
-    <select id="getById" parameterType="INTEGER" resultType="Question">
+    <select id="getById" parameterType="string" resultType="Question">
         select
         id,
         question_content as questionContent,
         question_type as questionType,
         <include refid="baseColumnsQry" />
-        from question_t where id=#{id} where use_yn!='n'
+        from question_t where id=#{id} and use_yn!='n'
     </select>
     <!--新增加商品 -->
     <insert id="insert" parameterType="Question">
@@ -65,7 +65,7 @@
     </insert>
     <!-- 删除商品 -->
     <delete id="delete">
-        delete from question_t where id=#{id}
+        update question_t set use_yn = 'n' where id=#{id}
     </delete>
     <!-- 修改商品 -->
     <update id="update" parameterType="Question">

@@ -65,6 +65,9 @@ public class GeneralResponser<T> implements Serializable {
 		public GeneralResponser<T> build(int s) {
 			GeneralResponser<T> resp = new GeneralResponser<T>();
 			resp.status = s;
+			resp.code = "";
+			resp.message = "ok";
+			resp.data = null;
 			return resp;
 		}
 
@@ -72,6 +75,8 @@ public class GeneralResponser<T> implements Serializable {
 			GeneralResponser<T> resp = new GeneralResponser<T>();
 			resp.status = s;
 			resp.code = c;
+			resp.message = "ok";
+			resp.data = null;
 			return resp;
 		}
 
@@ -80,6 +85,7 @@ public class GeneralResponser<T> implements Serializable {
 			resp.status = s;
 			resp.code = c;
 			resp.message = m;
+			resp.data = null;
 			return resp;
 		}
 
