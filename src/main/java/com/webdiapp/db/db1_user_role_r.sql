@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.16, for macos10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: db1
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,30 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `group_t`
+-- Table structure for table `user_role_r`
 --
 
-DROP TABLE IF EXISTS `group_t`;
+DROP TABLE IF EXISTS `user_role_r`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `group_t` (
-  `id` int(11) NOT NULL,
-  `group_name` varchar(45) DEFAULT NULL COMMENT '定义了组名',
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_role_r` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
   `creation_timestamp` timestamp NULL DEFAULT NULL,
-  `lastupdate_timestamp` timestamp NULL DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
+  `lastupdate_timestamp` timestamp NULL DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
+  `use_yn` varchar(5) DEFAULT 'y',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色组对应的表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户有组的概念，不会强行赋予用户权限.要废弃了';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `group_t`
+-- Dumping data for table `user_role_r`
 --
 
-LOCK TABLES `group_t` WRITE;
-/*!40000 ALTER TABLE `group_t` DISABLE KEYS */;
-/*!40000 ALTER TABLE `group_t` ENABLE KEYS */;
+LOCK TABLES `user_role_r` WRITE;
+/*!40000 ALTER TABLE `user_role_r` DISABLE KEYS */;
+INSERT INTO `user_role_r` VALUES (1,1,1,NULL,NULL,NULL,NULL,'y'),(2,2,2,NULL,NULL,NULL,NULL,'y');
+/*!40000 ALTER TABLE `user_role_r` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-18 11:26:48
+-- Dump completed on 2019-12-12 14:44:23
