@@ -79,11 +79,11 @@
 	</context:component-scan>
 	
     <!-- 7 容器自动扫描IOC组件 
-    , com.webdiapp.controllers, com.webdiapp.services, com.webdiapp.dao
+     com.webdiapp.services, com.webdiapp.dao
     -->
     
 	<!-- 启用注解扫描，并定义组件查找规则 ，除了@controller，扫描所有的Bean -->
-	<context:component-scan base-package="com.webdiapp.*">
+	<context:component-scan base-package="com.webdiapp.services.*,com.webdiapp.mapper">
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
 	</context:component-scan>
 

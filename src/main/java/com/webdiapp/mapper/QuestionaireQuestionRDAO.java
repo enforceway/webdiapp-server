@@ -5,7 +5,9 @@ import java.util.List;
 import com.webdiapp.entities.QuestionaireQuestion;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface QuestionaireQuestionRDAO {
 	
 	public int removeQuestionItemsByQuestionItemIds(@Param("questionsIds") int[] questionsIds, @Param("questionaireId") int questionaireId);

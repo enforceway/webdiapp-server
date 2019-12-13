@@ -2,8 +2,11 @@ package com.webdiapp.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.webdiapp.entities.QuestionItemOption;
 
+@Repository
 public interface QuestionItemOptionDAO {
 
     public List<QuestionItemOption> getList(int questionaireQuestionId);
