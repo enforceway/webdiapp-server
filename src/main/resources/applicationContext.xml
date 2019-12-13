@@ -69,11 +69,24 @@
     <!--6 容器自动扫描IOC组件 
     , com.webdiapp.controllers, com.webdiapp.services, com.webdiapp.dao
     -->
+    
 	<!-- 启用注解扫描，并定义组件查找规则 ，除了@controller，扫描所有的Bean -->
 	<context:component-scan base-package="com.webdiapp.*">
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
 	</context:component-scan>
-	<context:component-scan base-package="com.webdiapp.entities" />
+	<!-- 启用注解扫描，并定义组件查找规则 ，mvc层只负责扫描@Controller、@ControllerAdvice -->
+
+	<!-- 1. 扫描 controller -->
+	<context:component-scan base-package="com.webdiapp.controllers"
+		use-default-filters="false">
+		<!-- 扫描@Controller -->
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.RestController" />
+		<!-- 控制器增强，使一个Contoller成为全局的异常处理类，类中用@ExceptionHandler方法注解的方法可以处理所有Controller发生的异常 -->
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+
 	<!--7 aspectj支持自动代理实现AOP功能 -->
     <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 
