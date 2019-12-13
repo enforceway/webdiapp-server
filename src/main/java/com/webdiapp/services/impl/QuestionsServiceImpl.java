@@ -1,4 +1,4 @@
-package com.webdiapp.services;
+package com.webdiapp.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import com.webdiapp.controllers.QuestionsController;
 import com.webdiapp.entities.Question;
 import com.webdiapp.mapper.QuestionDAO;
 import com.webdiapp.models.GeneralResponser;
+import com.webdiapp.services.QuestionsService;
 import com.webdiapp.vo.Pagination;
 import com.webdiapp.vo.PagingVO;
 

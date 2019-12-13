@@ -1,4 +1,4 @@
-package com.webdiapp.services;
+package com.webdiapp.services.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.User;
 import com.webdiapp.mapper.UserDAO;
+import com.webdiapp.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

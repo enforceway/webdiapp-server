@@ -29,7 +29,6 @@ public class QuestionsTypeController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
-        System.out.println(pageNo + "," + pageSize);
         List<QuestionType> list = this.service.getList(pageNo, pageSize);
         GeneralResponser gr = new GeneralResponser();
         gr.setData(list);

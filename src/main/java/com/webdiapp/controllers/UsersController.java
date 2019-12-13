@@ -1,9 +1,14 @@
 package com.webdiapp.controllers;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.webdiapp.constants.CommonConstants;
 import com.webdiapp.entities.User;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.UserService;
@@ -30,20 +36,22 @@ public class UsersController {
     UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public GeneralResponser<User> login(@RequestBody User user, HttpSession session) {
-        System.out.println(user.getUsername() + "," + user.getPwd());
-        session.setAttribute("online_user", user);
-        GeneralResponser.GeneralSponserBuilder<User> userResp = new GeneralResponser.GeneralSponserBuilder<User>();
-        
-        if("test".equals(user.getUsername())) {
-        	userResp.status(0).code("001").message("该用户不可用");
-        }
-        return userResp.build();
+    public void login(@RequestBody User user, @RequestParam String redirect,
+    		HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+        session.setAttribute(CommonConstants.LOGIN_SESSION_KEY, user);
+        try {
+			redirect = URLDecoder.decode(redirect, "UTF-8");
+			System.out.println("redirect:" + redirect);
+			response.sendRedirect(redirect);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     @RequestMapping(value = "/list/", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
-        System.out.println(pageNo + "," + pageSize);
         List<User> list = this.userService.getList(pageNo, pageSize);
         GeneralResponser gr = new GeneralResponser();
         gr.setData(list);
@@ -59,7 +67,6 @@ public class UsersController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
     public int insert(@RequestBody User user) {
-    	System.out.println("insert for questions:" + user.getUsername());// + ", " + user.getQuestionType() + "," + user.getCreationTimestamp());
     	Date curr = new Date();
     	user.setCreationTimestamp(curr);
     	user.setLastupdateTimestamp(curr);

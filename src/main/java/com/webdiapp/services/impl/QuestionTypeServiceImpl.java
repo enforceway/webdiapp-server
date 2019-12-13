@@ -1,4 +1,4 @@
-package com.webdiapp.services;
+package com.webdiapp.services.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.QuestionType;
 import com.webdiapp.mapper.QuestionTypeDAO;
+import com.webdiapp.services.QuestionTypeService;
 
 @Service
 public class QuestionTypeServiceImpl implements QuestionTypeService {
