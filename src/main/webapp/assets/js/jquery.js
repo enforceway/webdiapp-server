@@ -19,26 +19,44 @@ function cliLogin() {
 	var txtPwd = $("#password").val();
 	
 	if ($.trim(txtUser) == "") {
-	
-		Tip('请输入你的手机号');
+		Tip('请输入你的用户名');
 		$("#txtUser").focus();
 		return;
-		
 	}
-	if(!phone.exec(txtUser)){
-			
-			Tip('手机输入格式不正确,请从新输入');
-			$("#txtUser").focus();
-		return;
-		}
-	
 	if ($.trim(txtPwd) == "") {
 		Tip('请输入密码！');
 		$("#Userpwd").focus();
 		return;
 	}
-	
-	return false;
+	var search = window.location.search;
+	search = search.replace(/^\?/, "").split("&");
+	var queryParamObj = {};
+	search.forEach(function(item) {
+		item = item.split("=");
+		item[0] && item[1]?queryParamObj[item[0]] = item[1]:'';
+	});
+	debugger
+	$.ajax({
+		dataType: "json",
+		contentType: "appliction/json",
+		url: ("/webdiapp/users/login?redirect=") + ((queryParamObj.redirect)?queryParamObj.redirect:""),
+		data: JSON.stringify({
+			username: txtUser,
+			pwd: txtPwd
+		}),
+		dataType:'json', 
+		headers:{ 
+			Accept: "application/json", 
+			"Content-Type":"application/json"
+		},
+		type: "POST"
+	}).done(function(res) {
+		if(res.status === 1 && res.code === '') {
+			window.location.href = res.data;
+		}
+	}).fail(function(error) {
+		debugger
+	});
 }
 //注册操作
 

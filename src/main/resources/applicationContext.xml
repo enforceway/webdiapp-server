@@ -16,11 +16,6 @@
 
 	<!-- 1 引入属性文件，在配置中占位使用 -->
     <context:property-placeholder location="classpath*:db.properties" />
-    
-    <!-- 2 触发Annotation的启用 -->
-    <!-- 会自动注册RequestMappingHandlerMapping与RequestMappingHandlerAdapter两个Bean， 
-	这是SpringMVC为@Controllers分发请求所必需的，并提供了数据绑定支持、@NumberFormatannotation支持、 @DateTimeFormat支持、@Valid支持、读写XML的支持和读写JSON的支持等功能。 -->
-	<mvc:annotation-driven />
 
 	<!-- 3 配置C3P0数据源 -->
     <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -70,30 +65,6 @@
     </bean>
     <!--支持注解驱动的事务管理，指定事务管理器 -->
     <tx:annotation-driven transaction-manager="transactionManager" />
-
-	<!-- 7  扫描 controller -->
-	<!-- 启用注解扫描，并定义组件查找规则 ，mvc层只负责扫描@Controller、@ControllerAdvice -->
-	<context:component-scan base-package="com.webdiapp.controllers"
-		use-default-filters="false">
-		<!-- 扫描@Controller -->
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.RestController" />
-		<!-- 控制器增强，使一个Contoller成为全局的异常处理类，类中用@ExceptionHandler方法注解的方法可以处理所有Controller发生的异常 -->
-		<context:include-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
-	</context:component-scan>
-	
-    <!-- 8容器自动扫描IOC组件 
-     com.webdiapp.services, com.webdiapp.dao
-    -->
-    
-	<!-- 启用注解扫描，并定义组件查找规则 ，除了@controller，扫描所有的Bean -->
-	<context:component-scan base-package="com.webdiapp.services.*,com.webdiapp.mapper">
-		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
-	</context:component-scan>
-	
-	
-
 
 	<!-- 9 aspectj支持自动代理实现AOP功能 -->
     <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
