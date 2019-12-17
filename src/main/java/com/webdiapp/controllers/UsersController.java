@@ -1,6 +1,5 @@
 package com.webdiapp.controllers;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
@@ -35,21 +34,23 @@ public class UsersController {
     @Resource
     UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void login(@RequestBody User user, @RequestParam String redirect,
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public GeneralResponser<String> login(@RequestBody User user, @RequestParam String redirect,
     		HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         session.setAttribute(CommonConstants.LOGIN_SESSION_KEY, user);
+        GeneralResponser.GeneralSponserBuilder<String> builder = new GeneralResponser.GeneralSponserBuilder<String>();
+        log.info("user.username:" + user.getUsername() + ", user.pwd:" + user.getPwd());
         try {
 			redirect = URLDecoder.decode(redirect, "UTF-8");
-			System.out.println("redirect:" + redirect);
-			response.sendRedirect(redirect);
+//			System.out.println("redirect:" + redirect);
+//			response.sendRedirect(redirect);
+//			return builder.build(1, "", "", redirect);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
+        return builder.build(1, "", "", redirect);
     }
-    
+
     @RequestMapping(value = "/list/", method = RequestMethod.GET)
     public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         List<User> list = this.userService.getList(pageNo, pageSize);
