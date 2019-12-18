@@ -32,7 +32,7 @@ public class QuestionaireController {
     QuestionaireQuestionService queQuestionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser<PagingVO> list(@RequestParam(required=false) String subject, @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    public GeneralResponser<PagingVO> list(@RequestParam(required=false) String subject, @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
     	log.info("~~QuestionaireController类, list方法~~~");
     	log.info("pageNo=" + pageNo + ", pageSize=" + pageSize);
     	GeneralResponser<PagingVO> resp = this.queService.getList(subject, pageNo, pageSize);

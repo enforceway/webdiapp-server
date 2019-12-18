@@ -3,7 +3,9 @@ package com.webdiapp.controllers;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.webdiapp.constants.CommonConstants;
 import com.webdiapp.entities.User;
 import com.webdiapp.models.GeneralResponser;
+import com.webdiapp.services.UserAccessService;
 import com.webdiapp.services.UserService;
+import com.webdiapp.vo.UserRolesVO;
 
 @RestController
 @RequestMapping("/users")
@@ -30,33 +34,53 @@ import com.webdiapp.services.UserService;
 public class UsersController {
 
 	private static final Logger log = Logger.getLogger(UsersController.class);
-    
+
+	@Resource
+	UserAccessService userAccessService;
+
     @Resource
     UserService userService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public GeneralResponser<String> login(@RequestBody User user, @RequestParam String redirect,
-    		HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-        session.setAttribute(CommonConstants.LOGIN_SESSION_KEY, user);
-        GeneralResponser.GeneralSponserBuilder<String> builder = new GeneralResponser.GeneralSponserBuilder<String>();
-        log.info("user.username:" + user.getUsername() + ", user.pwd:" + user.getPwd());
-        try {
-			redirect = URLDecoder.decode(redirect, "UTF-8");
-//			System.out.println("redirect:" + redirect);
-//			response.sendRedirect(redirect);
-//			return builder.build(1, "", "", redirect);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-        return builder.build(1, "", "", redirect);
+    @RequestMapping(value = "/roles", method = RequestMethod.POST)
+    public GeneralResponser<UserRolesVO> listAccessRoles(@RequestBody User user) {
+    	return this.userAccessService.listRoleByUser(user);
     }
 
-    @RequestMapping(value = "/list/", method = RequestMethod.GET)
-    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
-        List<User> list = this.userService.getList(pageNo, pageSize);
-        GeneralResponser gr = new GeneralResponser();
-        gr.setData(list);
-        return gr;
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public GeneralResponser<Map<String, String>> login(@RequestBody User user, @RequestParam String redirect,
+    		HttpServletRequest request, HttpServletResponse response) {
+		GeneralResponser.GeneralSponserBuilder<Map<String, String>> builder = new GeneralResponser.GeneralSponserBuilder<Map<String, String>>();
+		GeneralResponser<Map<String, String>> result = null;
+		Map<String, String> userResult = null;
+		HttpSession session = request.getSession();
+		user = this.userAccessService.findUserByUserModel(user);
+		if(user == null) {
+			// 如果找到了多个该用户, 即该用户是脏数据
+			result = builder.build(1, "00", "查询用户角色出现错误：根据用户名和密码，不应该查询到两个用户结果");
+		} else if(user.getId() == null) {
+			// 如果该用户在数据库中不存在
+			result = builder.build(1, "00", "该用户还未注册");
+		} else {
+			userResult = new HashMap<String, String>();
+			result = builder.build(1, "", "", userResult);
+			// 用户信息保存在session中
+			session.setAttribute(CommonConstants.LOGIN_SESSION_KEY, user);
+			try {
+				redirect = URLDecoder.decode(redirect, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				redirect = "";
+			} finally {
+				userResult.put("location", redirect);
+			}
+		}
+		return result;
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public GeneralResponser<List<User>> list(@RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    	List<User> list = this.userService.getList(pageNo, pageSize);
+        return new GeneralResponser.GeneralSponserBuilder<List<User>>().build(1, "", "", list);
     }
 
     @RequestMapping("/listing")

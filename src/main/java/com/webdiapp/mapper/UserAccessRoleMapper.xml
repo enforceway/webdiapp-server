@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webdiapp.mapper.UserAccessRoleDAO">
+	<sql id="baseColumnsQry">
+		creation_timestamp as creationTimestamp,
+        creation_user as creationUser,
+        creation_username as creationUsername,
+        lastupdate_timestamp as lastupdateTimestamp,
+        lastupdate_user as lastupdateUser,
+        lastupdate_username as lastupdateUsername 
+	</sql>
+	<sql id="baseColumnsInsertFields">
+		creation_timestamp,creation_user,creation_username,lastupdate_timestamp,lastupdate_user,lastupdate_username 
+	</sql>
+	<sql id="baseColumnsInsert"> 
+        #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
+        #{creationUsername, javaType=string, jdbcType=VARCHAR},
+        #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
+        #{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+	</sql>
+
+    <select id="findUserByUserModel" parameterType="User" resultType="User">
+        SELECT 
+		    user_name as username,
+		    user_pwd as pwd,
+		    <include refid="baseColumnsQry" /> 
+		FROM
+		    user_t t_user
+		WHERE use_yn = 'y' AND
+		    user_name = #{username} AND user_pwd = #{pwd}
+    </select>
+    <select id="listRoleByUser" parameterType="User" resultType="UserRoleAccess">
+        SELECT 
+			t_user.id as userId,
+		    t_user.user_name as username,
+		    t_role.role_name as roleName,
+		    t_r.role_id as roleId 
+		FROM user_role_r t_r 
+			left join user_t t_user on t_r.user_id = t_user.id
+		    left join role_t t_role on t_r.role_id = t_role.id
+		WHERE t_user.use_yn = 'y' AND t_r.use_yn ='y' AND t_role.use_yn = 'y'
+		<if test="id != null and id != ''">
+			AND t_user.id = #{id}
+        </if>
+    </select>
+    <select id="getCount" resultType="int">
+        select count(id) from user_t where use_yn!='n'
+    </select>
+    <insert id="insert" parameterType="User">
+        insert into
+        user_t(user_name,<include refid="baseColumnsInsertFields" />) 
+        values(
+        #{username},
+       	<include refid="baseColumnsInsert" />
+        )
+    </insert>
+    <delete id="delete">
+        delete from user_t where id=#{id}
+    </delete>
+    <update id="update" parameterType="User">
+        update user_t set
+        user_name=#{username},
+        lastupdate_timestamp=#{lastupdateTimestamp},
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER},
+        lastupdate_username=#{lastupdateUsername, javaType=string, jdbcType=VARCHAR}
+        where id=#{id}
+    </update>
+</mapper>

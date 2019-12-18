@@ -18,8 +18,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getList(int pageNO, int size) {
+		if(pageNO == 0) {
+			pageNO = 1;
+		}
+		if(size == 0) {
+			size = 10;
+		}
 //		int skip=(pageNO-1)*size;
-        return this.userDao.getList(pageNO, size);
+        return this.userDao.getList((pageNO - 1) * size, size);
 	}
 
 	@Override

@@ -2,12 +2,14 @@ package com.webdiapp.entities;
 
 public class UserRoleAccess extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-	// 用户主键
+	// 用户ID
 	private Integer userId;
+	// 用户名
 	private String username;
+	// 角色名
 	private String roleName;
-	private String roleId;
+	// 角色ID
+	private Integer roleId;
 
 	public Integer getUserId() {
 		return userId;
@@ -33,11 +35,11 @@ public class UserRoleAccess extends BaseEntity {
 		this.roleName = roleName;
 	}
 
-	public String getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 

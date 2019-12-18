@@ -20,19 +20,17 @@
 	<!-- 使用默认的Servlet来响应静态文件 -->
 	<mvc:default-servlet-handler />
 	
-	<!-- 拦截器 -->  
+	<!-- 拦截器 
 	<mvc:interceptors>
 		<mvc:interceptor>
-		<!-- 对所有请求都拦截，公共拦截器可以有多个  -->
 			<mvc:mapping path="/users"/>
 			<mvc:mapping path="/questionaire/*"/>
 			<mvc:mapping path="/question/*"/>
 			<mvc:exclude-mapping path="/users/login"/>
-			<!-- <mvc:exclude-mapping path="/assets/*"/>
-			<mvc:exclude-mapping path="/index"/> -->
-			<bean name="baseInterceptor" class="com.webdiapp.access.login.LoginInterceptor" />
+			<bean name="LoginInterceptor" class="com.webdiapp.access.login.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	-->
 	
 	
 	

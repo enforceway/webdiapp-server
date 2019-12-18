@@ -1,15 +1,12 @@
 package com.webdiapp.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class BaseEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class BaseEntity {
 
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSSZ", timezone="GMT+8")
 	private Date creationTimestamp;
