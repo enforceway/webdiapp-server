@@ -11,6 +11,7 @@ public abstract class MyBatisUtil {
     public static SqlSessionFactory getSqlSessionFactory(){
         InputStream config = MyBatisUtil.class.getClassLoader().getResourceAsStream("MyBatisCfg.xml");
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
+        System.out.println("factory:" + factory.openSession(true));
         return factory;
     }
 
