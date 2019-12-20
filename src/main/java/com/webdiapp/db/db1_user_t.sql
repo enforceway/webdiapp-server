@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.16, for macos10.14 (x86_64)
 --
 -- Host: localhost    Database: db1
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,10 +21,11 @@
 
 DROP TABLE IF EXISTS `user_t`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) DEFAULT NULL,
+  `user_pwd` varchar(45) NOT NULL,
   `creation_timestamp` timestamp NULL DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `creation_username` varchar(45) DEFAULT NULL,
@@ -32,9 +33,9 @@ CREATE TABLE `user_t` (
   `lastupdate_user` int(11) DEFAULT NULL,
   `lastupdate_username` varchar(45) DEFAULT NULL,
   `use_yn` varchar(5) DEFAULT 'y',
-  `user_pwd` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `user_t` (
 
 LOCK TABLES `user_t` WRITE;
 /*!40000 ALTER TABLE `user_t` DISABLE KEYS */;
-INSERT INTO `user_t` VALUES (1,'admin','2019-03-22 10:58:55',0,NULL,'2019-03-22 11:14:32',0,NULL,'y','a0cc57b9ae4c351a0c45ad17c7638bf4'),(2,'enforceway','2019-03-22 11:27:40',0,NULL,'2019-03-22 11:27:40',0,NULL,'y','a0cc57b9ae4c351a0c45ad17c7638bf4'),(3,'wondrelanddd','2019-03-22 11:27:55',0,NULL,'2019-03-22 11:27:55',0,NULL,'y','a0cc57b9ae4c351a0c45ad17c7638bf4');
+INSERT INTO `user_t` VALUES (1,'admin','a0cc57b9ae4c351a0c45ad17c7638bf4','2019-03-22 10:58:55',0,NULL,'2019-03-22 11:14:32',0,NULL,'y'),(2,'enforceway','a0cc57b9ae4c351a0c45ad17c7638bf4','2019-03-22 11:27:40',0,NULL,'2019-03-22 11:27:40',0,NULL,'y'),(5,'lizhaolongamd','a0cc57b9ae4c351a0c45ad17c7638bf4',NULL,NULL,NULL,NULL,NULL,NULL,'y');
 /*!40000 ALTER TABLE `user_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-12 14:44:23
+-- Dump completed on 2019-12-20  9:11:13
