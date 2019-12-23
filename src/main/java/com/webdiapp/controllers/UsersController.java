@@ -26,6 +26,7 @@ import com.webdiapp.entities.User;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.UserAccessService;
 import com.webdiapp.services.UserService;
+import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.UserRolesVO;
 
 @RestController
@@ -47,34 +48,15 @@ public class UsersController {
     }
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public GeneralResponser<Map<String, String>> login(@RequestBody User user, @RequestParam String redirect,
+    public GeneralResponser<Map<String, Object>> login(@RequestBody User user, @RequestParam String redirect,
     		HttpServletRequest request, HttpServletResponse response) {
-		GeneralResponser.GeneralSponserBuilder<Map<String, String>> builder = new GeneralResponser.GeneralSponserBuilder<Map<String, String>>();
-		GeneralResponser<Map<String, String>> result = null;
-		Map<String, String> userResult = null;
 		HttpSession session = request.getSession();
-		user = this.userAccessService.findUserByUserModel(user);
-		if(user == null) {
-			// 如果找到了多个该用户, 即该用户是脏数据
-			result = builder.build(1, "00", "查询用户角色出现错误：根据用户名和密码，不应该查询到两个用户结果");
-		} else if(user.getId() == null) {
-			// 如果该用户在数据库中不存在
-			result = builder.build(1, "00", "该用户还未注册");
-		} else {
-			userResult = new HashMap<String, String>();
-			result = builder.build(1, "", "", userResult);
-			// 用户信息保存在session中
-			session.setAttribute(CommonConstants.LOGIN_SESSION_KEY, user);
-			try {
-				redirect = URLDecoder.decode(redirect, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				redirect = "";
-			} finally {
-				userResult.put("location", redirect);
-			}
+		GeneralResponser<Map<String, Object>> res = this.userAccessService.findUserByUserModel(user, session);
+		if("".equals(res.getCode())) {
+			res.getData().put("location", redirect);
 		}
-		return result;
+		UsersController.log.info("获取到的用户是:" + JsonUtil.objectToJson(user));
+		return res;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)

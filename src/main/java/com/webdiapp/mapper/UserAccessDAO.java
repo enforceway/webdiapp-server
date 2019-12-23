@@ -11,7 +11,7 @@ import com.webdiapp.entities.UserRoleAccess;
 @Repository
 public interface UserAccessDAO {
 
-    public List<User> findUserByUserModel(User user);
+//    public List<User> findUserByUserModel(User user);
 
     public List<UserRoleAccess> listRoleByUser(User user);
 

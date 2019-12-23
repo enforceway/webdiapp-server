@@ -25,11 +25,12 @@
         SELECT 
 		    user_name as username,
 		    user_pwd as pwd,
+		    id,
 		    <include refid="baseColumnsQry" /> 
 		FROM
 		    user_t t_user
 		WHERE use_yn = 'y' AND
-		    user_name = #{username} AND user_pwd = #{pwd}
+		    user_name = #{username}
     </select>
     <select id="listRoleByUser" parameterType="User" resultType="UserRoleAccess">
         SELECT 

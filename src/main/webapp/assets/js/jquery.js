@@ -52,7 +52,7 @@ function cliLogin() {
 		type: "POST"
 	}).done(function(res) {
 		if(res.status === 1 && res.code === '') {
-			window.location.href = res.data;
+			window.location.href = res.data.location;
 		}
 	}).fail(function(error) {
 		debugger
