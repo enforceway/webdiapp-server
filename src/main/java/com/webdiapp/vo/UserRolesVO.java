@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UserRolesVO {
 
-	private Integer userId;
+	private Integer id;
 	private String username;
 	private List<RoleVO> roles;
 
@@ -18,12 +18,12 @@ public class UserRolesVO {
 		return ur;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

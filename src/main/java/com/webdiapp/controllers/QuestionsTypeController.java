@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webdiapp.entities.QuestionType;
 //import com.webdiapp.vo.QuestionVO;
 import com.webdiapp.models.GeneralResponser;
+import com.webdiapp.models.GeneralResponser.GeneralSponserBuilder;
 import com.webdiapp.services.QuestionTypeService;
 
 @RestController
@@ -28,11 +29,10 @@ public class QuestionsTypeController {
     QuestionTypeService service;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    public GeneralResponser<List<QuestionType>> list(@PathVariable @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         List<QuestionType> list = this.service.getList(pageNo, pageSize);
-        GeneralResponser gr = new GeneralResponser();
-        gr.setData(list);
-        return gr;
+        GeneralResponser.GeneralSponserBuilder<List<QuestionType>> builder = new GeneralResponser.GeneralSponserBuilder<List<QuestionType>>();
+        return builder.build(1, "", "", list);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
@@ -45,20 +45,17 @@ public class QuestionsTypeController {
     	return count;
     }
 
-    @SuppressWarnings("finally")
 	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.GET)
-    public GeneralResponser listById(@PathVariable("questionId") String strQuestionId) {
-    	GeneralResponser gr = new GeneralResponser();
+    public GeneralResponser<QuestionType> listById(@PathVariable("questionId") String strQuestionId) {
+    	GeneralSponserBuilder<QuestionType> builder = new GeneralSponserBuilder<QuestionType>();
     	QuestionType que = null;
     	try {
     		int questionId = Integer.parseInt(strQuestionId);
     		que = this.service.getById(questionId);
 		} catch (NumberFormatException e) {
-			// TODO: handle exception
-		} finally {
-			gr.setData(que);
-			return gr;
+	    	return builder.build(0, "00", "传入的问题类型id非法", null);
 		}
+    	return builder.build(1, "", "", que);
     }
     
     @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")

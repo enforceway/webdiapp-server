@@ -1,9 +1,9 @@
 package com.webdiapp.controllers;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.webdiapp.constants.CommonConstants;
 import com.webdiapp.entities.Question;
+import com.webdiapp.entities.User;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionsService;
 import com.webdiapp.util.JsonUtil;
@@ -21,6 +24,7 @@ import com.webdiapp.vo.PagingVO;
 
 @RestController
 @RequestMapping("/question")
+@SessionAttributes(value={CommonConstants.LOGIN_SESSION_KEY},types={User.class})
 public class QuestionsController {
 
 	private static final Logger log = Logger.getLogger(QuestionsController.class);
@@ -29,8 +33,11 @@ public class QuestionsController {
     QuestionsService questionService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser<PagingVO> list(HttpSession session, @RequestParam(required=false) String title, @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
-        GeneralResponser<PagingVO> gr = this.questionService.getList(title, pageNo, pageSize);
+    public GeneralResponser<PagingVO> list(@RequestParam(required=false) String title, 
+    				@RequestParam(required=false,defaultValue="1") int pageNo,
+    				@RequestParam(required=false, defaultValue="10") int pageSize,
+    				Map<String, Object> map) {
+        GeneralResponser<PagingVO> gr = this.questionService.getList(map, title, pageNo, pageSize);
         log.info("问卷查询列表的response是: " + JsonUtil.objectToJson(gr.getData()));
         return gr;
     }

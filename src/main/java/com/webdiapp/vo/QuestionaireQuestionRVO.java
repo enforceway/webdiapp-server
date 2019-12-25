@@ -7,8 +7,6 @@ import com.webdiapp.entities.QuestionaireQuestion;
 
 public class QuestionaireQuestionRVO extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 
 	private Integer questionType; // 1代表单选，2代表多选，3代表文本输入，4代表长文本输入'

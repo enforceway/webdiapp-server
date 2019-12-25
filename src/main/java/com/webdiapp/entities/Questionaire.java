@@ -10,8 +10,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Questionaire extends BaseEntity {
 
-	private static final long serialVersionUID = -8552283633126138930L;
-
 	private Integer id;
 	
 	private String title;

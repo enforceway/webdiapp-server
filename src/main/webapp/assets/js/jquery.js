@@ -35,7 +35,6 @@ function cliLogin() {
 		item = item.split("=");
 		item[0] && item[1]?queryParamObj[item[0]] = item[1]:'';
 	});
-	debugger
 	$.ajax({
 		dataType: "json",
 		contentType: "appliction/json",

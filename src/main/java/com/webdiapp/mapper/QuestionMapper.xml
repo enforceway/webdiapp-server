@@ -22,8 +22,11 @@
         	count(id)
         from question_t 
         	where use_yn!='n' 
-       	<if test="content != null and content != ''">
-       		and question_content like concat('%', #{content}, '%')
+       	<if test="creationUser != null">
+       		and creation_user = #{creationUser}
+        </if>
+       	<if test="questionContent != null and questionContent != ''">
+       		and question_content like concat('%', #{questionContent}, '%')
         </if>
     </select>
     <!--获得商品信息并分页 -->
@@ -35,10 +38,13 @@
         question_type as questionType,
         <include refid="baseColumnsQry" />
         from question_t where use_yn!='n' 
-        <if test="content != null and content != ''">
-       		and question_content like concat('%', #{content}, '%')
+        <if test="creationUser != null">
+       		and creation_user = #{creationUser}
         </if>
-       	limit #{startIndex},#{pageSize}
+        <if test="questionContent != null and questionContent != ''">
+       		and question_content like concat('%', #{questionContent}, '%')
+        </if>
+       	limit #{pageIndex},#{pageSize}
     </select>
     <!-- 获得单个商品通过编号 -->
     <select id="getById" parameterType="string" resultType="Question">

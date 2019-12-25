@@ -8,8 +8,6 @@ import com.webdiapp.vo.QuestionVO;
 
 public class Question extends BaseEntity {
 
-	private static final long serialVersionUID = -8552283633126138930L;
-
 	private Integer id;
 	
 	private Integer questionTypeId;

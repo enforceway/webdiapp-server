@@ -1,9 +1,6 @@
 package com.webdiapp.controllers;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.webdiapp.constants.CommonConstants;
 import com.webdiapp.entities.User;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.UserAccessService;
@@ -31,7 +26,6 @@ import com.webdiapp.vo.UserRolesVO;
 
 @RestController
 @RequestMapping("/users")
-@SessionAttributes("users")
 public class UsersController {
 
 	private static final Logger log = Logger.getLogger(UsersController.class);
@@ -44,7 +38,7 @@ public class UsersController {
 
     @RequestMapping(value = "/roles", method = RequestMethod.POST)
     public GeneralResponser<UserRolesVO> listAccessRoles(@RequestBody User user) {
-    	return this.userAccessService.listRoleByUser(user);
+    	return this.userAccessService.listUserAndRole(user);
     }
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -65,37 +59,26 @@ public class UsersController {
         return new GeneralResponser.GeneralSponserBuilder<List<User>>().build(1, "", "", list);
     }
 
-    @RequestMapping("/listing")
-    public String hello() {
-    	int count = this.userService.getCount();
-    	log.info("search count is:" + count);
-        return "goden/listing:" + count;
-    }
-
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes="application/json")
     public int insert(@RequestBody User user) {
     	Date curr = new Date();
     	user.setCreationTimestamp(curr);
     	user.setLastupdateTimestamp(curr);
-//    	user.setUserYn("y");
     	int count = this.userService.insert(user);
     	return count;
     }
 
-    @SuppressWarnings("finally")
-	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.GET)
-    public GeneralResponser listById(@PathVariable("questionId") String strQuestionId) {
-    	GeneralResponser gr = new GeneralResponser();
+	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.POST)
+    public GeneralResponser <User> listUserById(@PathVariable("questionId") String strQuestionId) {
+    	GeneralResponser.GeneralSponserBuilder<User> builder = new GeneralResponser.GeneralSponserBuilder<User>();
     	User que = null;
     	try {
     		int questionId = Integer.parseInt(strQuestionId);
     		que = this.userService.getById(questionId);
 		} catch (NumberFormatException e) {
-			// TODO: handle exception
-		} finally {
-			gr.setData(que);
-			return gr;
+			return builder.build(0, "00", "该用户ID非法", null);
 		}
+    	return builder.build(1, "", "", que);
     }
     
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes="application/json")

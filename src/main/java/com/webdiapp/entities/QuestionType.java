@@ -2,7 +2,6 @@ package com.webdiapp.entities;
 
 public class QuestionType extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String type;
 

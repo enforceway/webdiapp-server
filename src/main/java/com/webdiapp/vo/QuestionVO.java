@@ -4,8 +4,6 @@ import com.webdiapp.entities.BaseEntity;
 
 public class QuestionVO extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 	
 	private Integer questionTypeId;

@@ -17,6 +17,7 @@ import com.webdiapp.mapper.UserAccessRoleDAO;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.response.handler.user.impl.UserResponseEnum;
 import com.webdiapp.services.UserAccessService;
+import com.webdiapp.util.ContextUtil;
 import com.webdiapp.util.EncryptionUtil;
 import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.RoleVO;
@@ -29,15 +30,15 @@ public class UserAccessServiceImpl implements UserAccessService {
 
 	@Resource
 	private UserAccessRoleDAO userAccessRoleDAO;
-	
-	@Override
+
 	public Map<String, Object> isTrueCredentialUser(User user, List<User> userList) {
 		Map<String, Object> responseMap = null;
 		if(userList.size() == 1) {
 			User retrievedUser = userList.get(0);
 			this.logger.info("判断是否是有效的用户:" + JsonUtil.objectToJson(user) + ", " + JsonUtil.objectToJson(retrievedUser));
 			if(retrievedUser != null && retrievedUser.getPwd().equals(user.getPwd()) && retrievedUser.getId() != null) {
-				responseMap = UserResponseEnum.USER_FOUND.handle(user, retrievedUser);
+				UserRolesVO userRoleVO = this.listRoleByUser(retrievedUser);
+				responseMap = UserResponseEnum.USER_FOUND.handle(user, userRoleVO);
 			} else if(retrievedUser == null || retrievedUser.getId() == null) {
 				responseMap = UserResponseEnum.USER_NOT_FOUND.handle(user, null);
 			} else {
@@ -57,7 +58,7 @@ public class UserAccessServiceImpl implements UserAccessService {
 		Map<String, Object> responseMap = this.isTrueCredentialUser(user, userList);
 		this.logger.info("查询responseMap数据:" + JsonUtil.objectToJson(responseMap));
 		if((Boolean)responseMap.get(CommonConstants.IF_SUCCESS) == true) {
-			session.setAttribute(CommonConstants.LOGIN_SESSION_KEY, responseMap.get("data"));
+			ContextUtil.setOnlineUserInfo(session, responseMap.get("data"));
 		}
 		// 如果找到了多个该用户, 即该用户是脏数据
 		String code = (String)responseMap.get("code");
@@ -71,13 +72,18 @@ public class UserAccessServiceImpl implements UserAccessService {
 	}
 
 	@Override
-	public GeneralResponser<UserRolesVO> listRoleByUser(User user) {
+	public GeneralResponser<UserRolesVO> listUserAndRole(User user) {
+		UserRolesVO userRoleVo = this.listRoleByUser(user);
+		return new GeneralResponser.GeneralSponserBuilder<UserRolesVO>().build(1, "", "", userRoleVo);
+	}
+
+	public UserRolesVO listRoleByUser(User user) {
 		List<UserRoleAccess> roleList = this.userAccessRoleDAO.listRoleByUser(user);
 		UserRolesVO userRoleVo = UserRolesVO.generate();
 		for(UserRoleAccess roleInst : roleList) {
 			// 设置返回值中用户ID
-			if(userRoleVo.getUserId() == null) {
-				userRoleVo.setUserId(roleInst.getUserId());
+			if(userRoleVo.getId() == null) {
+				userRoleVo.setId(roleInst.getUserId());
 			}
 			// 设置返回值中用户名
 			if(StringUtils.isEmpty(userRoleVo.getUsername()) == true) {
@@ -85,7 +91,7 @@ public class UserAccessServiceImpl implements UserAccessService {
 			}
 			userRoleVo.getRoles().add(new RoleVO(roleInst.getRoleId(), roleInst.getRoleName()));
 		}
-		return new GeneralResponser.GeneralSponserBuilder<UserRolesVO>().build(1, "", "", userRoleVo);
+		return userRoleVo;
 	}
 
 }

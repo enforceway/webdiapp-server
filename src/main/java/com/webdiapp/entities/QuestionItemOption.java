@@ -1,7 +1,6 @@
 package com.webdiapp.entities;
 
 public class QuestionItemOption extends BaseEntity {
-    private static final long serialVersionUID = 1L;
     private Integer id;
     private Integer questionItemId;
     private String optionContent;

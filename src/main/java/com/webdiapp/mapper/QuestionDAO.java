@@ -1,17 +1,17 @@
 package com.webdiapp.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.webdiapp.entities.Question;
+import com.webdiapp.entities.QuestionPagination;
 
 @Repository
 public interface QuestionDAO {
 	
-	public int getCount(@Param("content") String questionName);
+	public int getCount(QuestionPagination question);
     
-	public List<Question> getList(@Param("content") String questionName, @Param("startIndex") int skip, @Param("pageSize") int size);
+	public List<Question> getList(QuestionPagination question);
     
     public Question getById(String id);
     
@@ -21,4 +21,4 @@ public interface QuestionDAO {
     
     public int update(Question entity);
     
-}
+} 
