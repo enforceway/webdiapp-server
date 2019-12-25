@@ -1,6 +1,7 @@
 package com.webdiapp.services;
 
 import com.webdiapp.vo.QuestionaireVO;
+import com.webdiapp.entities.QuestionairePagination;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.vo.PagingVO;
 
@@ -10,7 +11,7 @@ public interface QuestionaireService {
 
 	GeneralResponser<QuestionaireVO> getById(Integer id);
     
-    int getCount();
+    int getCount(QuestionairePagination pagination);
 
     GeneralResponser<Integer> insert(QuestionaireVO que);
 

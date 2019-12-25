@@ -32,7 +32,7 @@
 									<i class="icon_user"></i>
 								</div>
 								<input type="text" class="form-control" name="username"
-									id="username" placeholder="手机号" autocomplete="off">
+									id="username" placeholder="用户名" autocomplete="off">
 							</div>
 						</div>
 						<div class="form-group clearfix">

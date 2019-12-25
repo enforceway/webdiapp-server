@@ -10,17 +10,20 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.webdiapp.entities.Questionaire;
+import com.webdiapp.entities.QuestionairePagination;
 import com.webdiapp.mapper.QuestionaireDAO;
 import com.webdiapp.models.GeneralResponser;
 import com.webdiapp.services.QuestionItemOptionService;
 import com.webdiapp.services.QuestionaireQuestionService;
 import com.webdiapp.services.QuestionaireService;
+import com.webdiapp.util.ContextUtil;
 import com.webdiapp.util.JsonUtil;
 import com.webdiapp.vo.Pagination;
 import com.webdiapp.vo.PagingVO;
 import com.webdiapp.vo.QuestionOptionRVO;
 import com.webdiapp.vo.QuestionaireQuestionRVO;
 import com.webdiapp.vo.QuestionaireVO;
+import com.webdiapp.vo.UserRolesVO;
 
 @Service
 public class QuestionaireServiceImpl implements QuestionaireService {
@@ -38,13 +41,36 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
 	@Override
 	public GeneralResponser<PagingVO> getList(String subject, int pageNO, int size) {
+		if(pageNO == 0) {
+			pageNO = 1;
+		}
+		if(size == 0) {
+			size = 10;
+		}
+		QuestionairePagination paginationParam = new QuestionairePagination();
+		UserRolesVO userRolesVO = ContextUtil.getOnlineUserInfo();
+		List<Questionaire> res = null;
+		
+		// 设置当前登录的人的id
+		if(!ContextUtil.isAdmin()) {
+			paginationParam.setCreationUser(userRolesVO.getId());
+		}
+		int total = this.queDao.getCount(paginationParam);
+		if(0 != total) {
+			paginationParam.setPageIndex((pageNO - 1) * size);
+			paginationParam.setPageSize(size);
+			res = this.queDao.getList(paginationParam);
+		}
 		PagingVO questionPaging = new PagingVO();
 		Pagination pagination = new Pagination();
 		pagination.setCurPage(pageNO);
         pagination.setPageSize(size);
-        
-		List<Questionaire> res = this.queDao.getList(subject, (pageNO - 1) * size, size);
-		questionPaging.setData(res);
+        pagination.setTotal(total);
+        if(res == null) {
+        	questionPaging.setData(new ArrayList<Questionaire>());
+        } else {
+        	questionPaging.setData(res);
+        }
 		questionPaging.setPagination(pagination);
 		return new GeneralResponser.GeneralSponserBuilder<PagingVO>().build(1, "", "", questionPaging);
 	}
@@ -75,8 +101,8 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 	}
 
 	@Override
-	public int getCount() {
-		return this.queDao.getCount();
+	public int getCount(QuestionairePagination pagination) {
+		return this.queDao.getCount(pagination);
 	}
 
 	@Override

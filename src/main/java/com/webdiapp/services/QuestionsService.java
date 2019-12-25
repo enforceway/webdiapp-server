@@ -1,7 +1,5 @@
 package com.webdiapp.services;
 
-import java.util.Map;
-
 import com.webdiapp.entities.Question;
 import com.webdiapp.entities.QuestionPagination;
 import com.webdiapp.models.GeneralResponser;
@@ -11,7 +9,7 @@ public interface QuestionsService {
 
 //	int getPagingInfo(String questionName, int curPage, int pageSize);
 
-	GeneralResponser<PagingVO> getList(Map<String, Object> map, String questionName, int pageNo, int pageSize);
+	GeneralResponser<PagingVO> getList(String questionName, int pageNo, int pageSize);
 
     int getCount(QuestionPagination pagination);
 

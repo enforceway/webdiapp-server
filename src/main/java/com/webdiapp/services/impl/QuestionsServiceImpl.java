@@ -2,7 +2,6 @@ package com.webdiapp.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -22,14 +21,14 @@ import com.webdiapp.vo.UserRolesVO;
 
 @Service
 public class QuestionsServiceImpl implements QuestionsService {
-	
+
 	private static final Logger log = Logger.getLogger(QuestionsController.class);
 
 	@Resource
     QuestionDAO questionDao;
 
 	@Override
-	public GeneralResponser<PagingVO> getList(Map<String, Object> map, String questionName, int pageNO, int pageSize) {
+	public GeneralResponser<PagingVO> getList(String questionName, int pageNO, int pageSize) {
 		if(pageNO == 0) {
 			pageNO = 1;
 		}
@@ -51,7 +50,6 @@ public class QuestionsServiceImpl implements QuestionsService {
 			pagination1.setPageSize(pageSize);
 			list = this.questionDao.getList(pagination1);
 		}
-
 		PagingVO questionPaging = new PagingVO();
 		Pagination pagination = new Pagination();
 		pagination.setCurPage(pageNO);

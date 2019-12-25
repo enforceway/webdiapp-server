@@ -11,7 +11,7 @@ public interface QuestionDAO {
 	
 	public int getCount(QuestionPagination question);
     
-	public List<Question> getList(QuestionPagination question);
+	public List<Question> getList(QuestionPagination pagination);
     
     public Question getById(String id);
     

@@ -26,10 +26,13 @@
         active_date_end as activeDateEnd,
         <include refid="baseColumnsQry" />
         from questionaire_t where use_yn != 'n'
-        <if test="content != null and content != ''">
-       		and title like concat('%', #{content}, '%')
+        <if test="creationUser != null">
+       		and creation_user = #{creationUser}
         </if>
-        limit #{startIndex},#{pageSize}
+        <if test="title != null and title != ''">
+       		and title like concat('%', #{title}, '%')
+        </if>
+        limit #{pageIndex},#{pageSize}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="Questionaire">
         select
@@ -46,7 +49,16 @@
         where naire.id=#{id} and use_yn != 'n'
     </select>
     <select id="getCount" resultType="int">
-        select count(id) from questionaire_t where use_yn != 'n'
+        select 
+        	count(id) 
+        from questionaire_t 
+        where use_yn != 'n'
+        <if test="creationUser != null">
+       		and creation_user = #{creationUser}
+        </if>
+        <if test="title != null and title != ''">
+       		and title like concat('%', #{title}, '%')
+        </if>
     </select>
     <insert id="insert" parameterType="Questionaire"
     	useGeneratedKeys="true" keyProperty="id">

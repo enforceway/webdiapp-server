@@ -24,7 +24,6 @@ import com.webdiapp.vo.PagingVO;
 
 @RestController
 @RequestMapping("/question")
-@SessionAttributes(value={CommonConstants.LOGIN_SESSION_KEY},types={User.class})
 public class QuestionsController {
 
 	private static final Logger log = Logger.getLogger(QuestionsController.class);
@@ -35,9 +34,8 @@ public class QuestionsController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public GeneralResponser<PagingVO> list(@RequestParam(required=false) String title, 
     				@RequestParam(required=false,defaultValue="1") int pageNo,
-    				@RequestParam(required=false, defaultValue="10") int pageSize,
-    				Map<String, Object> map) {
-        GeneralResponser<PagingVO> gr = this.questionService.getList(map, title, pageNo, pageSize);
+    				@RequestParam(required=false, defaultValue="10") int pageSize) {
+        GeneralResponser<PagingVO> gr = this.questionService.getList(title, pageNo, pageSize);
         log.info("问卷查询列表的response是: " + JsonUtil.objectToJson(gr.getData()));
         return gr;
     }
