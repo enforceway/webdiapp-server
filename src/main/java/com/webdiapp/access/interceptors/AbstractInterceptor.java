@@ -7,13 +7,13 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 public abstract class AbstractInterceptor implements HandlerInterceptor {
 
-	private static final Logger logger = Logger.getLogger(AbstractInterceptor.class);
+//	private static final Logger logger = Logger.getLogger(AbstractInterceptor.class);
 
 	// 不需要拦截的链接
 	protected static List<String> excludeActionList = new ArrayList<String>();

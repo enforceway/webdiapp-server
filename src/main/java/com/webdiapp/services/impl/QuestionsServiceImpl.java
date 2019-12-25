@@ -37,12 +37,12 @@ public class QuestionsServiceImpl implements QuestionsService {
 			pageSize = 10;
 		}
 		QuestionPagination pagination1 = new QuestionPagination();
-		UserRolesVO userRolesVO = ContextUtil.getOnlineUserInfo(map);
+		UserRolesVO userRolesVO = ContextUtil.getOnlineUserInfo();
 		List<Question> list = null;
 		// 设置关键字
 		pagination1.setQuestionContent(questionName);
 		// 设置当前登录的人的id
-		if(!ContextUtil.isAdmin(userRolesVO)) {
+		if(!ContextUtil.isAdmin()) {
 			pagination1.setCreationUser(userRolesVO.getId());
 		}
 		int total = this.getCount(pagination1);
