@@ -132,7 +132,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/javascript");
 			PrintWriter writer = response.getWriter();
-			writer.write("http://localhost:8080/webdiapp/login.jsp");
+			writer.write("http://www.enforceway.com:10325/webdiapp/login.jsp");
 			return false;
 		}
 		return result;
