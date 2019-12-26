@@ -107,6 +107,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
 	@Override
 	public GeneralResponser<Integer> insert(QuestionaireVO question) {
+		UserRolesVO user = ContextUtil.getOnlineUserInfo();
 		Questionaire newQue = new Questionaire();
 		Date date = new Date();
 		newQue.setStatusId(question.getStatusId());
@@ -116,6 +117,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		newQue.setCreationTimestamp(date);
 //		newQue.setCreationUser(null);
 		newQue.setLastupdateTimestamp(date);
+		newQue.setCreationUser(user.getId());
 //		newQue.setLastupdateUser(null);
 		
 		this.queDao.insert(newQue);
@@ -124,12 +126,12 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 		for(QuestionaireQuestionRVO que : ques) {
 			// 设置创建问卷后生成的id
 			que.setQuestionaireId(newQue.getId());
-
+			que.setCreationUser(user.getId());
 			this.queQuestionService.insert(que);
 			for(QuestionOptionRVO optionItem : que.getOptions()) {
 				// 设置生成的题目的id
 				optionItem.setQuestionItemId(que.getId());
-				
+				optionItem.setCreationUser(user.getId());
 				this.questionItemOptionService.insert(optionItem);
 			}
 		}

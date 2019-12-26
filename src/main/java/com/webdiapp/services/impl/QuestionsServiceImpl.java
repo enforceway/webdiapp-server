@@ -78,6 +78,9 @@ public class QuestionsServiceImpl implements QuestionsService {
 
 	@Override
 	public GeneralResponser<Integer> insert(Question question) {
+		UserRolesVO user = ContextUtil.getOnlineUserInfo();
+		System.out.println("当前登录的用户id:" + user.getId());
+		question.setCreationUser(user.getId());
 		int i = this.questionDao.insert(question);
 		return new GeneralResponser.GeneralSponserBuilder<Integer>().build(1, "", "", i);
 	}
