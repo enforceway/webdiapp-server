@@ -2,13 +2,10 @@ package com.webdiapp.questionaire.vo;
 
 import java.util.List;
 
-import com.webdiapp.entities.BaseEntity;
-import com.webdiapp.questionaire.entities.QuestionaireQuestion;
-import com.webdiapp.questionaire.vo.QuestionOptionRVO;
+import com.webdiapp.common.entities.BaseEntity;
+import com.webdiapp.questionItem.vo.QuestionOptionRVO;
 
 public class QuestionaireQuestionRVO extends BaseEntity {
-
-	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
@@ -17,6 +14,8 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 	private Integer questionId;
 
 	private Integer questionaireId;
+	
+	private String questionContent;
 
 	private Integer enabled; // 1或者null代表启用状态，0代表不可用状态
 	
@@ -24,18 +23,27 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 	
 	public QuestionaireQuestionRVO() {}
 	
-	public QuestionaireQuestionRVO(QuestionaireQuestion questionR) {
-		this.setId(questionR.getId());
-		this.setQuestionType(questionR.getQuestionType());
-		this.setQuestionId(questionR.getQuestionId());
-		this.setQuestionaireId(questionR.getQuestionaireId());
-		this.setEnabled(questionR.getEnabled());
-		
-		this.setCreationTimestamp(questionR.getCreationTimestamp());
-		this.setCreationUser(questionR.getCreationUser());
-		this.setLastupdateTimestamp(questionR.getLastupdateTimestamp());
-		this.setLastupdateUser(questionR.getLastupdateUser());
+	public String getQuestionContent() {
+		return questionContent;
 	}
+
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
+
+//	public QuestionaireQuestionRVO(QuestionaireQuestion questionR) {
+//		this.setId(questionR.getId());
+//		this.setQuestionType(questionR.getQuestionType());
+//		this.setQuestionId(questionR.getQuestionId());
+//		this.setQuestionaireId(questionR.getQuestionaireId());
+//		this.setEnabled(questionR.getEnabled());
+//		this.setQuestionContent(questionR.getQuestionContent());
+//
+//		this.setCreationTimestamp(questionR.getCreationTimestamp());
+//		this.setCreationUser(questionR.getCreationUser());
+//		this.setLastupdateTimestamp(questionR.getLastupdateTimestamp());
+//		this.setLastupdateUser(questionR.getLastupdateUser());
+//	}
 
 	public Integer getId() {
 		return id;

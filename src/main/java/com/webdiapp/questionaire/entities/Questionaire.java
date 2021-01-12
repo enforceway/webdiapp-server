@@ -1,6 +1,6 @@
 package com.webdiapp.questionaire.entities;
 
-import com.webdiapp.entities.BaseEntity;
+import com.webdiapp.common.entities.BaseEntity;
 
 import java.util.Date;
 

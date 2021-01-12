@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.webdiapp.questionaire.entities.Questionaire;
-import com.webdiapp.questionaire.vo.QuestionaireQuestionRVO;
-import com.webdiapp.vo.BaseVO;
+import com.webdiapp.common.vo.BaseVO;
 
 //import javax.validation.constraints.Min;
 //import javax.validation.constraints.NotNull;
@@ -28,16 +27,16 @@ public class QuestionaireVO extends BaseVO {
 	
 	public QuestionaireVO() {}
 	
-	public QuestionaireVO(Questionaire que) {
-//		this.setCreationTimestamp(que.getCreationTimestamp());
-//		System.out.println("que:" + que.getCreationUser());
-//		this.setCreationUser(que.getCreationUser());
-		
-		this.setId(que.getId());
-		this.setStatusId(que.getStatusId());
-		this.setActiveDateStart(que.getActiveDateStart());
-		this.setActiveDateEnd(que.getActiveDateEnd());
-	}
+//	public QuestionaireVO(Questionaire que) {
+////		this.setCreationTimestamp(que.getCreationTimestamp());
+////		System.out.println("que:" + que.getCreationUser());
+////		this.setCreationUser(que.getCreationUser());
+//
+//		this.setId(que.getId());
+//		this.setStatusId(que.getStatusId());
+//		this.setActiveDateStart(que.getActiveDateStart());
+//		this.setActiveDateEnd(que.getActiveDateEnd());
+//	}
 
 	public Date getActiveDateStart() {
 		return activeDateStart;
