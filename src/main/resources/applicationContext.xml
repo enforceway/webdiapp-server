@@ -41,7 +41,7 @@
     <!--3 会话工厂bean sqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 配置文件路径 -->
-        <property name="configLocation" value="classpath:MyBatisCfg.xml"></property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
         <!-- 数据源 -->
         <property name="dataSource" ref="datasource"></property>
         <!-- sql映射文件路径 -->
