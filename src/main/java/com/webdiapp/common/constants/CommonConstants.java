@@ -1,4 +1,4 @@
-package com.webdiapp.constants;
+package com.webdiapp.common.constants;
 
 public class CommonConstants {
 	public final static String LOGIN_SESSION_KEY = "ONLINE_USER";
