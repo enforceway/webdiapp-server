@@ -1,4 +1,4 @@
-package com.webdiapp.util;
+package com.webdiapp.common.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
