@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface QuestionaireMapper {
     
-    public List<Questionaire> getList(@Param("skip") int skip, @Param("size") int size);
+    public List<Questionaire> getList(@Param("title") String title, @Param("skip") int skip, @Param("size") int size);
     
     public Questionaire getById(int id);
     
