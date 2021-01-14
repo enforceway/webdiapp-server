@@ -24,10 +24,10 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     QuestionaireMapper questionaireMapper;
 
     @Override
-    public PagingVO<List<QuestionaireVO>> getList(String subject, int pageNO, int size) {
+    public PagingVO<List<QuestionaireVO>> getList(String title, int pageNO, int size) {
         PagingVO<List<QuestionaireVO>> pagingData = new PagingVO<List<QuestionaireVO>>();
 
-        List<Questionaire> list = this.questionaireMapper.getList(pageNO, size);
+        List<Questionaire> list = this.questionaireMapper.getList(title, pageNO, size);
         List<QuestionaireVO> resultList = QuestionaireVO.formatEntityListToVO(list);
 
         Pagination pagination = new Pagination(pageNO, size, 100);
