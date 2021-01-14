@@ -21,6 +21,7 @@
         select
         id,
         status_id as statusId,
+        title as title,
         <include refid="baseColumnsQry" />
         from questionaire_t where use_yn != 'n'
         <if test="title != null and title != ''">
