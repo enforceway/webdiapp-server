@@ -19,6 +19,8 @@ public class Questionaire extends BaseEntity {
 	private Date activeDateStart;
 
 	private Date activeDateEnd;
+
+	private String title;
 	
 	public Questionaire() {}
 
@@ -53,5 +55,13 @@ public class Questionaire extends BaseEntity {
 	public void setActiveDateEnd(Date activeDateEnd) {
 		this.activeDateEnd = activeDateEnd;
 	}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
 }

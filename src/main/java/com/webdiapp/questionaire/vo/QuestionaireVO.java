@@ -25,6 +25,8 @@ public class QuestionaireVO extends BaseVO {
 	private Date activeDateEnd;
 	
 	private List<QuestionaireQuestionRVO> questionsList;
+
+	private String title;
 	
 	public QuestionaireVO() {}
 
@@ -36,6 +38,10 @@ public class QuestionaireVO extends BaseVO {
 		// 设置起始有效期
 		this.setActiveDateEnd(survey.getActiveDateEnd());
 		this.setActiveDateStart(survey.getActiveDateStart());
+		// 设置问卷标题
+        this.setTitle(survey.getTitle());
+        // 设置公共信息
+        this.setCommonFields(survey);
 	}
 
 	public static List<QuestionaireVO> formatEntityListToVO(List<Questionaire> list) {
@@ -97,4 +103,11 @@ public class QuestionaireVO extends BaseVO {
 		this.questionsList = questionsList;
 	}
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
