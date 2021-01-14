@@ -26,12 +26,12 @@ CREATE TABLE `questionaire_t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status_id` int(11) DEFAULT NULL COMMENT '定义了状态',
   `title` varchar(200) NOT NULL COMMENT '问卷标题',
+  `active_date_start` datetime DEFAULT NULL COMMENT '开始有效日期',
+  `active_date_end` datetime DEFAULT NULL COMMENT '结束有效日期',
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
   `lastupdate_user` int(11) DEFAULT NULL,
-  `active_date_start` datetime DEFAULT NULL COMMENT '开始有效日期',
-  `active_date_end` datetime DEFAULT NULL COMMENT '结束有效日期',
   `use_yn` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='问卷对应的数据表';
