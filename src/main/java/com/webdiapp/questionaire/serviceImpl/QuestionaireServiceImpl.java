@@ -38,7 +38,9 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
     @Override
     public QuestionaireVO getById(Integer id) {
-        return null;
+        Questionaire result = this.questionaireMapper.getById(id);
+        QuestionaireVO resultVO = new QuestionaireVO(result);
+        return resultVO;
     }
 
     @Override

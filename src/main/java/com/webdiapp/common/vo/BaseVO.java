@@ -2,6 +2,7 @@ package com.webdiapp.common.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import com.webdiapp.common.entities.BaseEntity;
 
 public class BaseVO implements Serializable {
 
@@ -16,6 +17,13 @@ public class BaseVO implements Serializable {
     private Integer lastupdateUser;
     
     public BaseVO() {
+	}
+
+	public void setCommonFields(BaseEntity baseEntity) {
+        this.setCreationTimestamp(baseEntity.getCreationTimestamp());
+        this.setCreationUser(baseEntity.getCreationUser());
+        this.setLastupdateTimestamp(baseEntity.getLastupdateTimestamp());
+        this.setLastupdateUser(baseEntity.getLastupdateUser());
 	}
 
 	public Date getCreationTimestamp() {

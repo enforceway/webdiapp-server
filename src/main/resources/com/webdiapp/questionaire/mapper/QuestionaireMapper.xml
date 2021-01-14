@@ -35,6 +35,7 @@
         naire.status_id as statusId,
         naire.active_date_start as activeDateStart,
         naire.active_date_end as activeDateEnd,
+        naire.title as title,
         naire.creation_timestamp as creationTimestamp,
         naire.creation_user as creationUser,
         naire.lastupdate_timestamp as lastupdateTimestamp,

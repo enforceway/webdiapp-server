@@ -53,11 +53,14 @@ public class QuestionaireController {
 
 //    @SuppressWarnings("finally")
 	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.GET)
-    public GeneralResponser listById(@PathVariable("questionId") Integer strQuestionId) {
+    public GeneralResponser listById(@PathVariable("questionId") String strQuestionId) {
     	GeneralResponser gr = new GeneralResponser();
     	QuestionaireVO que = null;
     	try {
-    		que = this.queService.getById(strQuestionId);
+    	    Integer queId = Integer.valueOf(strQuestionId);
+    		que = this.queService.getById(queId);
+            gr.setData(que);
+    		return gr;
 		} catch (NumberFormatException e) {
 			gr.setData(e.getMessage());
 		} finally {
