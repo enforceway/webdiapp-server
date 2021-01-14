@@ -5,7 +5,7 @@ import java.util.List;
 import com.webdiapp.questionaire.entities.Questionaire;
 import org.apache.ibatis.annotations.Param;
 
-public interface QuestionaireDAO {
+public interface QuestionaireMapper {
     
     public List<Questionaire> getList(@Param("skip") int skip, @Param("size") int size);
     

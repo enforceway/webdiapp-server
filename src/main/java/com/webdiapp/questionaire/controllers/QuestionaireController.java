@@ -25,7 +25,18 @@ public class QuestionaireController {
 	QuestionaireService queService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public GeneralResponser list(@RequestParam(required = false,defaultValue = "") String surveyTitle, @RequestParam(required=false,defaultValue="0") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+    public GeneralResponser list(@RequestParam(required = false,defaultValue = "") String surveyTitle, @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
+        if(pageNo <= 0) {
+            pageNo = 1;
+        }
+/*
+1 - 0 (1~10)
+2 - 10(11~20)
+
+
+
+* */
+        pageNo =  pageSize * (pageNo - 1);
         PagingVO<List<QuestionaireVO>> list = this.queService.getList(surveyTitle, pageNo, pageSize);
         GeneralResponser<PagingVO> gr = new GeneralResponser<PagingVO>();
         gr.setData(list);

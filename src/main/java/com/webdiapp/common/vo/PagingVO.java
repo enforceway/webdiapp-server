@@ -6,7 +6,7 @@ public class PagingVO<T> {
 	// 分页数据：pageSize，pageNumber，totalCount等
 	private Pagination pagination;
 	// 查询出来的分页数据
-	private T data;
+	private T list;
 
 	public Pagination getPagination() {
 		return pagination;
@@ -16,12 +16,11 @@ public class PagingVO<T> {
 		this.pagination = pagination;
 	}
 
-	public T getData() {
-		return data;
+	public T getList() {
+		return list;
 	}
 
-	public void setData(T data) {
-		this.data = data;
+	public void setList(T list) {
+		this.list = list;
 	}
-
 }

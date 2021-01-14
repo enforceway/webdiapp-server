@@ -2,32 +2,39 @@ package com.webdiapp.common.vo;
 
 public class Pagination {
 
-	private int pageSize;
-	private int curPage;
-	private int total;
+	private Integer pageSize;
+	private Integer curPage;
+	private Integer total;
 
-	public int getPageSize() {
-		return pageSize;
+	public Pagination() {}
+
+	public Pagination(Integer curPage, Integer pageSize, Integer totalCount) {
+        this.setCurPage(curPage);
+        this.setPageSize(pageSize);
+        this.setTotal(totalCount);
 	}
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
+    public Integer getPageSize() {
+        return pageSize;
+    }
 
-	public int getCurPage() {
-		return curPage;
-	}
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
-	public void setCurPage(int curPage) {
-		this.curPage = curPage;
-	}
+    public Integer getCurPage() {
+        return curPage;
+    }
 
-	public int getTotal() {
-		return total;
-	}
+    public void setCurPage(Integer curPage) {
+        this.curPage = curPage;
+    }
 
-	public void setTotal(int total) {
-		this.total = total;
-	}
+    public Integer getTotal() {
+        return total;
+    }
 
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 }

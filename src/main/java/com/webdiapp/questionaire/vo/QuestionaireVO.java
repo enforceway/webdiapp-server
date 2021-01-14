@@ -1,5 +1,6 @@
 package com.webdiapp.questionaire.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,24 @@ public class QuestionaireVO extends BaseVO {
 	private List<QuestionaireQuestionRVO> questionsList;
 	
 	public QuestionaireVO() {}
+
+	public QuestionaireVO(Questionaire survey) {
+		// 设置主键
+		this.setId(survey.getId());
+		// 设置状态
+		this.setStatusId(survey.getStatusId());
+		// 设置起始有效期
+		this.setActiveDateEnd(survey.getActiveDateEnd());
+		this.setActiveDateStart(survey.getActiveDateStart());
+	}
+
+	public static List<QuestionaireVO> formatEntityListToVO(List<Questionaire> list) {
+		List<QuestionaireVO> resultList = new ArrayList<QuestionaireVO>();
+		for (Questionaire survey : list){
+			resultList.add(new QuestionaireVO(survey));
+		}
+		return resultList;
+	}
 	
 //	public QuestionaireVO(Questionaire que) {
 ////		this.setCreationTimestamp(que.getCreationTimestamp());
