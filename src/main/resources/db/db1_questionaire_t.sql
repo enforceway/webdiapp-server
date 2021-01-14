@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `questionaire_t`;
 CREATE TABLE `questionaire_t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status_id` int(11) DEFAULT NULL COMMENT '定义了状态',
+  `title` varchar(200) NOT NULL COMMENT '问卷标题',
   `creation_timestamp` datetime DEFAULT NULL,
   `creation_user` int(11) DEFAULT NULL,
   `lastupdate_timestamp` datetime DEFAULT NULL,
