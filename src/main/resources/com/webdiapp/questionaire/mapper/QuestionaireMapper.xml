@@ -22,7 +22,11 @@
         id,
         status_id as statusId,
         <include refid="baseColumnsQry" />
-        from questionaire_t where use_yn != 'n' limit #{skip},#{size}
+        from questionaire_t where use_yn != 'n'
+        <if test="title != null and title != ''">
+        and title like '%${title}'
+        </if> 
+        limit #{skip},#{size}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="Questionaire">
         select
