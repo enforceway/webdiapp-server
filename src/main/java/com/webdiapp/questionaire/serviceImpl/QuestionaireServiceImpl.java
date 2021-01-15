@@ -52,8 +52,9 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     }
 
     @Override
-    public Integer delete(int id) {
-        return null;
+    public Integer delete(Integer id) {
+        int result = this.questionaireMapper.delete(id);
+        return result;
     }
 
     @Override
