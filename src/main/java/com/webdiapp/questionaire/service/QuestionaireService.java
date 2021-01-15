@@ -15,7 +15,7 @@ public interface QuestionaireService {
     // 新增新数据
     Integer insert(QuestionaireVO que);
     // 按照主键删除数据
-    Integer delete(int id);
+    Integer delete(Integer id);
     // 按照主键熟知删除数据
     int deletes(int[] ids);
     // 更新数据
