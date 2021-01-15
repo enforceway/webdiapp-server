@@ -11,7 +11,7 @@ public interface QuestionaireMapper {
     
     public Questionaire getById(int id);
     
-    public int getCount();
+    public int getCount(@Param("title") String title);
     
     public int insert(Questionaire entity);
     
