@@ -22,6 +22,8 @@
         id,
         status_id as statusId,
         title as title,
+        active_date_start as activeDateStart,
+        active_date_end as activeDateEnd,
         <include refid="baseColumnsQry" />
         from questionaire_t where use_yn != 'n'
         <if test="title != null and title != ''">
@@ -49,6 +51,9 @@
         and title like '%#{title}%'
         </if>
     </select>
+    <select id="getCountById" resultType="int" parameterType="Integer">
+        select count(1) from questionaire_t where use_yn != 'n' and id = #{id}
+    </select>
     <insert id="insert" parameterType="Questionaire"
     	useGeneratedKeys="true" keyProperty="id">
         insert into
@@ -64,7 +69,7 @@
         )
     </insert>
     <delete id="delete">
-        update questionaire_t set use_yn = 'n' where id=#{id}
+        update questionaire_t set use_yn = 'n' where id=#{id} and use_yn != 'n'
     </delete>
     <update id="update" parameterType="Questionaire">
         update questionaire_t set

@@ -1,5 +1,6 @@
 package com.webdiapp.questionaire.service;
 
+import com.webdiapp.questionaire.constants.QuestionaireRemoveStatus;
 import com.webdiapp.questionaire.vo.QuestionaireVO;
 import com.webdiapp.common.vo.Pagination;
 import com.webdiapp.common.models.GeneralResponser;
@@ -15,7 +16,7 @@ public interface QuestionaireService {
     // 新增新数据
     Integer insert(QuestionaireVO que);
     // 按照主键删除数据
-    Integer delete(Integer id);
+    QuestionaireRemoveStatus delete(Integer id);
     // 按照主键熟知删除数据
     int deletes(int[] ids);
     // 更新数据

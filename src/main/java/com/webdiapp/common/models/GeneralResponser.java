@@ -1,5 +1,7 @@
 package com.webdiapp.common.models;
 
+import com.webdiapp.common.constants.GeneralResponseStatus;
+
 import java.io.Serializable;
 
 public class GeneralResponser<T> implements Serializable {
@@ -19,6 +21,9 @@ public class GeneralResponser<T> implements Serializable {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public void setCode(GeneralResponseStatus codeStatus) {
+		this.code = codeStatus.toString();
 	}
 	public T getData() {
 		return data;

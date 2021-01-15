@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import com.webdiapp.common.models.GeneralResponser;
 import com.webdiapp.common.vo.Pagination;
 import com.webdiapp.common.vo.PagingVO;
+import com.webdiapp.questionaire.constants.QuestionaireRemoveStatus;
 import com.webdiapp.questionaire.entities.Questionaire;
 import com.webdiapp.questionaire.mapper.QuestionaireMapper;
 import com.webdiapp.questionaire.service.QuestionaireService;
@@ -33,12 +34,12 @@ public class QuestionaireServiceImpl implements QuestionaireService {
         int totalCount = this.questionaireMapper.getCount(title);
         if (totalCount > 0) {
           int npageNo = size * (pageNO - 1);
-          list = this.questionaireMapper.getList(title, pageNO, size);
+          list = this.questionaireMapper.getList(title, npageNo, size);
         } else {
           pageNO = 0;
         }
         if (list != null) {
-          result = QuestionaireVO.formatEntityListToVO(list);
+            resultList= QuestionaireVO.formatEntityListToVO(list);
         }
 
         Pagination pagination = new Pagination(pageNO, size, totalCount);
@@ -63,9 +64,21 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     }
 
     @Override
-    public Integer delete(Integer id) {
+    public QuestionaireRemoveStatus delete(Integer id) {
+        int count = this.questionaireMapper.getCountById(id);
+        if (count <= 0) {
+            // 不存在
+            return QuestionaireRemoveStatus.NOTEXISTS;
+        }
+
         int result = this.questionaireMapper.delete(id);
-        return result;
+        if(result <= 0) {
+            // 逻辑删除失败
+            return QuestionaireRemoveStatus.REMOVEFAIL;
+        } else {
+            // 逻辑删除成功
+            return QuestionaireRemoveStatus.REMOVESUCCESS;
+        }
     }
 
     @Override

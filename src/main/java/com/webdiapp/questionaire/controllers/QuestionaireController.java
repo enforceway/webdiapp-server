@@ -6,7 +6,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 //import org.apache.log4j.Logger;
+import com.webdiapp.common.constants.GeneralResponseStatus;
 import com.webdiapp.common.vo.PagingVO;
+import com.webdiapp.questionaire.constants.QuestionaireRemoveStatus;
 import com.webdiapp.questionaire.entities.Questionaire;
 import com.webdiapp.questionaire.service.QuestionaireService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +64,16 @@ public class QuestionaireController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
-    public int delete(@RequestBody Questionaire que) {
-    	int count = this.queService.delete(que.getId());
-        return count;
+    public GeneralResponser<Integer> delete(@RequestBody Questionaire que) {
+        GeneralResponser<Integer> gr = new GeneralResponser<Integer>();
+        QuestionaireRemoveStatus removeStatus = this.queService.delete(que.getId());
+        gr.setData(removeStatus.enumToInt());
+        if(removeStatus == QuestionaireRemoveStatus.REMOVESUCCESS) {
+            gr.setCode(GeneralResponseStatus.CODESUCCESS.enumToString());
+        } else {
+            gr.setCode(GeneralResponseStatus.CODEFAIL.enumToString());
+        }
+        return gr;
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes="application/json")
