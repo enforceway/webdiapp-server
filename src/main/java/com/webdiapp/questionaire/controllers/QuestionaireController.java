@@ -29,14 +29,6 @@ public class QuestionaireController {
         if(pageNo <= 0) {
             pageNo = 1;
         }
-/*
-1 - 0 (1~10)
-2 - 10(11~20)
-
-
-
-* */
-        pageNo =  pageSize * (pageNo - 1);
         PagingVO<List<QuestionaireVO>> list = this.queService.getList(surveyTitle, pageNo, pageSize);
         GeneralResponser<PagingVO> gr = new GeneralResponser<PagingVO>();
         gr.setData(list);
