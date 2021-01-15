@@ -25,8 +25,8 @@
         <include refid="baseColumnsQry" />
         from questionaire_t where use_yn != 'n'
         <if test="title != null and title != ''">
-        and title like '%${title}'
-        </if> 
+        and title like '%#{title}%'
+        </if>
         limit #{skip},#{size}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="Questionaire">
@@ -61,7 +61,7 @@
         )
     </insert>
     <delete id="delete">
-        delete from questionaire_t where id=#{id}
+        update questionaire_t set use_yn = 'n' where id=#{id}
     </delete>
     <update id="update" parameterType="Questionaire">
         update questionaire_t set
