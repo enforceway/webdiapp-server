@@ -43,8 +43,11 @@
         from questionaire_t naire 
         where naire.id=#{id} and use_yn != 'n'
     </select>
-    <select id="getCount" resultType="int">
-        select count(id) from questionaire_t where use_yn != 'n'
+    <select id="getCount" resultType="int" parameterType="String">
+        select count(1) from questionaire_t where use_yn != 'n'
+        <if test="title != null and title != ''">
+        and title like '%#{title}%'
+        </if>
     </select>
     <insert id="insert" parameterType="Questionaire"
     	useGeneratedKeys="true" keyProperty="id">
