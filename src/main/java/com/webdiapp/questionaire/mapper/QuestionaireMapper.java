@@ -15,7 +15,7 @@ public interface QuestionaireMapper {
     
     public int insert(Questionaire entity);
     
-    public int delete(int id);
+    public int delete(Integer id);
     
     public int update(Questionaire entity);
     
