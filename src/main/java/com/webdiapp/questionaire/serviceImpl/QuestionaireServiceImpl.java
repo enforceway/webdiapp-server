@@ -27,10 +27,21 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     public PagingVO<List<QuestionaireVO>> getList(String title, int pageNO, int size) {
         PagingVO<List<QuestionaireVO>> pagingData = new PagingVO<List<QuestionaireVO>>();
 
-        List<Questionaire> list = this.questionaireMapper.getList(title, pageNO, size);
-        List<QuestionaireVO> resultList = QuestionaireVO.formatEntityListToVO(list);
+        List<Questionaire> list = null;
+        List<QuestionaireVO> resultList = new ArrayList<QuestionaireVO>();
 
-        Pagination pagination = new Pagination(pageNO, size, 100);
+        int totalCount = this.questionaireMapper.getCount(title);
+        if (totalCount > 0) {
+          int npageNo = size * (pageNO - 1);
+          list = this.questionaireMapper.getList(title, pageNO, size);
+        } else {
+          pageNO = 0;
+        }
+        if (list != null) {
+          result = QuestionaireVO.formatEntityListToVO(list);
+        }
+
+        Pagination pagination = new Pagination(pageNO, size, totalCount);
         pagingData.setList(resultList);
         pagingData.setPagination(pagination);
         return pagingData;
