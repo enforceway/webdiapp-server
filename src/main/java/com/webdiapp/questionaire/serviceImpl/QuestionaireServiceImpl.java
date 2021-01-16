@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import com.webdiapp.common.models.GeneralResponser;
 import com.webdiapp.common.vo.Pagination;
 import com.webdiapp.common.vo.PagingVO;
 import com.webdiapp.common.constants.GeneralRemoveStatusEnum;
+import com.webdiapp.questionItem.entities.QuestionItemRelationships;
+import com.webdiapp.questionItem.mapper.QuestionRelationMapper;
+import com.webdiapp.questionItem.vo.QuestionaireQuestionRVO;
 import com.webdiapp.questionaire.entities.Questionaire;
 import com.webdiapp.questionaire.mapper.QuestionaireMapper;
 import com.webdiapp.questionaire.service.QuestionaireService;
-import com.webdiapp.questionaire.vo.QuestionaireQuestionRVO;
 import com.webdiapp.questionaire.vo.QuestionaireVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,8 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
     @Autowired
     QuestionaireMapper questionaireMapper;
+
+    QuestionRelationMapper relationMapper;
 
     @Override
     public PagingVO<List<QuestionaireVO>> getList(String title, int pageNO, int size) {
@@ -50,10 +51,25 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
     @Override
     public QuestionaireVO getById(Integer id) {
+        QuestionaireVO resultVO = new QuestionaireVO();
+        resultVO.setQuestionsList(new ArrayList<QuestionaireQuestionRVO>());
         // 查询survey
-        Questionaire result = this.questionaireMapper.getById(id);
-        // 查询survey对应的题目
-        QuestionaireVO resultVO = new QuestionaireVO(result);
+        List<QuestionItemRelationships> list = this.relationMapper.getQuestionItemList(id);
+        for(QuestionItemRelationships relationShip : list) {
+            // 设置问卷主键
+            resultVO.setId(relationShip.getQuestionaireId());
+            // 设置状态
+            resultVO.setStatusId(relationShip.getStatusId());
+            // 设置起始有效期
+            resultVO.setActiveDateStart(relationShip.getActiveDateStart());
+            resultVO.setActiveDateEnd(relationShip.getActiveDateEnd());
+            // 标题
+            resultVO.setTitle(relationShip.getQuestionaireTitle());
+
+            // 追加问卷问题
+            QuestionaireQuestionRVO rvo = new QuestionaireQuestionRVO(relationShip);
+            resultVO.getQuestionsList().add(rvo);
+        }
         return resultVO;
     }
 

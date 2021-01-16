@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+接口名 -->
-<mapper namespace="com.webdiapp.questionaire.mapper.QuestionRelationMapper">
-    <select id="getList" parameterType="INTEGER" resultType="QuestionaireQuestion">
+<mapper namespace="com.webdiapp.questionItem.mapper.QuestionRelationMapper">
+    <select id="getQuestionItemList" parameterType="INTEGER" resultType="QuestionaireQuestion">
         select
-        que_r.id,
-        que_r.question_type as questionType,
-        que_r.question_id as questionId,
-        que_r.questionaire_id as questionaireId,
-        que_r.enabled,
-        que.question_content as questionContent
-        from questionaire_question_r que_r 
-        left join 
-        question_t que 
+            que_r.id as relationId,
+            que_r.question_type as questionType,
+            que_r.question_id as questionId,
+            que_r.questionaire_id as questionaireId,
+            que_r.enabled as questionItemEnabled,
+            que.question_content as questionContent,
+            survey.title as questionaireTitle
+        from questionaire_t survey
+        left join
+            questionaire_question_r que_r
+        on survey.id = que_r.questionaire_id
+        left join
+            question_t que
         on que_r.question_id = que.id
-        where que_r.questionaire_id=#{questionaireId} and que_r.use_yn!='n' and que.use_yn!='n'
+        where que_r.questionaire_id=#{questionaireId} and que_r.use_yn!='n' and que.use_yn!='n' and survey.use_yn != 'n'
     </select>
-    <select id="getById" parameterType="INTEGER" resultType="QuestionaireQuestion">
-        select
-        id,
-        question_type as questionType,
-        question_id as questionId,
-        questionaire_id as questionaireId,
-        enabled,
-        <include refid="SurveyCommonTemplateMapper.baseColumnsQry" />
-        from questionaire_question_r where id=#{id} and use_yn!='n'
-    </select>
+    <!--<select id="getById" parameterType="INTEGER" resultType="QuestionaireQuestion">-->
+        <!--select-->
+        <!--id,-->
+        <!--question_type as questionType,-->
+        <!--question_id as questionId,-->
+        <!--questionaire_id as questionaireId,-->
+        <!--enabled,-->
+        <!--<include refid="SurveyCommonTemplateMapper.baseColumnsQry" />-->
+        <!--from questionaire_question_r where id=#{id} and use_yn!='n'-->
+    <!--</select>-->
     <select id="getCount" resultType="int">
         select count(id) from questionaire_question_r where use_yn!='n'
     </select>

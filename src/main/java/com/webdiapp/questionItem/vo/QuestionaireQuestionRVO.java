@@ -1,11 +1,15 @@
-package com.webdiapp.questionaire.vo;
+package com.webdiapp.questionItem.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.webdiapp.common.entities.BaseEntity;
+import com.webdiapp.common.vo.BaseVO;
+import com.webdiapp.question.entities.Question;
+import com.webdiapp.questionItem.entities.QuestionItemRelationships;
 import com.webdiapp.questionItem.vo.QuestionOptionRVO;
 
-public class QuestionaireQuestionRVO extends BaseEntity {
+public class QuestionaireQuestionRVO extends BaseVO {
 
 	private Integer id;
 
@@ -22,6 +26,16 @@ public class QuestionaireQuestionRVO extends BaseEntity {
 	private List<QuestionOptionRVO> options; // 题目对应的选项
 	
 	public QuestionaireQuestionRVO() {}
+
+	public QuestionaireQuestionRVO(QuestionItemRelationships relationship) {
+		this.setId(relationship.getRelationId());
+		this.setQuestionType(relationship.getQuestionType());
+		this.setQuestionId(relationship.getQuestionId());
+		this.setQuestionaireId(relationship.getQuestionaireId());
+		this.setQuestionContent(relationship.getQuestionContent());
+		this.setEnabled(relationship.getQuestionItemEnabled());
+		this.setOptions(new ArrayList<QuestionOptionRVO>());
+	}
 	
 	public String getQuestionContent() {
 		return questionContent;
