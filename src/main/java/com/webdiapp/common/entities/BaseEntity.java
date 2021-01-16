@@ -1,5 +1,7 @@
 package com.webdiapp.common.entities;
 
+import com.webdiapp.common.vo.BaseVO;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -87,6 +89,13 @@ public class BaseEntity implements Serializable {
 
 	public void setUserYn(String userYn) {
 		this.userYn = userYn;
+	}
+
+	public void setCommonFields(BaseVO baseVO) {
+		this.setCreationTimestamp(baseVO.getCreationTimestamp());
+		this.setCreationUser(baseVO.getCreationUser());
+		this.setLastupdateTimestamp(baseVO.getLastupdateTimestamp());
+		this.setLastupdateUser(baseVO.getLastupdateUser());
 	}
 
 }
