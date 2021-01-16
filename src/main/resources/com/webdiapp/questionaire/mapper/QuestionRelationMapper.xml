@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.webdiapp.questionaire.mapper.QuestionRelationMapper">
+    <select id="getList" parameterType="INTEGER" resultType="QuestionaireQuestion">
+        select
+        que_r.id,
+        que_r.question_type as questionType,
+        que_r.question_id as questionId,
+        que_r.questionaire_id as questionaireId,
+        que_r.enabled,
+        que.question_content as questionContent
+        from questionaire_question_r que_r 
+        left join 
+        question_t que 
+        on que_r.question_id = que.id
+        where que_r.questionaire_id=#{questionaireId} and que_r.use_yn!='n' and que.use_yn!='n'
+    </select>
+    <select id="getById" parameterType="INTEGER" resultType="QuestionaireQuestion">
+        select
+        id,
+        question_type as questionType,
+        question_id as questionId,
+        questionaire_id as questionaireId,
+        enabled,
+        <include refid="SurveyCommonTemplateMapper.baseColumnsQry" />
+        from questionaire_question_r where id=#{id} and use_yn!='n'
+    </select>
+    <select id="getCount" resultType="int">
+        select count(id) from questionaire_question_r where use_yn!='n'
+    </select>
+    <insert id="insert" parameterType="QuestionaireQuestion"
+    	useGeneratedKeys="true" keyProperty="id">
+        insert into
+        questionaire_question_r(question_type, question_id, questionaire_id, enabled, <include refid="SurveyCommonTemplateMapper.baseColumnsInsertFields" />)
+        values(
+        #{questionType, javaType=INTEGER, jdbcType=INTEGER},
+        #{questionId, javaType=INTEGER, jdbcType=INTEGER},
+        #{questionaireId, javaType=INTEGER, jdbcType=INTEGER},
+        #{enabled, javaType=INTEGER, jdbcType=INTEGER},
+        <include refid="SurveyCommonTemplateMapper.baseColumnsInsert" />
+        )
+    </insert>
+    <!-- 删除问卷中所有的题目  -->
+    <delete id="removeQuestionItemsByQuestionItemIds">
+    	update questionaire_question_r set
+    	use_yn='n'
+    	where use_yn != 'n' and questionaire_id = #{questionaireId}
+    </delete>
+    <delete id="delete" parameterType="int[]">
+    	update questionaire_question_r set
+    	use_yn='n' 
+    	where use_yn != 'n' and id in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{item}</foreach>
+    </delete>
+    <!-- 不设置更新直接删除
+    <update id="update" parameterType="QuestionaireQuestion">
+        update questionaire_question_r set
+        question_type=#{questionType},
+        question_id=#{questionId},
+        questionaire_id=#{questionaireId},
+        enabled=#{enabled},
+        lastupdate_timestamp=#{lastupdateTimestamp},
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
+        where id=#{id}
+    </update> -->
+</mapper>

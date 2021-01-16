@@ -50,7 +50,9 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
     @Override
     public QuestionaireVO getById(Integer id) {
+        // 查询survey
         Questionaire result = this.questionaireMapper.getById(id);
+        // 查询survey对应的题目
         QuestionaireVO resultVO = new QuestionaireVO(result);
         return resultVO;
     }

@@ -1,33 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webdiapp.roleAccess.mapper.RoleMapper">
-	<sql id="baseColumnsQry">
-		creation_timestamp as creationTimestamp,
-        creation_user as creationUser,
-        lastupdate_timestamp as lastupdateTimestamp,
-        lastupdate_user as lastupdateUser
-	</sql>
-	<sql id="baseColumnsInsertFields">
-		creation_timestamp,creation_user,creation_username,lastupdate_timestamp,lastupdate_user,lastupdate_username 
-	</sql>
-	<sql id="baseColumnsInsert"> 
-        #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
-        #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
-        #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
-        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
-	</sql>
     <select id="getList" resultType="Role">
         select
         id as roleId,
         role_name as roleName,
-        <include refid="baseColumnsQry" />
+        <include refid="SurveyCommonTemplateMapper.baseColumnsQry" />
         from role_t where use_yn!='n' limit #{skip},#{size}
     </select>
     <select id="getById" parameterType="INTEGER" resultType="Role">
         select
         id as roleId,
         role_name as roleName,
-        <include refid="baseColumnsQry" />
+        <include refid="SurveyCommonTemplateMapper.baseColumnsQry" />
         from role_t where id=#{id} and use_yn!='n'
     </select>
     <select id="getCount" resultType="int">
@@ -38,10 +23,10 @@
     </select>
     <insert id="insert" parameterType="Role">
         insert into
-        role_t(user_name,<include refid="baseColumnsInsertFields" />)
+        role_t(user_name,<include refid="SurveyCommonTemplateMapper.baseColumnsInsertFields" />)
         values(
         #{username},
-       	<include refid="baseColumnsInsert" />
+       	<include refid="SurveyCommonTemplateMapper.baseColumnsInsert" />
         )
     </insert>
     <delete id="delete">

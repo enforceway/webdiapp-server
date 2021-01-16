@@ -2,21 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间应该是对应接口的包名+接口名 -->
 <mapper namespace="com.webdiapp.questionaire.mapper.QuestionaireMapper">
-	<sql id="baseColumnsQry">
-		creation_timestamp as creationTimestamp,
-        creation_user as creationUser,
-        lastupdate_timestamp as lastupdateTimestamp,
-        lastupdate_user as lastupdateUser
-	</sql>
-	<sql id="baseColumnsInsertFields">
-		creation_timestamp,creation_user,lastupdate_timestamp,lastupdate_user 
-	</sql>
-	<sql id="baseColumnsInsert">
-		#{creation_timestamp, javaType=java.sql.Date, jdbcType=DATE},
-        #{creation_user, javaType=INTEGER, jdbcType=INTEGER},
-        #{lastupdate_timestamp, javaType=java.sql.Date, jdbcType=DATE},
-        #{lastupdate_user, javaType=INTEGER, jdbcType=INTEGER}
-	</sql>
     <select id="getList" resultType="Questionaire">
         select
         id,
@@ -24,7 +9,7 @@
         title as title,
         active_date_start as activeDateStart,
         active_date_end as activeDateEnd,
-        <include refid="baseColumnsQry" />
+        <include refid="SurveyCommonTemplateMapper.baseColumnsQry" />
         from questionaire_t where use_yn != 'n'
         <if test="title != null and title != ''">
         and title like '%#{title}%'
@@ -38,10 +23,7 @@
         naire.active_date_start as activeDateStart,
         naire.active_date_end as activeDateEnd,
         naire.title as title,
-        naire.creation_timestamp as creationTimestamp,
-        naire.creation_user as creationUser,
-        naire.lastupdate_timestamp as lastupdateTimestamp,
-        naire.lastupdate_user as lastupdateUser
+        <include refid="SurveyCommonTemplateMapper.baseColumnsQry" />
         from questionaire_t naire 
         where naire.id=#{id} and use_yn != 'n'
     </select>
@@ -57,15 +39,12 @@
     <insert id="insert" parameterType="Questionaire"
     	useGeneratedKeys="true" keyProperty="id">
         insert into
-        questionaire_t(status_id, active_date_start, active_date_end, <include refid="baseColumnsInsertFields" />) 
+        questionaire_t(status_id, active_date_start, active_date_end, <include refid="SurveyCommonTemplateMapper.baseColumnsInsertFields" />)
         values(
         #{statusId, javaType=INTEGER, jdbcType=INTEGER},
         #{activeDateStart, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{activeDateEnd, javaType=java.util.Date, jdbcType=TIMESTAMP},
-        #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
-        #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
-        #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
-        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
+        <include refid="SurveyCommonTemplateMapper.baseColumnsInsert" />
         )
     </insert>
     <delete id="delete">
