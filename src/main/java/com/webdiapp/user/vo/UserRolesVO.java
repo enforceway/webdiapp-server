@@ -1,5 +1,7 @@
 package com.webdiapp.user.vo;
 
+import com.webdiapp.roleAccess.vo.RoleVO;
+
 import java.util.ArrayList;
 import java.util.List;
 

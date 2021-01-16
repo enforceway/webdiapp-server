@@ -1,18 +1,11 @@
-package com.webdiapp.user.vo;
+package com.webdiapp.roleAccess.entities;
 
-public class RoleVO {
+import com.webdiapp.common.entities.BaseEntity;
 
-	// 角色ID
+public class Role extends BaseEntity {
+
 	private Integer roleId;
-	// 角色名称
 	private String roleName;
-	
-	public RoleVO() {}
-	
-	public RoleVO(Integer roleId, String roleName) {
-		this.roleId = roleId;
-		this.roleName = roleName;
-	}
 
 	public Integer getRoleId() {
 		return roleId;
@@ -29,5 +22,4 @@ public class RoleVO {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-
 }

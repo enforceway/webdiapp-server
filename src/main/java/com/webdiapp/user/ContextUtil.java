@@ -8,7 +8,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.webdiapp.common.constants.CommonConstants;
-import com.webdiapp.user.vo.RoleVO;
+import com.webdiapp.roleAccess.vo.RoleVO;
 import com.webdiapp.user.vo.UserRolesVO;
 public class ContextUtil {
 	

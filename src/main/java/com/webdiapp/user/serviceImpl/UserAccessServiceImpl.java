@@ -3,11 +3,9 @@ package com.webdiapp.user.serviceImpl;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 //import org.apache.log4j.Logger;
-import com.webdiapp.common.models.GeneralResponser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,8 +19,7 @@ import com.webdiapp.user.constants.UserResponseEnum;
 import com.webdiapp.user.service.UserAccessService;
 import com.webdiapp.user.ContextUtil;
 import com.webdiapp.common.util.EncryptionUtil;
-import com.webdiapp.common.util.JsonUtil;
-import com.webdiapp.user.vo.RoleVO;
+import com.webdiapp.roleAccess.vo.RoleVO;
 import com.webdiapp.user.vo.UserRolesVO;
 
 @Service
