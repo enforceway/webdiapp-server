@@ -38,15 +38,15 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public RoleVO getById(String id) {
+	public RoleVO getById(Integer id) {
 	    Role user = this.roleMapper.getById(id);
 		return new RoleVO(user);
 	}
 
 	@Override
 	public int getCount(RoleVO roleVO) {
-		Role user = roleVO.toEntity();
-	    int total = this.roleMapper.getCount(user);
+		Role role = roleVO.toEntity();
+	    int total = this.roleMapper.getCount(role);
 		return total;
 	}
 

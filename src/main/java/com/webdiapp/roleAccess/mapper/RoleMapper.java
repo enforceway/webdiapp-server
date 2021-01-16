@@ -12,14 +12,14 @@ public interface RoleMapper {
     
     public List<Role> getList(@Param("skip") int skip, @Param("size") int size);
     
-    public Role getById(String id);
+    public Role getById(Integer id);
     
-    public int getCount(Role user);
+    public int getCount(Role role);
     
-    public int insert(Role user);
+    public int insert(Role role);
     
     public int delete(int id);
     
-    public int update(Role user);
+    public int update(Role role);
     
 }

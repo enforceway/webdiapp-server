@@ -9,7 +9,7 @@ public interface RoleService {
 
     PagingVO<List<RoleVO>> getList(int pageNO, int size);
 
-    RoleVO getById(String id);
+    RoleVO getById(Integer id);
     
     int getCount(RoleVO roleVO);
 

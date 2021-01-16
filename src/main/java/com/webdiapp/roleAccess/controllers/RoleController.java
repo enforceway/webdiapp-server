@@ -42,11 +42,19 @@ public class RoleController {
     	return count;
     }
 
-	@RequestMapping(value = "/list/{questionId}", method = RequestMethod.POST)
-    public GeneralResponser<RoleVO> listUserById(@PathVariable("questionId") String strQuestionId) {
-        GeneralResponser<RoleVO>  gr = new GeneralResponser<RoleVO>();
-        RoleVO que = this.roleService.getById(strQuestionId);
-        gr.setData(que);
+	@RequestMapping(value = "/list/{roleId}", method = RequestMethod.GET)
+    public GeneralResponser<RoleVO> listUserById(@PathVariable("roleId") String roleId) {
+        GeneralResponser gr = new GeneralResponser<RoleVO>();
+        gr.setData(null);
+        try {
+            Integer id = Integer.valueOf(roleId);
+            RoleVO que = this.roleService.getById(id);
+            gr.setData(que);
+        } catch(NumberFormatException e) {
+            gr.setData(e.getMessage());
+        } finally {
+
+        }
     	return gr;
     }
     

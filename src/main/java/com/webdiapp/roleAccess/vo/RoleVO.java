@@ -18,6 +18,7 @@ public class RoleVO extends BaseVO {
 	public RoleVO(Role role) {
 	    this.setRoleId(role.getRoleId());
 	    this.setRoleName(role.getRoleName());
+	    this.setCommonFields(role);
 	}
 
     public RoleVO(Integer roleId, String roleName) {
@@ -53,7 +54,7 @@ public class RoleVO extends BaseVO {
         for(Role role : list) {
             result.add(new RoleVO(role));
         }
-        return null;
+        return result;
     }
 
 
