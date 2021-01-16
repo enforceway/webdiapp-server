@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.webdiapp.question.mapper.QuestionMapper">
+	<sql id="baseColumnsQry">
+		creation_timestamp as creationTimestamp,
+        creation_user as creationUser,
+        lastupdate_timestamp as lastupdateTimestamp,
+        lastupdate_user as lastupdateUser
+	</sql>
+	<sql id="baseColumnsInsertFields">
+		creation_timestamp,creation_user,lastupdate_timestamp,lastupdate_user 
+	</sql>
+	<sql id="baseColumnsInsert">
+		#{creation_timestamp, javaType=java.sql.Date, jdbcType=DATE},
+        #{creation_user, javaType=INTEGER, jdbcType=INTEGER},
+        #{lastupdate_timestamp, javaType=java.sql.Date, jdbcType=DATE},
+        #{lastupdate_user, javaType=INTEGER, jdbcType=INTEGER}
+	</sql>
+	<select id="getCount" resultType="int">
+        select
+        	count(id)
+        from question_t 
+        	where use_yn!='n'
+        <if test="id != null and id != ''">
+            and id = #{id}
+        </if>
+       	<if test="creationUser != null">
+       		and creation_user = #{creationUser}
+        </if>
+       	<if test="questionContent != null and questionContent != ''">
+       		and question_content like concat('%', #{questionContent}, '%')
+        </if>
+    </select>
+    <!--获得商品信息并分页 -->
+    <select id="getList" resultType="Question">
+        select
+        id,
+        question_type_id as questionTypeId,
+        question_content as questionContent,
+        question_type as questionType,
+        <include refid="baseColumnsQry" />
+        from question_t where use_yn!='n' 
+        <if test="creationUser != null">
+       		and creation_user = #{creationUser}
+        </if>
+        <if test="questionContent != null and questionContent != ''">
+       		and question_content like concat('%', #{questionContent}, '%')
+        </if>
+       	limit #{pageIndex},#{pageSize}
+    </select>
+    <!-- 获得单个商品通过编号 -->
+    <select id="getById" parameterType="string" resultType="Question">
+        select
+        id,
+        question_content as questionContent,
+        question_type as questionType,
+        <include refid="baseColumnsQry" />
+        from question_t where id=#{id} and use_yn!='n'
+    </select>
+    <!--新增加商品 -->
+    <insert id="insert" parameterType="Question">
+        insert into
+        question_t(question_content,question_type, question_type_id, <include refid="baseColumnsInsertFields" />) 
+        values(
+        #{questionContent},
+        #{questionType},
+        #{questionTypeId, javaType=INTEGER, jdbcType=INTEGER},
+        #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
+        #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
+        )
+    </insert>
+    <!-- 删除商品 -->
+    <delete id="delete">
+        update question_t set use_yn = 'n' where id=#{id}
+    </delete>
+    <!-- 修改商品 -->
+    <update id="update" parameterType="Question">
+        update question_t set
+        question_type_id=#{questionTypeId},
+        question_content=#{questionContent},
+        question_type=#{questionType},
+        lastupdate_timestamp=#{lastupdateTimestamp},
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
+        where id=#{id}
+    </update>
+</mapper>

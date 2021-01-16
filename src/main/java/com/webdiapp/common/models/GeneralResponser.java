@@ -1,6 +1,6 @@
 package com.webdiapp.common.models;
 
-import com.webdiapp.common.constants.GeneralResponseStatus;
+import com.webdiapp.common.constants.GeneralResponseStatusEnum;
 
 import java.io.Serializable;
 
@@ -22,7 +22,7 @@ public class GeneralResponser<T> implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public void setCode(GeneralResponseStatus codeStatus) {
+	public void setCode(GeneralResponseStatusEnum codeStatus) {
 		this.code = codeStatus.toString();
 	}
 	public T getData() {

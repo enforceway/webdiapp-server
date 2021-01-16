@@ -6,9 +6,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 //import org.apache.log4j.Logger;
-import com.webdiapp.common.constants.GeneralResponseStatus;
+import com.webdiapp.common.constants.GeneralResponseStatusEnum;
 import com.webdiapp.common.vo.PagingVO;
-import com.webdiapp.questionaire.constants.QuestionaireRemoveStatus;
+import com.webdiapp.common.constants.GeneralRemoveStatusEnum;
 import com.webdiapp.questionaire.entities.Questionaire;
 import com.webdiapp.questionaire.service.QuestionaireService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,9 @@ public class QuestionaireController {
     public GeneralResponser list(@RequestParam(required = false,defaultValue = "") String surveyTitle, @RequestParam(required=false,defaultValue="1") int pageNo, @RequestParam(required=false, defaultValue="10") int pageSize){
         if(pageNo <= 0) {
             pageNo = 1;
+        }
+        if(pageSize == 0) {
+            pageSize = 10;
         }
         PagingVO<List<QuestionaireVO>> list = this.queService.getList(surveyTitle, pageNo, pageSize);
         GeneralResponser<PagingVO> gr = new GeneralResponser<PagingVO>();
@@ -66,12 +69,12 @@ public class QuestionaireController {
     @RequestMapping(value = "/delete", method = RequestMethod.PUT, consumes="application/json")
     public GeneralResponser<Integer> delete(@RequestBody Questionaire que) {
         GeneralResponser<Integer> gr = new GeneralResponser<Integer>();
-        QuestionaireRemoveStatus removeStatus = this.queService.delete(que.getId());
+        GeneralRemoveStatusEnum removeStatus = this.queService.delete(que.getId());
         gr.setData(removeStatus.enumToInt());
-        if(removeStatus == QuestionaireRemoveStatus.REMOVESUCCESS) {
-            gr.setCode(GeneralResponseStatus.CODESUCCESS.enumToString());
+        if(removeStatus == GeneralRemoveStatusEnum.REMOVESUCCESS) {
+            gr.setCode(GeneralResponseStatusEnum.CODESUCCESS.enumToString());
         } else {
-            gr.setCode(GeneralResponseStatus.CODEFAIL.enumToString());
+            gr.setCode(GeneralResponseStatusEnum.CODEFAIL.enumToString());
         }
         return gr;
     }

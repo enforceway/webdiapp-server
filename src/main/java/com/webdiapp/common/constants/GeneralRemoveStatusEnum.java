@@ -1,23 +1,27 @@
 package com.webdiapp.common.constants;
 
-public enum GeneralResponseStatus {
-    // 执行成功
-    CODESUCCESS(0),
-    // 执行失败
-    CODEFAIL(1);
+public enum GeneralRemoveStatusEnum {
+    // 删除成功
+    REMOVESUCCESS(0),
+    // 不存在
+    NOTEXISTS(1),
+    // 删除失败
+    REMOVEFAIL(2);
     private int value;
 
-    private GeneralResponseStatus(int value){
+    private GeneralRemoveStatusEnum(int value){
         this.value = value;
     }
 
-    public static GeneralResponseStatus intToEnum(int value) {
+    public static GeneralRemoveStatusEnum intToEnum(int value) {
         //将数值转换成枚举值
         switch (value) {
             case 0:
-                return CODESUCCESS;
+                return REMOVESUCCESS;
             case 1:
-                return CODEFAIL;
+                return NOTEXISTS;
+            case 2:
+                return REMOVEFAIL;
             default:
                 return null;
         }
@@ -28,6 +32,11 @@ public enum GeneralResponseStatus {
     }
     public String enumToString() {
         //将枚举值转换成数值
+        return String.valueOf(this.value);
+    }
+
+    @Override
+    public String toString() {
         return String.valueOf(this.value);
     }
 }

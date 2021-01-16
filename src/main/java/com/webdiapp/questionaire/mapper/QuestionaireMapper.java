@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.webdiapp.questionaire.entities.Questionaire;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface QuestionaireMapper {
     
     public List<Questionaire> getList(@Param("title") String title, @Param("skip") int skip, @Param("size") int size);

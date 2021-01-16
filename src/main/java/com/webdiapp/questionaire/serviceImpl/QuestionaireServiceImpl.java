@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import com.webdiapp.common.models.GeneralResponser;
 import com.webdiapp.common.vo.Pagination;
 import com.webdiapp.common.vo.PagingVO;
-import com.webdiapp.questionaire.constants.QuestionaireRemoveStatus;
+import com.webdiapp.common.constants.GeneralRemoveStatusEnum;
 import com.webdiapp.questionaire.entities.Questionaire;
 import com.webdiapp.questionaire.mapper.QuestionaireMapper;
 import com.webdiapp.questionaire.service.QuestionaireService;
@@ -39,7 +39,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
           pageNO = 0;
         }
         if (list != null) {
-            resultList= QuestionaireVO.formatEntityListToVO(list);
+            resultList = QuestionaireVO.formatEntityListToVO(list);
         }
 
         Pagination pagination = new Pagination(pageNO, size, totalCount);
@@ -64,20 +64,20 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     }
 
     @Override
-    public QuestionaireRemoveStatus delete(Integer id) {
+    public GeneralRemoveStatusEnum delete(Integer id) {
         int count = this.questionaireMapper.getCountById(id);
         if (count <= 0) {
             // 不存在
-            return QuestionaireRemoveStatus.NOTEXISTS;
+            return GeneralRemoveStatusEnum.NOTEXISTS;
         }
 
         int result = this.questionaireMapper.delete(id);
         if(result <= 0) {
             // 逻辑删除失败
-            return QuestionaireRemoveStatus.REMOVEFAIL;
+            return GeneralRemoveStatusEnum.REMOVEFAIL;
         } else {
             // 逻辑删除成功
-            return QuestionaireRemoveStatus.REMOVESUCCESS;
+            return GeneralRemoveStatusEnum.REMOVESUCCESS;
         }
     }
 
