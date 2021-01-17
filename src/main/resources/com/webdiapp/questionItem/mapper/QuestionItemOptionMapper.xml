@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.webdiapp.questionItem.mapper.QuestionItemOptionMapper">
+  <select id="getList" parameterType="INTEGER" resultType="QuestionItemOptionRelationships">select id, questionaire_question_id as questionItemId, option_content as optionContent, selected, creation_timestamp as creationTimestamp, creation_user as creationUser from questionaire_question_options_r where questionaire_question_id=#{questionaireQuestionId} and use_yn!='n'</select>
+  <select id="getById" parameterType="INTEGER" resultType="QuestionItemOptionRelationships">select id, questionaire_question_id, option_content, selected, creation_timestamp, creation_user from questionaire_question_options_r where id=#{id} and use_yn!='n'</select>
+  <select id="getCount" resultType="int">select count(id) from questionaire_question_options_r where use_yn!='n'</select>  
+  <insert id="insert" parameterType="QuestionItemOptionRelationships" useGeneratedKeys="true" keyProperty="id">insert into questionaire_question_options_r(questionaire_question_id, option_content, selected, creation_timestamp, creation_user) values( #{questionItemId, javaType=INTEGER, jdbcType=INTEGER}, #{optionContent, javaType=STRING, jdbcType=INTEGER}, #{selected, javaType=INTEGER, jdbcType=INTEGER}, #{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP}, #{creationUser, javaType=INTEGER, jdbcType=INTEGER} )</insert>
+  <delete id="delete">update questionaire_question_options_r set use_yn='n' where id in [1,2,3,4]</delete>  
+  <!-- 不设置更新直接逻辑删除
+    <update id="update" parameterType="QuestionaireQuestion">
+        update questionaire_question_r set
+        question_type=#{questionType},
+        question_id=#{questionId},
+        questionaire_id=#{questionaireId},
+        enabled=#{enabled},
+        lastupdate_timestamp=#{lastupdateTimestamp},
+        lastupdate_user=#{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
+        where id=#{id}
+    </update> --> 
+    <delete id="removeQuestionItemsByQuestionaireIdWithout" parameterType="hashmap">
+    	update questionaire_question_options_r set
+    	use_yn='n' where questionaire_question_id not in (
+    		select 
+    			id 
+    		from questionaire_question_r where questionaire_id = #{1} 
+    			and
+    		id not in <foreach collection="array" item="item" index="index" open="(" separator="," close=")">#{item}</foreach> 
+    	)
+    </delete>
+    <delete id="removeQuestionItemOptionsByQuestionItemIds">
+    <!-- 无论是需要保留下来的题目候选项，还是不保留下来的题目后选项，都删除 -->
+    	update questionaire_question_options_r set
+    	use_yn='n' where questionaire_question_id in (
+    		select 
+    			id
+    		from questionaire_question_r where use_yn != 'n' 
+    			and
+    			questionaire_id = #{1}
+    	)
+    </delete>
+</mapper>

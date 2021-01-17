@@ -1,6 +1,7 @@
 package com.webdiapp.questionItem.vo;
 
 import com.webdiapp.common.vo.BaseVO;
+import com.webdiapp.questionItem.entities.QuestionItemOptionRelationships;
 
 public class QuestionOptionRVO extends BaseVO {
 
@@ -30,6 +31,14 @@ public class QuestionOptionRVO extends BaseVO {
 //		this.setLastupdateTimestamp(itemOption.getLastupdateTimestamp());
 //		this.setLastupdateUser(itemOption.getLastupdateUser());
 //	}
+
+	public QuestionOptionRVO(QuestionItemOptionRelationships relationships) {
+		this.setId(relationships.getId());
+		this.setQuestionItemId(relationships.getQuestionItemId());
+		this.setOptionContent(relationships.getOptionContent());
+		this.setSelected(relationships.getSelected());
+		this.setCommonFields(relationships);
+	}
 
 	public Integer getId() {
 		return id;

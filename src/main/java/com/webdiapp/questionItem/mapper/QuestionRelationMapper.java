@@ -18,7 +18,7 @@ public interface QuestionRelationMapper {
     // 根据问卷主键，列出对应问卷中问题数量
     public int getCount();
 
-    public int insert(QuestionaireQuestion entity);
+    public int insert(QuestionItemRelationships relationshipsEntity);
 
     public int delete(int[] ids);
 

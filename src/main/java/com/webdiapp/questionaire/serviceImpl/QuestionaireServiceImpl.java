@@ -9,11 +9,15 @@ import com.webdiapp.common.vo.PagingVO;
 import com.webdiapp.common.constants.GeneralRemoveStatusEnum;
 import com.webdiapp.questionItem.entities.QuestionItemRelationships;
 import com.webdiapp.questionItem.mapper.QuestionRelationMapper;
+import com.webdiapp.questionItem.service.QuestionItemOptionService;
+import com.webdiapp.questionItem.vo.QuestionOptionRVO;
 import com.webdiapp.questionItem.vo.QuestionaireQuestionRVO;
 import com.webdiapp.questionaire.entities.Questionaire;
 import com.webdiapp.questionaire.mapper.QuestionaireMapper;
 import com.webdiapp.questionaire.service.QuestionaireService;
 import com.webdiapp.questionaire.vo.QuestionaireVO;
+import com.webdiapp.user.ContextUtil;
+import com.webdiapp.user.vo.UserRolesVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,9 @@ public class QuestionaireServiceImpl implements QuestionaireService {
 
     @Autowired
     QuestionRelationMapper relationMapper;
+
+    @Autowired
+    QuestionItemOptionService questionItemOptionService;
 
     @Override
     public PagingVO<List<QuestionaireVO>> getList(String title, int pageNO, int size) {
@@ -77,11 +84,53 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     }
 
     @Override
-    public Integer insert(QuestionaireVO que) {
+    public Integer insert(QuestionaireVO questionaireVO) {
         Date curr = new Date();
-        que.setCreationTimestamp(curr);
-        que.setLastupdateTimestamp(curr);
-        return null;
+        questionaireVO.setCreationTimestamp(curr);
+        questionaireVO.setLastupdateTimestamp(curr);
+
+//        UserRolesVO user = ContextUtil.getOnlineUserInfo();
+        Questionaire newQue = new Questionaire();
+        Date date = new Date();
+        newQue.setStatusId(questionaireVO.getStatusId());
+        newQue.setTitle(questionaireVO.getTitle());
+        newQue.setActiveDateStart(questionaireVO.getActiveDateStart());
+        newQue.setActiveDateEnd(questionaireVO.getActiveDateEnd());
+        newQue.setCreationTimestamp(date);
+//		newQue.setCreationUser(null);
+        newQue.setLastupdateTimestamp(date);
+        // 设置当前创建用户
+//        newQue.setCreationUser(user.getId());
+//		newQue.setLastupdateUser(null);
+        // 新增问卷
+        this.questionaireMapper.insert(newQue);
+        questionaireVO.setId(newQue.getId());
+        List<QuestionaireQuestionRVO> ques = questionaireVO.getQuestionsList();
+        // 新增问卷中问题部分
+        for(QuestionaireQuestionRVO que : ques) {
+            // 设置创建问卷后生成的id
+            que.setQuestionaireId(newQue.getId());
+
+            QuestionItemRelationships relationships = new QuestionItemRelationships();
+            // 设置问卷id
+            relationships.setQuestionaireId(que.getQuestionaireId());
+            // 设置问卷问题类型
+            relationships.setQuestionType(que.getQuestionType());
+            // 设置问卷问题内容
+            relationships.setQuestionContent(que.getQuestionContent());
+            // 设置问卷开启状态
+            relationships.setQuestionItemEnabled(que.getEnabled());
+            // 新增问卷中问题
+            this.relationMapper.insert(relationships);
+
+            for(QuestionOptionRVO optionItem : que.getOptions()) {
+                // 设置生成的题目的id
+                optionItem.setQuestionItemId(relationships.getQuestionaireId());
+//                optionItem.setCreationUser(user.getId());
+                this.questionItemOptionService.insert(optionItem);
+            }
+        }
+        return 1;
     }
 
     @Override

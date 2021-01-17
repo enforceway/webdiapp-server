@@ -4,7 +4,7 @@ import com.webdiapp.common.entities.BaseEntity;
 
 import java.util.Date;
 
-public class QuestionItemRelationships extends BaseEntity {
+public class QuestionItemRelationships{
     // 问卷与问题关系的主键
     private Integer relationId;
     // 问卷的主键
