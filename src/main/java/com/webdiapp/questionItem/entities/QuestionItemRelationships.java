@@ -25,6 +25,10 @@ public class QuestionItemRelationships extends BaseEntity {
 
     private Integer questionItemEnabled;
 
+    private Date questionaireCreationTimestamp;
+
+    private Integer questionaireCreationUser;
+
     public Integer getRelationId() {
         return relationId;
     }
@@ -103,5 +107,21 @@ public class QuestionItemRelationships extends BaseEntity {
 
     public void setQuestionItemEnabled(Integer questionItemEnabled) {
         this.questionItemEnabled = questionItemEnabled;
+    }
+
+    public Date getQuestionaireCreationTimestamp() {
+        return questionaireCreationTimestamp;
+    }
+
+    public void setQuestionaireCreationTimestamp(Date questionaireCreationTimestamp) {
+        this.questionaireCreationTimestamp = questionaireCreationTimestamp;
+    }
+
+    public Integer getQuestionaireCreationUser() {
+        return questionaireCreationUser;
+    }
+
+    public void setQuestionaireCreationUser(Integer questionaireCreationUser) {
+        this.questionaireCreationUser = questionaireCreationUser;
     }
 }

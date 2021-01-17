@@ -23,6 +23,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
     @Autowired
     QuestionaireMapper questionaireMapper;
 
+    @Autowired
     QuestionRelationMapper relationMapper;
 
     @Override
@@ -65,7 +66,9 @@ public class QuestionaireServiceImpl implements QuestionaireService {
             resultVO.setActiveDateEnd(relationShip.getActiveDateEnd());
             // 标题
             resultVO.setTitle(relationShip.getQuestionaireTitle());
-
+            // 设置创建时间/创建用户
+            resultVO.setCreationUser(relationShip.getQuestionaireCreationUser());
+            resultVO.setCreationTimestamp(relationShip.getQuestionaireCreationTimestamp());
             // 追加问卷问题
             QuestionaireQuestionRVO rvo = new QuestionaireQuestionRVO(relationShip);
             resultVO.getQuestionsList().add(rvo);

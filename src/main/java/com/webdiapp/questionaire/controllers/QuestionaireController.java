@@ -59,8 +59,12 @@ public class QuestionaireController {
             gr.setData(que);
     		return gr;
 		} catch (NumberFormatException e) {
+    	    e.printStackTrace();
 			gr.setData(e.getMessage());
-		} finally {
+		} catch(Exception e) {
+    	    e.printStackTrace();
+    	    gr.setData(e.getMessage());
+        } finally {
 			gr.setData(que);
 			return gr;
 		}
