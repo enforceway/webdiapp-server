@@ -23,7 +23,7 @@ public class BaseEntity implements Serializable {
     
 //    private String lastupdateUsername;
     
-    private String userYn;
+    private String useyn;
     
     public BaseEntity() {
 //    	new 
@@ -83,12 +83,12 @@ public class BaseEntity implements Serializable {
 //		this.lastupdateUsername = lastupdateUsername;
 //	}
 
-	public String getUserYn() {
-		return userYn;
+	public String getUseyn() {
+		return useyn;
 	}
 
-	public void setUserYn(String userYn) {
-		this.userYn = userYn;
+	public void setUseyn(String useyn) {
+		this.useyn = useyn;
 	}
 
 	public void setCommonFields(BaseVO baseVO) {

@@ -1,6 +1,7 @@
 package com.webdiapp.questionaire.entities;
 
 import com.webdiapp.common.entities.BaseEntity;
+import com.webdiapp.questionaire.vo.QuestionaireVO;
 
 import java.util.Date;
 
@@ -23,6 +24,15 @@ public class Questionaire extends BaseEntity {
 	private String title;
 	
 	public Questionaire() {}
+
+	public Questionaire(QuestionaireVO que) {
+        this.setId(que.getId());
+        this.setStatusId(que.getStatusId());
+        this.setActiveDateStart(que.getActiveDateStart());
+        this.setActiveDateEnd(que.getActiveDateEnd());
+        this.setTitle(que.getTitle());
+        this.setCommonFields(que);
+	}
 
 	public Integer getId() {
 		return id;

@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan({"com.webdiapp.questionaire.mapper","com.webdiapp.question.mapper","com.webdiapp.user.mapper","com.webdiapp.roleAccess.mapper","com.webdiapp.questionItem.mapper"})
+@MapperScan({"com.webdiapp.questionaire.mapper","com.webdiapp.question.mapper","com.webdiapp.questionItem.mapper","com.webdiapp.user.mapper","com.webdiapp.roleAccess.mapper"})
 public class WebdiappApplication {
 
 	public static void main(String[] args) {

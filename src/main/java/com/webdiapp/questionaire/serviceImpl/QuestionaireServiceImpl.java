@@ -89,16 +89,7 @@ public class QuestionaireServiceImpl implements QuestionaireService {
         questionaireVO.setCreationTimestamp(curr);
         questionaireVO.setLastupdateTimestamp(curr);
 
-//        UserRolesVO user = ContextUtil.getOnlineUserInfo();
-        Questionaire newQue = new Questionaire();
-        Date date = new Date();
-        newQue.setStatusId(questionaireVO.getStatusId());
-        newQue.setTitle(questionaireVO.getTitle());
-        newQue.setActiveDateStart(questionaireVO.getActiveDateStart());
-        newQue.setActiveDateEnd(questionaireVO.getActiveDateEnd());
-        newQue.setCreationTimestamp(date);
-//		newQue.setCreationUser(null);
-        newQue.setLastupdateTimestamp(date);
+        Questionaire newQue = new Questionaire(questionaireVO);
         // 设置当前创建用户
 //        newQue.setCreationUser(user.getId());
 //		newQue.setLastupdateUser(null);

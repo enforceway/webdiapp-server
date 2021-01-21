@@ -38,9 +38,10 @@
     <insert id="insert" parameterType="Questionaire"
     	useGeneratedKeys="true" keyProperty="id">
         insert into
-        questionaire_t(status_id, active_date_start, active_date_end, <include refid="SurveyCommonTemplateMapper.baseColumnsInsertFields" />)
+        questionaire_t(status_id, title, active_date_start, active_date_end, <include refid="SurveyCommonTemplateMapper.baseColumnsInsertFields" />)
         values(
         #{statusId, javaType=INTEGER, jdbcType=INTEGER},
+        #{title, javaType=String, jdbcType=VARCHAR},
         #{activeDateStart, javaType=java.util.Date, jdbcType=TIMESTAMP},
         #{activeDateEnd, javaType=java.util.Date, jdbcType=TIMESTAMP},
         <include refid="SurveyCommonTemplateMapper.baseColumnsInsert" />

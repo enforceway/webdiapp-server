@@ -9,12 +9,12 @@
         lastupdate_user as lastupdateUser
 	</sql>
 	<sql id="baseColumnsInsertFields">
-		creation_timestamp,creation_user,lastupdate_timestamp,lastupdate_user 
+		creation_timestamp,creation_user,lastupdate_timestamp,lastupdate_user
 	</sql>
 	<sql id="baseColumnsInsert">
-		#{creation_timestamp, javaType=java.sql.Date, jdbcType=DATE},
-        #{creation_user, javaType=INTEGER, jdbcType=INTEGER},
-        #{lastupdate_timestamp, javaType=java.sql.Date, jdbcType=DATE},
-        #{lastupdate_user, javaType=INTEGER, jdbcType=INTEGER}
+		#{creationTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{creationUser, javaType=INTEGER, jdbcType=INTEGER},
+        #{lastupdateTimestamp, javaType=java.util.Date, jdbcType=TIMESTAMP},
+        #{lastupdateUser, javaType=INTEGER, jdbcType=INTEGER}
 	</sql>
 </mapper>
