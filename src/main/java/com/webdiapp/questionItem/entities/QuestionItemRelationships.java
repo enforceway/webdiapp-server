@@ -4,7 +4,9 @@ import com.webdiapp.common.entities.BaseEntity;
 
 import java.util.Date;
 
-public class QuestionItemRelationships{
+public class QuestionItemRelationships extends BaseEntity {
+    private static final long serialVersionUID = 1L;
+
     // 问卷与问题关系的主键
     private Integer relationId;
     // 问卷的主键

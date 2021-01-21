@@ -99,18 +99,23 @@ public class QuestionaireServiceImpl implements QuestionaireService {
         List<QuestionaireQuestionRVO> ques = questionaireVO.getQuestionsList();
         // 新增问卷中问题部分
         for(QuestionaireQuestionRVO que : ques) {
+            Date cre = new Date();
             // 设置创建问卷后生成的id
             que.setQuestionaireId(newQue.getId());
 
             QuestionItemRelationships relationships = new QuestionItemRelationships();
             // 设置问卷id
             relationships.setQuestionaireId(que.getQuestionaireId());
+            // 设置问题的id
+            relationships.setQuestionId(que.getQuestionId());
             // 设置问卷问题类型
             relationships.setQuestionType(que.getQuestionType());
             // 设置问卷问题内容
             relationships.setQuestionContent(que.getQuestionContent());
             // 设置问卷开启状态
             relationships.setQuestionItemEnabled(que.getEnabled());
+            relationships.setCreationTimestamp(cre);
+            relationships.setLastupdateTimestamp(cre);
             // 新增问卷中问题
             this.relationMapper.insert(relationships);
 

@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `questionaire_question_r`;
 /*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `questionaire_question_r` (
   `id` int(11) NOT NULL COMMENT '主键',
-  `question_type` int(11) NOT NULL COMMENT '题目类型: 1代表单选，2代表多选，3代表文本输入，4代表长文本输入',
+  `question_type` int(11) COMMENT '题目类型: 1代表单选，2代表多选，3代表文本输入，4代表长文本输入',
   `question_id` int(11) NOT NULL COMMENT '题目的id',
   `questionaire_id` int(11) NOT NULL COMMENT '调查问卷的id',
   `enabled` int(11) DEFAULT NULL COMMENT '定义了该问题在问卷中是否启用：0代表未启动，1代表启用',

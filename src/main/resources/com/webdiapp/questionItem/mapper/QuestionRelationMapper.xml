@@ -39,14 +39,14 @@
         select count(id) from questionaire_question_r where use_yn!='n'
     </select>
     <insert id="insert" parameterType="QuestionaireQuestion"
-    	useGeneratedKeys="true" keyProperty="id">
+    	useGeneratedKeys="true" keyProperty="relationId">
         insert into
         questionaire_question_r(question_type, question_id, questionaire_id, enabled, <include refid="SurveyCommonTemplateMapper.baseColumnsInsertFields" />)
         values(
         #{questionType, javaType=INTEGER, jdbcType=INTEGER},
         #{questionId, javaType=INTEGER, jdbcType=INTEGER},
         #{questionaireId, javaType=INTEGER, jdbcType=INTEGER},
-        #{enabled, javaType=INTEGER, jdbcType=INTEGER},
+        #{questionItemEnabled, javaType=INTEGER, jdbcType=INTEGER},
         <include refid="SurveyCommonTemplateMapper.baseColumnsInsert" />
         )
     </insert>
